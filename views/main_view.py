@@ -4,6 +4,8 @@ from assets.ui_PY.main_window import *
 from PyQt5.QtWidgets import QMainWindow
 from views.addBook_view import AddBookView
 from views.addAuthor_view import AddAuthorView
+from views.addCategory_view import AddCategoryView
+from views.home_view import HomeView
 
 class MainView(QMainWindow):
 
@@ -13,16 +15,24 @@ class MainView(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.home_view = HomeView()
         self.addBook_view = AddBookView()
         self.addAuthor_view = AddAuthorView()
+        self.addCategory_view = AddCategoryView()
 
+        self.ui.stackedWidget.addWidget(self.home_view)
         self.ui.stackedWidget.addWidget(self.addBook_view)
         self.ui.stackedWidget.addWidget(self.addAuthor_view)
+        self.ui.stackedWidget.addWidget(self.addCategory_view)
     
+        self.ui.home_button.clicked.connect(self.home)
         self.ui.addBook_button.clicked.connect(self.addBook)
         self.ui.addAuthor_button.clicked.connect(self.addAuthor)
+        self.ui.addCategory_button.clicked.connect(self.addCategory)
 
         self.show()
 
+    def home(self): self.ui.stackedWidget.setCurrentWidget(self.home_view)
     def addBook(self): self.ui.stackedWidget.setCurrentWidget(self.addBook_view)
     def addAuthor(self): self.ui.stackedWidget.setCurrentWidget(self.addAuthor_view)
+    def addCategory(self): self.ui.stackedWidget.setCurrentWidget(self.addCategory_view)

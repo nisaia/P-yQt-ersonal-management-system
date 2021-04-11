@@ -1,9 +1,11 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QFileDialog
+from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
 from assets.ui_PY.addBook_window import *
 from database.db import session
 from database.models import Author, Category, Book
 from PyQt5.QtGui import QPixmap
+from utils.custom_exceptions import NoInputException
+from sqlalchemy.exc import IntegrityError
 
 class AddBookView(QWidget):
     
@@ -46,24 +48,40 @@ class AddBookView(QWidget):
         self.cover_path = file_name
 
     def addBook(self):
-        book_title = self.ui.bookTitle_lineEdit.text()
-        isbn = self.ui.ISBN_lineEdit.text()
-        author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex()+1).first()
-        #category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex()).first()
-        cover_path = self.cover_path
-        description = self.ui.description_plainText.toPlainText()
+        try:
+            book_title = self.ui.bookTitle_lineEdit.text()
+            isbn = self.ui.ISBN_lineEdit.text()
+            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex()+1).first()
+            #category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex()).first()
 
-        book = Book(title=book_title,
-                    isbn=isbn,
-                    author_id=author.id,
-                    category_id=1,
-                    description=description,
-                    image_path=cover_path)
-        
-        session.add(book)
-        session.commit()
+            if len(book_title) == 0 or len(isbn) == 0 or len(self.cover_path) == 0: raise NoInputException
 
-        self.clearAll()
+            description = self.ui.description_plainText.toPlainText()
+
+            book = Book(title=book_title,
+                        isbn=isbn,
+                        author_id=author.id,
+                        category_id=1,
+                        description=description,
+                        image_path=self.cover_path)
+            
+            session.add(book)
+            session.commit()
+
+            self.clearAll()
+        except NoInputException:
+            error_message = QMessageBox()
+            error_message.setIcon(QMessageBox.Critical)
+            error_message.setText('Fields not valid')
+            error_message.setWindowTitle('Error')
+            error_message.exec_()
+        except IntegrityError:
+            error_message = QMessageBox()
+            error_message.setIcon(QMessageBox.Critical)
+            error_message.setText('Field already inserted')
+            error_message.setWindowTitle('Error')
+            error_message.exec_()
+            session.rollback()
 
 
     def clearAll(self):
