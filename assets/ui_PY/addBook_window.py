@@ -73,6 +73,7 @@ class Ui_Form(object):
         self.preview_button = QtWidgets.QPushButton(self.addBook_frame)
         self.preview_button.setGeometry(QtCore.QRect(560, 190, 91, 31))
         self.preview_button.setObjectName("preview_button")
+        self.preview_button.setVisible(False)
         self.description_label = QtWidgets.QLabel(self.addBook_frame)
         self.description_label.setGeometry(QtCore.QRect(10, 230, 121, 31))
         self.description_label.setObjectName("description_label")

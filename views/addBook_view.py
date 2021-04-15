@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox, QMainWindow, QDia
 from assets.ui_PY.addBook_window import *
 from views.coverIllustration_view import *
 from database.db import session
-from database.models import Author, Category, Book
+from database.models import *
 from PyQt5.QtGui import QPixmap
 from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
@@ -17,6 +17,19 @@ class AddBookView(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+
+        
+        self.ui.uploadCover_button.clicked.connect(self.get_image_file)
+        self.ui.preview_button.clicked.connect(self.displayCover)
+                
+        self.ui.addBook_button.clicked.connect(self.addBook)
+        self.ui.clearAll_button.clicked.connect(self.clearAll)
+
+        self.show()
+
+    def update(self):
+        self.ui.author_comboBox.clear()
+        self.ui.category_comboBox.clear()
 
         authors = session.query(Author).all()
         if len(authors) == 0:
@@ -33,14 +46,6 @@ class AddBookView(QWidget):
         else:
             for category in categories:
                 self.ui.category_comboBox.addItem(category.name)
-        
-        self.ui.uploadCover_button.clicked.connect(self.get_image_file)
-        self.ui.preview_button.clicked.connect(self.displayCover)
-                
-        self.ui.addBook_button.clicked.connect(self.addBook)
-        self.ui.clearAll_button.clicked.connect(self.clearAll)
-
-        self.show()
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
@@ -63,7 +68,7 @@ class AddBookView(QWidget):
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.isbn_lineEdit.text()
             author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
-            category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex()).first()
+            category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex() + 1).first()
 
             if len(book_title) == 0 or len(isbn) == 0 or len(self.cover_path) == 0 or author == None or category == None: raise NoInputException
 
@@ -78,6 +83,11 @@ class AddBookView(QWidget):
             
             session.add(book)
             session.commit()
+
+            results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
+            #print(session.query(Book).join(Book.category_id).join(Book.author_id)).all()
+            for book, author, category in results:
+                print(book.title, author.name, author.surname, category.name)
 
             self.clearAll()
         except NoInputException:

@@ -15,8 +15,8 @@ class AddAuthorView(QWidget):
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
     def addAuthor(self):
-        name = self.ui.name_lineEdit.text()
-        surname = self.ui.surname_lineEdit.text()
+        name = self.ui.authorName_lineEdit.text()
+        surname = self.ui.authorSurname_lineEdit.text()
 
         author = Author(name=name, surname=surname)
         session.add(author)
@@ -25,5 +25,5 @@ class AddAuthorView(QWidget):
         self.clearAll()
 
     def clearAll(self):
-        self.ui.name_lineEdit.clear()
-        self.ui.surname_lineEdit.clear()
+        self.ui.authorName_lineEdit.clear()
+        self.ui.authorSurname_lineEdit.clear()

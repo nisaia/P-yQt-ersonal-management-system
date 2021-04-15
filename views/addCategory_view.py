@@ -19,12 +19,14 @@ class AddCategoryView(QWidget):
 
     def addCategory(self):
         try:
-            name = self.ui.name_lineEdit.text()
+            name = self.ui.categoryName_lineEdit.text()
             if len(name) == 0: raise NoInputException
 
             category = Category(name=name)
             session.add(category)
             session.commit()
+
+            self.clearField()
         except NoInputException:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
@@ -39,6 +41,9 @@ class AddCategoryView(QWidget):
             error_message.exec_()
             session.rollback()
 
+    def clearField(self):
+        self.ui.categoryName_lineEdit.clear()
+
 
     def clearAll(self):
-        self.ui.name_lineEdit.clear()
+        self.ui.categoryName_lineEdit.clear()
