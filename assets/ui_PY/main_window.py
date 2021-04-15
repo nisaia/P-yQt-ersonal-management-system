@@ -9,53 +9,42 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIcon
-from os.path import abspath
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1200, 800)
-        MainWindow.setStyleSheet("QPushButton{\n"
-"    height: 40px;\n"
-"}\n"
-"\n"
-"QStackedWidget#stackedWidget {\n"
-"    border: 1px solid red;\n"
-"}")
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 261, 451))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 261, 491))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.home_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.home_button.setObjectName("home_button")
-        self.home_button.setIcon(QIcon(abspath('assets/icons/home.png')))
         self.verticalLayout.addWidget(self.home_button)
         self.addBook_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.addBook_button.setObjectName("addBook_button")
-        self.addBook_button.setIcon(QIcon(abspath('assets/icons/book.png')))
         self.verticalLayout.addWidget(self.addBook_button)
         self.allBooks_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.allBooks_button.setObjectName("allBooks_button")
-        self.allBooks_button.setIcon(QIcon(abspath('assets/icons/books.png')))
         self.verticalLayout.addWidget(self.allBooks_button)
         self.addAuthor_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.addAuthor_button.setObjectName("addAuthor_button")
-        self.addAuthor_button.setIcon(QIcon(abspath('assets/icons/author.png')))
         self.verticalLayout.addWidget(self.addAuthor_button)
         self.addCategory_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.addCategory_button.setObjectName("addCategory_button")
-        self.addCategory_button.setIcon(QIcon(abspath('assets/icons/category.png')))
         self.verticalLayout.addWidget(self.addCategory_button)
         self.statistics_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.statistics_button.setObjectName("statistics_button")
-        self.statistics_button.setIcon(QIcon(abspath('assets/icons/statistics.png')))
         self.verticalLayout.addWidget(self.statistics_button)
+        self.settings_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.settings_button.setObjectName("settings_button")
+        self.verticalLayout.addWidget(self.settings_button)
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget.setGeometry(QtCore.QRect(290, 10, 890, 771))
         self.stackedWidget.setObjectName("stackedWidget")
@@ -73,3 +62,4 @@ class Ui_MainWindow(object):
         self.addAuthor_button.setText(_translate("MainWindow", "Add author"))
         self.addCategory_button.setText(_translate("MainWindow", "Add category"))
         self.statistics_button.setText(_translate("MainWindow", "Statistics"))
+        self.settings_button.setText(_translate("MainWindow", "Settings"))

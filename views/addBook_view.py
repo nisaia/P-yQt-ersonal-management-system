@@ -1,6 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox, QMainWindow, QDialog
 from assets.ui_PY.addBook_window import *
+from views.coverIllustration_view import *
 from database.db import session
 from database.models import Author, Category, Book
 from PyQt5.QtGui import QPixmap
@@ -33,30 +34,40 @@ class AddBookView(QWidget):
             for category in categories:
                 self.ui.category_comboBox.addItem(category.name)
         
-
         self.ui.uploadCover_button.clicked.connect(self.get_image_file)
+        self.ui.preview_button.clicked.connect(self.displayCover)
                 
         self.ui.addBook_button.clicked.connect(self.addBook)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
-        
+
         self.show()
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        image = QPixmap(file_name)
-        self.ui.image_label.setPixmap(image)
         self.cover_path = file_name
+        self.ui.coverPath_label.setText(self.cover_path)
+        self.ui.preview_button.setVisible(True)
+
+    def displayCover(self):
+        coverIllustration_window = CoverIllustrationView()
+        coverIllustration_window.setModal(True)
+        
+        image = QPixmap(self.cover_path)
+        coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
+        coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
+
+        coverIllustration_window.exec_()
 
     def addBook(self):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
-            isbn = self.ui.ISBN_lineEdit.text()
-            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex()+1).first()
-            #category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex()).first()
+            isbn = self.ui.isbn_lineEdit.text()
+            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
+            category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex()).first()
 
-            if len(book_title) == 0 or len(isbn) == 0 or len(self.cover_path) == 0: raise NoInputException
+            if len(book_title) == 0 or len(isbn) == 0 or len(self.cover_path) == 0 or author == None or category == None: raise NoInputException
 
-            description = self.ui.description_plainText.toPlainText()
+            description = self.ui.description_plainTextEdit.toPlainText()
 
             book = Book(title=book_title,
                         isbn=isbn,
@@ -86,9 +97,9 @@ class AddBookView(QWidget):
 
     def clearAll(self):
         self.ui.bookTitle_lineEdit.clear()
-        self.ui.ISBN_lineEdit.clear()
+        self.ui.isbn_lineEdit.clear()
         self.ui.author_comboBox.setCurrentIndex(0)
         self.ui.category_comboBox.setCurrentIndex(0)
-        self.cover_path = ""
-        self.ui.image_label.clear()
-        self.ui.description_plainText.clear()
+        self.ui.coverPath_label.setText("")
+        self.ui.preview_button.setVisible(False)
+        self.ui.description_plainTextEdit.clear()

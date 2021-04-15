@@ -14,13 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton{
-	height: 40px;
-}
-
-QStackedWidget#stackedWidget {
-	border: 1px solid red;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -29,7 +23,7 @@ QStackedWidget#stackedWidget {
       <x>10</x>
       <y>10</y>
       <width>261</width>
-      <height>451</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -72,6 +66,13 @@ QStackedWidget#stackedWidget {
       <widget class="QPushButton" name="statistics_button">
        <property name="text">
         <string>Statistics</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="settings_button">
+       <property name="text">
+        <string>Settings</string>
        </property>
       </widget>
      </item>
