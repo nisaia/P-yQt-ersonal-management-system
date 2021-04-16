@@ -29,16 +29,20 @@ class AllBooksView(QWidget):
     def loadData(self):
         labels = ['Id', 'Title', 'ISBN', 'Author', 'Category']
         results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
-        print(len(results))
         self.model = QStandardItemModel(len(results), len(labels))
         self.model.setHorizontalHeaderLabels(labels)
         
         for row, (book, author, category) in enumerate(results):
             book_id = QStandardItem(str(book.id))
+            book_id.setTextAlignment(Qt.AlignCenter)
             book_title = QStandardItem(book.title)
+            book_title.setTextAlignment(Qt.AlignCenter)
             book_isbn = QStandardItem(book.isbn)
+            book_isbn.setTextAlignment(Qt.AlignCenter)
             authorI = QStandardItem(author.name + " " + author.surname)
+            authorI.setTextAlignment(Qt.AlignCenter)
             categoryI = QStandardItem(category.name)
+            categoryI.setTextAlignment(Qt.AlignCenter)
             self.model.setItem(row, 0, book_id)
             self.model.setItem(row, 1, book_title)
             self.model.setItem(row, 2, book_isbn)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/ui_XML/homepage_window.ui'
+# Form implementation generated from reading ui file 'assets/ui_XML/home_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -18,16 +18,20 @@ class Ui_Form(object):
         Form.setStyleSheet("QLabel#homepage_label {\n"
 "    background-color: green;\n"
 "}")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(50, 30, 781, 61))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.homepage_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.homepage_label = QtWidgets.QLabel(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.homepage_label.sizePolicy().hasHeightForWidth())
+        self.homepage_label.setSizePolicy(sizePolicy)
         self.homepage_label.setAlignment(QtCore.Qt.AlignCenter)
         self.homepage_label.setObjectName("homepage_label")
-        self.horizontalLayout.addWidget(self.homepage_label)
+        self.verticalLayout.addWidget(self.homepage_label)
+        self.textEdit = QtWidgets.QTextEdit(Form)
+        self.textEdit.setObjectName("textEdit")
+        self.verticalLayout.addWidget(self.textEdit)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -35,4 +39,9 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.homepage_label.setText(_translate("Form", "Homepage"))
+        self.homepage_label.setText(_translate("Form", "Home"))
+        self.textEdit.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Noto Sans\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pagina di Home</p></body></html>"))

@@ -15,10 +15,12 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 500)
+        self.horizontalLayout = QtWidgets.QHBoxLayout(Dialog)
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.coverIllustration_label = QtWidgets.QLabel(Dialog)
-        self.coverIllustration_label.setGeometry(QtCore.QRect(0, 0, 400, 500))
         self.coverIllustration_label.setText("")
         self.coverIllustration_label.setObjectName("coverIllustration_label")
+        self.horizontalLayout.addWidget(self.coverIllustration_label)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

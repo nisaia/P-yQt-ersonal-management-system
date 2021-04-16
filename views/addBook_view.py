@@ -77,7 +77,7 @@ class AddBookView(QWidget):
             book = Book(title=book_title,
                         isbn=isbn,
                         author_id=author.id,
-                        category_id=1,
+                        category_id=category.id,
                         description=description,
                         image_path=self.cover_path)
             
@@ -86,8 +86,8 @@ class AddBookView(QWidget):
 
             results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
             #print(session.query(Book).join(Book.category_id).join(Book.author_id)).all()
-            for book, author, category in results:
-                print(book.title, author.name, author.surname, category.name)
+            #for book, author, category in results:
+                #print(book.title, author.name, author.surname, category.name)
 
             self.clearAll()
         except NoInputException:

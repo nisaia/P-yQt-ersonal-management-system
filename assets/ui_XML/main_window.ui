@@ -17,77 +17,71 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>261</width>
-      <height>491</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="home_button">
-       <property name="text">
-        <string>Home</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="addBook_button">
-       <property name="text">
-        <string>Add book</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="allBooks_button">
-       <property name="text">
-        <string>All books</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="addAuthor_button">
-       <property name="text">
-        <string>Add author</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="addCategory_button">
-       <property name="text">
-        <string>Add category</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="statistics_button">
-       <property name="text">
-        <string>Statistics</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="settings_button">
-       <property name="text">
-        <string>Settings</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QStackedWidget" name="stackedWidget">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>10</y>
-      <width>890</width>
-      <height>771</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="home_button">
+        <property name="text">
+         <string>Home</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addBook_button">
+        <property name="text">
+         <string>Add book</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="allBooks_button">
+        <property name="text">
+         <string>All books</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addAuthor_button">
+        <property name="text">
+         <string>Add author</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addCategory_button">
+        <property name="text">
+         <string>Add category</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="statistics_button">
+        <property name="text">
+         <string>Statistics</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="settings_button">
+        <property name="text">
+         <string>Settings</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
