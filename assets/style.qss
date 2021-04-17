@@ -7,6 +7,7 @@ QMainWindow {
 QPushButton {
     background-color: rgb(25, 124, 205);
     height: 40px;
+    width: 200px;
     color: rgb(255, 255, 255);
     border: 4px solid rgb(255, 255, 255);
     text-transform: uppercase;
@@ -25,6 +26,7 @@ QPushButton::hover {
 QLabel {
     color: rgb(0, 0, 0);
     font-size: 14pt;
+    border: 2px solid red;
 }
 
 QLineEdit {
@@ -33,6 +35,7 @@ QLineEdit {
     border-radius: 5px;
     color: black;
     font-size: 14pt;
+    padding: 5px;
 }
 
 QLineEdit::focus {

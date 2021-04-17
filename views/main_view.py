@@ -16,11 +16,11 @@ class MainView(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.home_view = HomeView()
-        self.addBook_view = AddBookView()
-        self.allBooks_view = AllBooksView()
-        self.addAuthor_view = AddAuthorView()
-        self.addCategory_view = AddCategoryView()
+        self.home_view = HomeView(parent=self)
+        self.addBook_view = AddBookView(parent=self)
+        self.allBooks_view = AllBooksView(parent=self)
+        self.addAuthor_view = AddAuthorView(parent=self)
+        self.addCategory_view = AddCategoryView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.home_view)
         self.ui.stackedWidget.addWidget(self.addBook_view)
@@ -40,9 +40,11 @@ class MainView(QMainWindow):
     def addBook(self):
         self.addBook_view.update()
         self.ui.stackedWidget.setCurrentWidget(self.addBook_view)
+        print(self.ui.stackedWidget.count())
+        print(self.addBook_view.parent())
 
     def allBooks(self):
-        self.allBooks_view.reloadTable()
+        self.allBooks_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allBooks_view)
     def addAuthor(self): self.ui.stackedWidget.setCurrentWidget(self.addAuthor_view)
     def addCategory(self): self.ui.stackedWidget.setCurrentWidget(self.addCategory_view)

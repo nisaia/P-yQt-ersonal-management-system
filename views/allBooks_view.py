@@ -5,32 +5,29 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from assets.ui_PY.allBooks_window import *
 from database.db import session
 from database.models import *
+from views.book_view import BookView
 
 class AllBooksView(QWidget):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        super().__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.loadData()
+        self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Category']
 
-        self.filter_proxy_model = QSortFilterProxyModel()
-        self.filter_proxy_model.setFilterKeyColumn(-1)
-        self.filter_proxy_model.setSourceModel(self.model)
-        
-        self.ui.tableView.setModel(self.filter_proxy_model)
-
-        self.ui.lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
-        
+        self.ui.tableView.clicked.connect(self.book_details)
 
         self.show()
 
     def loadData(self):
-        labels = ['Id', 'Title', 'ISBN', 'Author', 'Category']
         results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
-        self.model = QStandardItemModel(len(results), len(labels))
-        self.model.setHorizontalHeaderLabels(labels)
+        self.model = QStandardItemModel(len(results), len(self.labels))
+        self.model.setHorizontalHeaderLabels(self.labels)
+
+        self.filter_proxy_model = QSortFilterProxyModel()
+        self.filter_proxy_model.setFilterKeyColumn(-1)
+        self.filter_proxy_model.setSourceModel(self.model)
         
         for row, (book, author, category) in enumerate(results):
             book_id = QStandardItem(str(book.id))
@@ -49,5 +46,17 @@ class AllBooksView(QWidget):
             self.model.setItem(row, 3, authorI)
             self.model.setItem(row, 4, categoryI)
 
-    def reloadTable(self):
-        self.loadData()
+        self.ui.tableView.setModel(self.filter_proxy_model)
+
+        self.ui.lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+
+    def book_details(self):
+        row = self.ui.tableView.selectionModel().selectedRows()[0].row()
+        id = self.filter_proxy_model.index(row, 0).data()
+        result = session.query(Book, Author, Category).select_from(Book).filter_by(id=id).join(Author).join(Category).first()
+        book, author, category = result
+        book_view = BookView(parent=self, book=book, author=author, category=category)
+        book_view.update()
+        self.parent().addWidget(book_view)  #SISTEMARE QUESTA COSA PERCHÈ È ORRENDA
+        self.parent().setCurrentWidget(book_view)
+        print(len(self.parent().children()))

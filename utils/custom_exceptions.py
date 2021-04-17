@@ -4,4 +4,6 @@ class Error(Exception):
 
 class NoInputException(Error):
     """Raised when length of the input value is 0"""
-    pass
+    
+    def __init__(self, error_message):
+        self.error_message = error_message

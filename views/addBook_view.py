@@ -10,11 +10,11 @@ from sqlalchemy.exc import IntegrityError
 
 class AddBookView(QWidget):
     
-    def __init__(self):
+    def __init__(self, parent):
 
         self.cover_path = ""
 
-        super().__init__()
+        super().__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
@@ -38,6 +38,7 @@ class AddBookView(QWidget):
         else:
             for author in authors:
                 self.ui.author_comboBox.addItem(str(author.name + " " + author.surname))
+            self.ui.author_comboBox.setDisabled(False)
 
         categories = session.query(Category).all()
         if len(categories) == 0:
@@ -46,6 +47,7 @@ class AddBookView(QWidget):
         else:
             for category in categories:
                 self.ui.category_comboBox.addItem(category.name)
+            self.ui.category_comboBox.setDisabled(False)
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
@@ -58,8 +60,8 @@ class AddBookView(QWidget):
         coverIllustration_window.setModal(True)
         
         image = QPixmap(self.cover_path)
+        image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
         coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
-        coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
 
         coverIllustration_window.exec_()
 
@@ -70,7 +72,10 @@ class AddBookView(QWidget):
             author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
             category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex() + 1).first()
 
-            if len(book_title) == 0 or len(isbn) == 0 or len(self.cover_path) == 0 or author == None or category == None: raise NoInputException
+            if len(book_title) == 0: raise NoInputException('Enter the title of book')
+            elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
+            elif author == None: raise NoInputException('Enter the author of the book')
+            elif category == None: raise NoInputException('Enter the category of the book')
 
             description = self.ui.description_plainTextEdit.toPlainText()
 
@@ -90,10 +95,11 @@ class AddBookView(QWidget):
                 #print(book.title, author.name, author.surname, category.name)
 
             self.clearAll()
-        except NoInputException:
+        except NoInputException as e:
+            message = e.error_message
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Fields not valid')
+            error_message.setText(message)
             error_message.setWindowTitle('Error')
             error_message.exec_()
         except IntegrityError:
