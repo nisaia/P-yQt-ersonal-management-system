@@ -11,14 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(890, 730)
-        Form.setStyleSheet("")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+class Ui_addBook_window(object):
+    def setupUi(self, addBook_window):
+        addBook_window.setObjectName("addBook_window")
+        addBook_window.resize(890, 730)
+        addBook_window.setStyleSheet("")
+        self.verticalLayout = QtWidgets.QVBoxLayout(addBook_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.addBook_frame = QtWidgets.QFrame(Form)
+        self.addBook_frame = QtWidgets.QFrame(addBook_window)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.addBook_frame.setFont(font)
@@ -64,6 +64,7 @@ class Ui_Form(object):
         self.formLayout.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.uploadCover_button)
         self.preview_button = QtWidgets.QPushButton(self.addBook_frame)
         self.preview_button.setObjectName("preview_button")
+        self.preview_button.setVisible(False)
         self.formLayout.setWidget(12, QtWidgets.QFormLayout.FieldRole, self.preview_button)
         self.description_label = QtWidgets.QLabel(self.addBook_frame)
         self.description_label.setObjectName("description_label")
@@ -83,20 +84,20 @@ class Ui_Form(object):
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.FieldRole, self.coverPath_label)
         self.verticalLayout.addWidget(self.addBook_frame)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(addBook_window)
+        QtCore.QMetaObject.connectSlotsByName(addBook_window)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, addBook_window):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.isbn_label.setText(_translate("Form", "ISBN:"))
-        self.author_label.setText(_translate("Form", "Author:"))
-        self.category_label.setText(_translate("Form", "Category:"))
-        self.cover_label.setText(_translate("Form", "Cover:"))
-        self.bookTitle_label.setText(_translate("Form", "Title:"))
-        self.addBook_label.setText(_translate("Form", "Add book"))
-        self.uploadCover_button.setText(_translate("Form", "..."))
-        self.preview_button.setText(_translate("Form", "Preview"))
-        self.description_label.setText(_translate("Form", "Description:"))
-        self.addBook_button.setText(_translate("Form", "Add book"))
-        self.clearAll_button.setText(_translate("Form", "Clear all"))
+        addBook_window.setWindowTitle(_translate("addBook_window", "Form"))
+        self.isbn_label.setText(_translate("addBook_window", "ISBN:"))
+        self.author_label.setText(_translate("addBook_window", "Author:"))
+        self.category_label.setText(_translate("addBook_window", "Category:"))
+        self.cover_label.setText(_translate("addBook_window", "Cover:"))
+        self.bookTitle_label.setText(_translate("addBook_window", "Title:"))
+        self.addBook_label.setText(_translate("addBook_window", "Add book"))
+        self.uploadCover_button.setText(_translate("addBook_window", "..."))
+        self.preview_button.setText(_translate("addBook_window", "Preview"))
+        self.description_label.setText(_translate("addBook_window", "Description:"))
+        self.addBook_button.setText(_translate("addBook_window", "Add book"))
+        self.clearAll_button.setText(_translate("addBook_window", "Clear all"))

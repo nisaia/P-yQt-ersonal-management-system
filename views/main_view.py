@@ -7,6 +7,7 @@ from views.addAuthor_view import AddAuthorView
 from views.addCategory_view import AddCategoryView
 from views.home_view import HomeView
 from views.allBooks_view import AllBooksView
+from views.book_view import BookView
 
 class MainView(QMainWindow):
 
@@ -21,12 +22,14 @@ class MainView(QMainWindow):
         self.allBooks_view = AllBooksView(parent=self)
         self.addAuthor_view = AddAuthorView(parent=self)
         self.addCategory_view = AddCategoryView(parent=self)
+        self.book_view = BookView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.home_view)
         self.ui.stackedWidget.addWidget(self.addBook_view)
         self.ui.stackedWidget.addWidget(self.allBooks_view)
         self.ui.stackedWidget.addWidget(self.addAuthor_view)
         self.ui.stackedWidget.addWidget(self.addCategory_view)
+        self.ui.stackedWidget.addWidget(self.book_view)
     
         self.ui.home_button.clicked.connect(self.home)
         self.ui.addBook_button.clicked.connect(self.addBook)

@@ -6,7 +6,7 @@ class CoverIllustrationView(QDialog):
 
     def __init__(self):
         super().__init__()
-        self.ui = Ui_Dialog()
+        self.ui = Ui_coverIllustration_window()
         self.ui.setupUi(self)
 
         self.show()

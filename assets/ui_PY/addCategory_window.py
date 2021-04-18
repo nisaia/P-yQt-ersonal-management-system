@@ -11,16 +11,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(890, 730)
-        Form.setStyleSheet("QLabel#addCategory_label {\n"
+class Ui_addCategory_window(object):
+    def setupUi(self, addCategory_window):
+        addCategory_window.setObjectName("addCategory_window")
+        addCategory_window.resize(890, 730)
+        addCategory_window.setStyleSheet("QLabel#addCategory_label {\n"
 "    background-color: green;\n"
 "}")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout = QtWidgets.QVBoxLayout(addCategory_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(Form)
+        self.frame = QtWidgets.QFrame(addCategory_window)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.frame.setFont(font)
@@ -52,12 +52,12 @@ class Ui_Form(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.label)
         self.verticalLayout.addWidget(self.frame)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(addCategory_window)
+        QtCore.QMetaObject.connectSlotsByName(addCategory_window)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, addCategory_window):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.categoryName_label.setText(_translate("Form", "Name:"))
-        self.addCategory_button.setText(_translate("Form", "Add category"))
-        self.label.setText(_translate("Form", "Add category"))
+        addCategory_window.setWindowTitle(_translate("addCategory_window", "Form"))
+        self.categoryName_label.setText(_translate("addCategory_window", "Name:"))
+        self.addCategory_button.setText(_translate("addCategory_window", "Add category"))
+        self.label.setText(_translate("addCategory_window", "Add category"))

@@ -11,20 +11,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 500)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(Dialog)
+class Ui_coverIllustration_window(object):
+    def setupUi(self, coverIllustration_window):
+        coverIllustration_window.setObjectName("coverIllustration_window")
+        coverIllustration_window.resize(400, 500)
+        self.horizontalLayout = QtWidgets.QHBoxLayout(coverIllustration_window)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.coverIllustration_label = QtWidgets.QLabel(Dialog)
+        self.coverIllustration_label = QtWidgets.QLabel(coverIllustration_window)
         self.coverIllustration_label.setText("")
         self.coverIllustration_label.setObjectName("coverIllustration_label")
         self.horizontalLayout.addWidget(self.coverIllustration_label)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(coverIllustration_window)
+        QtCore.QMetaObject.connectSlotsByName(coverIllustration_window)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, coverIllustration_window):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        coverIllustration_window.setWindowTitle(_translate("coverIllustration_window", "Dialog"))

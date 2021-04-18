@@ -11,7 +11,7 @@ class AllBooksView(QWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.ui = Ui_Form()
+        self.ui = Ui_allBooks_window()
         self.ui.setupUi(self)
 
         self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Category']
@@ -19,6 +19,7 @@ class AllBooksView(QWidget):
         self.ui.tableView.clicked.connect(self.book_details)
 
         self.show()
+
 
     def loadData(self):
         results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
@@ -55,8 +56,7 @@ class AllBooksView(QWidget):
         id = self.filter_proxy_model.index(row, 0).data()
         result = session.query(Book, Author, Category).select_from(Book).filter_by(id=id).join(Author).join(Category).first()
         book, author, category = result
-        book_view = BookView(parent=self, book=book, author=author, category=category)
+        book_view = self.parent().findChild(QWidget, 'book_window')
         book_view.update()
-        self.parent().addWidget(book_view)  #SISTEMARE QUESTA COSA PERCHÈ È ORRENDA
+        book_view.setValue(book, author, category)
         self.parent().setCurrentWidget(book_view)
-        print(len(self.parent().children()))

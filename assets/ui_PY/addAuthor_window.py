@@ -11,16 +11,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(890, 730)
-        Form.setStyleSheet("QLabel#addAuthor_label {\n"
+class Ui_addAuthor_window(object):
+    def setupUi(self, addAuthor_window):
+        addAuthor_window.setObjectName("addAuthor_window")
+        addAuthor_window.resize(890, 730)
+        addAuthor_window.setStyleSheet("QLabel#addAuthor_label {\n"
 "    background-color: green;\n"
 "}")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout = QtWidgets.QVBoxLayout(addAuthor_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(Form)
+        self.frame = QtWidgets.QFrame(addAuthor_window)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.frame.setFont(font)
@@ -62,17 +62,17 @@ class Ui_Form(object):
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.label)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.label)
         self.verticalLayout.addWidget(self.frame)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(addAuthor_window)
+        QtCore.QMetaObject.connectSlotsByName(addAuthor_window)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, addAuthor_window):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.authorName_label.setText(_translate("Form", "Name:"))
-        self.authorSurname_label.setText(_translate("Form", "Surname:"))
-        self.addAuthor_button.setText(_translate("Form", "Add author"))
-        self.clearAll_button.setText(_translate("Form", "Clear all"))
-        self.label.setText(_translate("Form", "Add author"))
+        addAuthor_window.setWindowTitle(_translate("addAuthor_window", "Form"))
+        self.authorName_label.setText(_translate("addAuthor_window", "Name:"))
+        self.authorSurname_label.setText(_translate("addAuthor_window", "Surname:"))
+        self.addAuthor_button.setText(_translate("addAuthor_window", "Add author"))
+        self.clearAll_button.setText(_translate("addAuthor_window", "Clear all"))
+        self.label.setText(_translate("addAuthor_window", "Add author"))

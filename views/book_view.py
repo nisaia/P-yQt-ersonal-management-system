@@ -4,34 +4,19 @@ from assets.ui_PY.book_window import *
 from PyQt5.QtGui import QPixmap
 from database.models import *
 from database.db import session
+from utils.custom_exceptions import *
+from sqlalchemy.exc import IntegrityError
+from PyQt5.QtWidgets import QMessageBox
 
 class BookView(QWidget):
 
-    def __init__(self, parent, book, author, category):
+    def __init__(self, parent):
         super().__init__(parent)
-        self.ui = Ui_Form()
+        self.ui = Ui_book_window()
         self.ui.setupUi(self)
 
-
-        # FIRST TAB
-        self.ui.title.setText(book.title)
-        self.ui.isbn.setText(book.isbn)
-        image = QPixmap(book.image_path)
-        image = image.scaled(self.ui.cover.width(), self.ui.cover.height(), QtCore.Qt.KeepAspectRatio)
-        self.ui.cover.setPixmap(image)
-        self.ui.author.setText(author.name + " " + author.surname)
-        self.ui.category.setText(category.name)
-        self.ui.description.setText(book.description)
-
-        #SECOND TAB
-        self.ui.bookTitle_lineEdit.setText(book.title)
-        self.ui.isbn_lineEdit.setText(book.isbn)
-        self.ui.coverPath_label.setText(book.image_path)
-        self.ui.description_plainTextEdit.setPlainText(book.description)
-
         self.ui.editBook_button.clicked.connect(self.editBook)
-        self.ui.clearAll_button.clicked.connect(self.clearAll)
-        #self.ui.deleteBook_button.clicked.connect(self.deleteBook)
+        self.ui.deleteBook_button.clicked.connect(self.deleteBook)
 
         self.show()
 
@@ -57,8 +42,83 @@ class BookView(QWidget):
                 self.ui.category_comboBox.addItem(category.name)
             self.ui.category_comboBox.setDisabled(False)
 
-        def editBook(self): pass
+    def setValue(self, book, author, category):
+        self.book = book
+        self.author = author
+        self.category = category
 
-        def clearAll(self): pass
+        # FIRST TAB
+        self.ui.title.setText(self.book.title)
+        self.ui.isbn.setText(self.book.isbn)
+        image = QPixmap(self.book.image_path)
+        image = image.scaled(self.ui.cover.width(), self.ui.cover.height(), QtCore.Qt.KeepAspectRatio)
+        self.ui.cover.setPixmap(image)
+        self.ui.author.setText(self.author.name + " " + self.author.surname)
+        self.ui.category.setText(self.category.name)
+        self.ui.description.setText(self.book.description)
 
-        def deleteBook(self): pass
+        #SECOND TAB
+        self.ui.bookTitle_lineEdit.setText(self.book.title)
+        self.ui.isbn_lineEdit.setText(self.book.isbn)
+        self.ui.coverPath_label.setText(self.book.image_path)
+        self.ui.description_plainTextEdit.setPlainText(self.book.description)
+
+
+    def editBook(self):
+        try:
+            book_title = self.ui.bookTitle_lineEdit.text()
+            isbn = self.ui.isbn_lineEdit.text()
+            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
+            category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex() + 1).first()
+
+            if len(book_title) == 0: raise NoInputException('Enter the title of book')
+            elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
+            elif author == None: raise NoInputException('Enter the author of the book')
+            elif category == None: raise NoInputException('Enter the category of the book')
+
+            description = self.ui.description_plainTextEdit.toPlainText()
+
+            updates = {
+                'title': book_title,
+                'isbn': isbn,
+                'author_id': author.id,
+                'category_id': category.id,
+                'description': description
+            }
+
+            for key, value in updates.items():
+                setattr(self.book, key, value)
+
+            session.commit()
+
+
+            message = QMessageBox()
+            message.setIcon(QMessageBox.Information)
+            message.setText('Book edited')
+            message.exec_()
+
+        except NoInputException as e:
+            message = e.error_message
+            error_message = QMessageBox()
+            error_message.setIcon(QMessageBox.Critical)
+            error_message.setText(message)
+            error_message.setWindowTitle('Error')
+            error_message.exec_()
+        except IntegrityError:
+            error_message = QMessageBox()
+            error_message.setIcon(QMessageBox.Critical)
+            error_message.setText('Field already inserted')
+            error_message.setWindowTitle('Error')
+            error_message.exec_()
+            session.rollback()
+
+    def deleteBook(self):
+        session.delete(self.book)
+        session.commit()
+        home_window = self.parent().findChild(QWidget, 'home_window')
+        self.parent().setCurrentWidget(home_window)
+
+        message = QMessageBox()
+        message.setIcon(QMessageBox.Information)
+        message.setText('Book eliminated')
+        message.exec_()

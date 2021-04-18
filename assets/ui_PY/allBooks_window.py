@@ -11,23 +11,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(890, 730)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+class Ui_allBooks_window(object):
+    def setupUi(self, allBooks_window):
+        allBooks_window.setObjectName("allBooks_window")
+        allBooks_window.resize(890, 730)
+        self.verticalLayout = QtWidgets.QVBoxLayout(allBooks_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(allBooks_window)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
+        self.lineEdit = QtWidgets.QLineEdit(allBooks_window)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout.addWidget(self.lineEdit)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.tableView = QtWidgets.QTableView(Form)
+        self.tableView = QtWidgets.QTableView(allBooks_window)
         self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableView.setObjectName("tableView")
@@ -35,10 +35,10 @@ class Ui_Form(object):
         self.tableView.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.tableView)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(allBooks_window)
+        QtCore.QMetaObject.connectSlotsByName(allBooks_window)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, allBooks_window):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "All books"))
+        allBooks_window.setWindowTitle(_translate("allBooks_window", "Form"))
+        self.label.setText(_translate("allBooks_window", "All books"))

@@ -15,7 +15,7 @@ class AddBookView(QWidget):
         self.cover_path = ""
 
         super().__init__(parent)
-        self.ui = Ui_Form()
+        self.ui = Ui_addBook_window()
         self.ui.setupUi(self)
 
         
@@ -89,7 +89,7 @@ class AddBookView(QWidget):
             session.add(book)
             session.commit()
 
-            results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
+            #results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
             #print(session.query(Book).join(Book.category_id).join(Book.author_id)).all()
             #for book, author, category in results:
                 #print(book.title, author.name, author.surname, category.name)

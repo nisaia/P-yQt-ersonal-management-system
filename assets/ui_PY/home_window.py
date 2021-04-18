@@ -11,16 +11,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(890, 730)
-        Form.setStyleSheet("QLabel#homepage_label {\n"
+class Ui_home_window(object):
+    def setupUi(self, home_window):
+        home_window.setObjectName("home_window")
+        home_window.resize(890, 730)
+        home_window.setStyleSheet("QLabel#homepage_label {\n"
 "    background-color: green;\n"
 "}")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout = QtWidgets.QVBoxLayout(home_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.homepage_label = QtWidgets.QLabel(Form)
+        self.homepage_label = QtWidgets.QLabel(home_window)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -29,18 +29,18 @@ class Ui_Form(object):
         self.homepage_label.setAlignment(QtCore.Qt.AlignCenter)
         self.homepage_label.setObjectName("homepage_label")
         self.verticalLayout.addWidget(self.homepage_label)
-        self.textEdit = QtWidgets.QTextEdit(Form)
+        self.textEdit = QtWidgets.QTextEdit(home_window)
         self.textEdit.setObjectName("textEdit")
         self.verticalLayout.addWidget(self.textEdit)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(home_window)
+        QtCore.QMetaObject.connectSlotsByName(home_window)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, home_window):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.homepage_label.setText(_translate("Form", "Home"))
-        self.textEdit.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        home_window.setWindowTitle(_translate("home_window", "Form"))
+        self.homepage_label.setText(_translate("home_window", "Home"))
+        self.textEdit.setHtml(_translate("home_window", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Noto Sans\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
