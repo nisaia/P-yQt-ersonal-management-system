@@ -81,6 +81,7 @@ class Ui_addBook_window(object):
         self.coverPath_label = QtWidgets.QLabel(self.addBook_frame)
         self.coverPath_label.setText("")
         self.coverPath_label.setObjectName("coverPath_label")
+        self.coverPath_label.setVisible(False)
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.FieldRole, self.coverPath_label)
         self.verticalLayout.addWidget(self.addBook_frame)
 

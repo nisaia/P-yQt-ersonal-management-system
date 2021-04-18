@@ -53,6 +53,7 @@ class AddBookView(QWidget):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
         self.cover_path = file_name
         self.ui.coverPath_label.setText(self.cover_path)
+        self.ui.coverPath_label.setVisible(True)
         self.ui.preview_button.setVisible(True)
 
     def displayCover(self):
@@ -117,5 +118,6 @@ class AddBookView(QWidget):
         self.ui.author_comboBox.setCurrentIndex(0)
         self.ui.category_comboBox.setCurrentIndex(0)
         self.ui.coverPath_label.setText("")
+        self.ui.coverPath_label.setVisible(False)
         self.ui.preview_button.setVisible(False)
         self.ui.description_plainTextEdit.clear()
