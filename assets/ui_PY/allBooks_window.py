@@ -35,6 +35,7 @@ class Ui_allBooks_window(object):
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableView.verticalHeader().setVisible(False)
+        self.tableView.setCursor(QtCore.Qt.PointingHandCursor)
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
 

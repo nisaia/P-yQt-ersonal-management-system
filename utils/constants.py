@@ -1,0 +1,1 @@
+styles_path = 'assets/styles'

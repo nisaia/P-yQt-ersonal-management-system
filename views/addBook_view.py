@@ -107,7 +107,7 @@ class AddBookView(QWidget):
         except IntegrityError:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Field already inserted')
+            error_message.setText('Book already inserted')
             error_message.setWindowTitle('Error')
             error_message.exec_()
             session.rollback()

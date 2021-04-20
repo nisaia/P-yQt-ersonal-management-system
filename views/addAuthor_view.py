@@ -1,8 +1,9 @@
 import sys
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMessageBox
 from assets.ui_PY.addAuthor_window import *
 from database.db import session
 from database.models import Author
+from utils.custom_exceptions import *
 
 class AddAuthorView(QWidget):
 
@@ -15,14 +16,26 @@ class AddAuthorView(QWidget):
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
     def addAuthor(self):
-        name = self.ui.authorName_lineEdit.text()
-        surname = self.ui.authorSurname_lineEdit.text()
+        try:
+            name = self.ui.authorName_lineEdit.text()
+            surname = self.ui.authorSurname_lineEdit.text()
 
-        author = Author(name=name, surname=surname)
-        session.add(author)
-        session.commit()
+            if len(name) == 0: raise NoInputException('Enter author name')
+            if len(surname) == 0: raise NoInputException('Enter author surname')
 
-        self.clearAll()
+            author = Author(name=name, surname=surname)
+            session.add(author)
+            session.commit()
+
+            self.clearAll()
+
+        except NoInputException as e:
+            message = e.error_message
+            error_message = QMessageBox()
+            error_message.setIcon(QMessageBox.Critical)
+            error_message.setText(message)
+            error_message.setWindowTitle('Error')
+            error_message.exec_()
 
     def clearAll(self):
         self.ui.authorName_lineEdit.clear()

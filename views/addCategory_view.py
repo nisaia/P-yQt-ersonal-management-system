@@ -20,23 +20,24 @@ class AddCategoryView(QWidget):
     def addCategory(self):
         try:
             name = self.ui.categoryName_lineEdit.text()
-            if len(name) == 0: raise NoInputException
+            if len(name) == 0: raise NoInputException('Enter category name')
 
             category = Category(name=name)
             session.add(category)
             session.commit()
 
             self.clearField()
-        except NoInputException:
+        except NoInputException as e:
+            message = e.error_message
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Field not valid')
+            error_message.setText(message)
             error_message.setWindowTitle('Error')
             error_message.exec_()
         except IntegrityError:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Field already inserted')
+            error_message.setText('Category already inserted')
             error_message.setWindowTitle('Error')
             error_message.exec_()
             session.rollback()
