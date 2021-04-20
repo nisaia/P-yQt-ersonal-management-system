@@ -15,7 +15,11 @@ class StatisticsView(QWidget):
         self.ui = Ui_statistics_window()
         self.ui.setupUi(self)
 
-        self.createChart()
+        self.category_series = QPieSeries()
+        self.author_series = QPieSeries()
+
+        self.createChart('Book percentages category', self.category_series)
+        self.createChart('Book percentages author', self.author_series)
 
         self.show()
 
@@ -29,13 +33,12 @@ class StatisticsView(QWidget):
         self.ui.categories_counter_label.setText(str(categories))
         
 
-    def createChart(self):
-        self.series = QPieSeries()
+    def createChart(self, title, series):
 
         chart = QChart()
-        chart.addSeries(self.series)
+        chart.addSeries(series)
         chart.setAnimationOptions(QChart.SeriesAnimations)
-        chart.setTitle('Book categories percentages')
+        chart.setTitle(title)
 
             #sslice.setLabel("{:.1f}%".format(100 * slice.percentage()))
 
@@ -46,15 +49,26 @@ class StatisticsView(QWidget):
         self.ui.horizontalLayout.addWidget(chartview)
 
     def updateValues(self):
-        self.series.clear()
         books = session.query(Book).count()
-        categories = session.query(Category).all()
 
+        categories = session.query(Category).all()
+        self.category_series.clear()
         for category in categories:
             category_books = session.query(Book).filter_by(category_id=category.id).count()
-            self.series.append(category.name, category_books/books)
+            self.category_series.append(category.name, category_books/books)
 
-        for i in range(len(self.series)):
+        for i in range(len(self.category_series)):
             slice = QPieSlice()
-            slice = self.series.slices()[i]
+            slice = self.category_series.slices()[i]
+            slice.setLabelVisible(True)
+
+        authors = session.query(Author).all()
+        self.author_series.clear()
+        for author in authors:
+            author_books = session.query(Book).filter_by(author_id=author.id).count()
+            self.author_series.append(author.name + " " + author.surname, author_books/books)
+
+        for i in range(len(self.author_series)):
+            slice = QPieSlice()
+            slice = self.author_series.slices()[i]
             slice.setLabelVisible(True)

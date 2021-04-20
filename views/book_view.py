@@ -6,7 +6,9 @@ from database.models import *
 from database.db import session
 from utils.custom_exceptions import *
 from sqlalchemy.exc import IntegrityError
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QFileDialog
+from views.coverIllustration_view import *
+
 
 class BookView(QWidget):
 
@@ -15,10 +17,30 @@ class BookView(QWidget):
         self.ui = Ui_book_window()
         self.ui.setupUi(self)
 
+        self.ui.uploadCover_button.clicked.connect(self.get_image_file)
+        self.ui.preview_button.clicked.connect(self.displayCover)
+
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
 
         self.show()
+
+    def get_image_file(self):
+        file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
+        self.cover_path = file_name
+        self.ui.coverPath_label.setText(self.cover_path)
+        self.ui.coverPath_label.setVisible(True)
+        self.ui.preview_button.setVisible(True)
+
+    def displayCover(self):
+        coverIllustration_window = CoverIllustrationView()
+        coverIllustration_window.setModal(True)
+        
+        image = QPixmap(self.cover_path)
+        image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
+        coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
+
+        coverIllustration_window.exec_()
 
     def update(self):
         self.ui.author_comboBox.clear()
@@ -60,7 +82,13 @@ class BookView(QWidget):
         #SECOND TAB
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.isbn_lineEdit.setText(self.book.isbn)
-        self.ui.coverPath_label.setText(self.book.image_path)
+
+        #LEVARE QUANDO SISTEMERÒ I MODELS
+        if len(self.book.image_path) == 0:
+            self.ui.coverPath_label.setVisible(False)
+            self.ui.preview_button.setVisible(False)
+        else:
+            self.ui.coverPath_label.setText(self.book.image_path)
         self.ui.description_plainTextEdit.setPlainText(self.book.description)
 
 

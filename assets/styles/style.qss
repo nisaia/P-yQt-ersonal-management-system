@@ -1,0 +1,92 @@
+/* DEFAULT SETTINGS */
+
+QMainWindow {
+    background-color: rgb(26, 26, 29);
+}
+
+QFrame {
+    font-size: 14pt;
+}
+
+QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover {
+    background-color: rgb(255, 0, 0);
+}
+
+QPushButton {
+    padding:0.35em 1.2em;
+    color: rgb(255, 255, 255);
+    border: 0.1em solid rgb(255, 255, 255);
+    border-radius: 0.12em;
+    height: 50px;
+    width: 100px;
+    font-size: 12pt;
+    /*text-transform: uppercase;*/
+}
+
+QPushButton::hover {
+    background-color: rgb(65, 179, 164);
+    color: rgb(255, 255, 255);
+}
+
+QStackedWidget {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 0.12em;
+}
+
+QLabel {
+    color: rgb(255, 255, 255);
+}
+
+QLineEdit {
+    background-color: rgba(0, 0, 0, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    font-size: 14pt;
+}
+
+QLineEdit::focus {
+    border-color: rgb(65, 179, 164);
+}
+
+QPlainTextEdit {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 0.12em;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+QPlainTextEdit::focus {
+    border-color: rgb(65, 179, 164);
+}
+
+QComboBox {
+    background-color: rgb(255, 255, 255);
+    color: rgb(26, 26, 29);
+    font-size: 14pt;
+}
+
+QComboBox QAbstractItemView {
+    border: 2px solid darkgray;
+    background-color: white;
+}
+
+QComboBox:!editable {
+    background-color: rgb(65, 179, 164);
+    color: rgb(26, 26, 29);
+}
+
+QHeaderView {
+    background-color: rgb(65, 179, 164);
+    color: rgb(0, 0, 0);
+}
+
+QTableView {
+    font-size: 12pt;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
