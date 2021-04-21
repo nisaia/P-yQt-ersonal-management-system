@@ -49,7 +49,7 @@ class MainView(QMainWindow):
 
     def home(self): self.ui.stackedWidget.setCurrentWidget(self.home_view)
     def addBook(self):
-        self.addBook_view.update()
+        self.addBook_view.updateComboBox()
         self.ui.stackedWidget.setCurrentWidget(self.addBook_view)
         print(self.ui.stackedWidget.count())
         print(self.addBook_view.parent())

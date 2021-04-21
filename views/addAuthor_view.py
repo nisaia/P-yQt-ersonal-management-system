@@ -4,6 +4,7 @@ from ui.addAuthor_window import *
 from database.db import session
 from database.models import Author
 from utils.custom_exceptions import *
+from utils.functions import openDialog
 
 class AddAuthorView(QWidget):
 
@@ -28,14 +29,11 @@ class AddAuthorView(QWidget):
             session.commit()
 
             self.clearAll()
+            openDialog(QMessageBox.Information, 'Author inserted', 'Success')
 
         except NoInputException as e:
             message = e.error_message
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText(message)
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            openDialog(QMessageBox.Critical, message, 'Error')
 
     def clearAll(self):
         self.ui.authorName_lineEdit.clear()

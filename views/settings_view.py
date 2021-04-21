@@ -27,8 +27,8 @@ class SettingsView(QWidget):
 
     def changeStyle(self):
         app = QtWidgets.QApplication.instance()
-        currenStyle = self.ui.comboBox.currentText()
-        with open(join(STYLES_PATH, currenStyle), 'r') as f:
+        currentStyle = self.ui.comboBox.currentText()
+        with open(join(STYLES_PATH, currentStyle), 'r') as f:
             qss = f.read()
             app.setStyleSheet(qss)
 

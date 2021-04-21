@@ -5,9 +5,14 @@ from PyQt5.QtGui import QPixmap
 from database.models import *
 from database.db import session
 from utils.custom_exceptions import *
+from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from views.coverIllustration_view import *
+from PyQt5.QtCore import QUrl
+from os.path import join
+from utils.constants import COVER_PATH
+import shutil
 
 
 class BookView(QWidget):
@@ -27,22 +32,20 @@ class BookView(QWidget):
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        self.cover_path = file_name
-        self.ui.coverPath_label.setText(self.cover_path)
-        self.ui.coverPath_label.setVisible(True)
-        self.ui.preview_button.setVisible(True)
+        self.ui.coverPath_label.setText(file_name)
 
     def displayCover(self):
         coverIllustration_window = CoverIllustrationView()
         coverIllustration_window.setModal(True)
         
-        image = QPixmap(self.cover_path)
+        image = QPixmap(self.ui.coverPath_label.text())
         image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
         coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
+        coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
 
         coverIllustration_window.exec_()
 
-    def update(self):
+    def updateValues(self, book, author, category):
         self.ui.author_comboBox.clear()
         self.ui.category_comboBox.clear()
 
@@ -64,7 +67,6 @@ class BookView(QWidget):
                 self.ui.category_comboBox.addItem(category.name)
             self.ui.category_comboBox.setDisabled(False)
 
-    def setValue(self, book, author, category):
         self.book = book
         self.author = author
         self.category = category
@@ -83,6 +85,7 @@ class BookView(QWidget):
         #SECOND TAB
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.isbn_lineEdit.setText(self.book.isbn)
+        self.ui.coverPath_label.setText(self.book.cover_path)
 
         self.ui.description_plainTextEdit.setPlainText(self.book.description)
 
@@ -99,6 +102,11 @@ class BookView(QWidget):
             elif author == None: raise NoInputException('Enter the author of the book')
             elif category == None: raise NoInputException('Enter the category of the book')
 
+            old_cover_path = self.ui.coverPath_label.text()
+            file_name = QUrl.fromLocalFile(old_cover_path).fileName()
+            print(file_name)
+            new_cover_path = join(COVER_PATH, file_name)
+
             description = self.ui.description_plainTextEdit.toPlainText()
 
             updates = {
@@ -106,6 +114,7 @@ class BookView(QWidget):
                 'isbn': isbn,
                 'author_id': author.id,
                 'category_id': category.id,
+                'cover_path': new_cover_path,
                 'description': description
             }
 
@@ -114,20 +123,15 @@ class BookView(QWidget):
 
             session.commit()
 
+            shutil.copy(old_cover_path, new_cover_path)
 
-            message = QMessageBox()
-            message.setIcon(QMessageBox.Information)
-            message.setText('Book edited')
-            message.exec_()
+            openDialog(QMessageBox.Information, 'Book edited', 'Success')
 
         except NoInputException as e:
-            e.showMessage()
+            message = e.error_message
+            openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Field already inserted')
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            openDialog(QMessageBox.Critical, 'Field already inserted', 'Error')
             session.rollback()
 
     def deleteBook(self):
@@ -136,7 +140,4 @@ class BookView(QWidget):
         home_window = self.parent().findChild(QWidget, 'home_window')
         self.parent().setCurrentWidget(home_window)
 
-        message = QMessageBox()
-        message.setIcon(QMessageBox.Information)
-        message.setText('Book eliminated')
-        message.exec_()
+        openDialog(QMessageBox.Information, 'Book deleted', 'Success')

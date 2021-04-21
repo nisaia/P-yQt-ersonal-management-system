@@ -107,6 +107,7 @@ class Ui_book_window(object):
         self.deleteBook_button.setObjectName("deleteBook_button")
         self.formLayout.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.deleteBook_button)
         self.tabWidget.addTab(self.tab_2, "")
+        self.tabWidget.tabBar().setCursor(QtCore.Qt.PointingHandCursor)
         self.verticalLayout.addWidget(self.tabWidget)
 
         self.retranslateUi(book_window)

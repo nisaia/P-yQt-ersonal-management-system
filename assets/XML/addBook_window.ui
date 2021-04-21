@@ -31,35 +31,35 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QFormLayout" name="formLayout">
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="isbn_label">
         <property name="text">
          <string>ISBN:</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="author_label">
         <property name="text">
          <string>Author:</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="category_label">
         <property name="text">
          <string>Category:</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
+      <item row="11" column="0">
        <widget class="QLabel" name="cover_label">
         <property name="text">
          <string>Cover:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QLabel" name="bookTitle_label">
         <property name="text">
          <string>Title:</string>
@@ -76,19 +76,19 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <widget class="QLineEdit" name="bookTitle_lineEdit"/>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="isbn_lineEdit"/>
       </item>
-      <item row="5" column="1">
+      <item row="6" column="1">
        <widget class="QComboBox" name="author_comboBox"/>
       </item>
-      <item row="7" column="1">
+      <item row="8" column="1">
        <widget class="QComboBox" name="category_comboBox"/>
       </item>
-      <item row="10" column="1">
+      <item row="11" column="1">
        <widget class="QPushButton" name="uploadCover_button">
         <property name="cursor">
          <cursorShape>ArrowCursor</cursorShape>
@@ -98,45 +98,61 @@
         </property>
        </widget>
       </item>
-      <item row="12" column="1">
+      <item row="13" column="1">
        <widget class="QPushButton" name="preview_button">
         <property name="text">
          <string>Preview</string>
         </property>
        </widget>
       </item>
-      <item row="16" column="0">
+      <item row="17" column="0">
        <widget class="QLabel" name="description_label">
         <property name="text">
          <string>Description:</string>
         </property>
        </widget>
       </item>
-      <item row="16" column="1">
+      <item row="17" column="1">
        <widget class="QPlainTextEdit" name="description_plainTextEdit"/>
       </item>
-      <item row="22" column="1">
+      <item row="23" column="1">
        <widget class="QPushButton" name="addBook_button">
         <property name="text">
          <string>Add book</string>
         </property>
        </widget>
       </item>
-      <item row="23" column="1">
+      <item row="24" column="1">
        <widget class="QPushButton" name="clearAll_button">
         <property name="text">
          <string>Clear all</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="1">
+      <item row="12" column="1">
        <widget class="QLabel" name="coverPath_label">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="19" column="1">
+      <item row="1" column="0" colspan="2">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="20" column="0" colspan="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>

@@ -57,6 +57,5 @@ class AllBooksView(QWidget):
         result = session.query(Book, Author, Category).select_from(Book).filter_by(id=id).join(Author).join(Category).first()
         book, author, category = result
         book_view = self.parent().findChild(QWidget, 'book_window')
-        book_view.update()
-        book_view.setValue(book, author, category)
+        book_view.updateValues(book, author, category)
         self.parent().setCurrentWidget(book_view)

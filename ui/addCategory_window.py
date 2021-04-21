@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/ui_XML/addCategory_window.ui'
+# Form implementation generated from reading ui file 'assets/XML/addCategory_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -36,22 +36,24 @@ class Ui_addCategory_window(object):
         font.setWeight(50)
         self.categoryName_label.setFont(font)
         self.categoryName_label.setObjectName("categoryName_label")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.categoryName_label)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.categoryName_label)
         self.categoryName_lineEdit = QtWidgets.QLineEdit(self.frame)
         self.categoryName_lineEdit.setObjectName("categoryName_lineEdit")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.categoryName_lineEdit)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.categoryName_lineEdit)
         self.addCategory_button = QtWidgets.QPushButton(self.frame)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.addCategory_button.setFont(font)
         self.addCategory_button.setObjectName("addCategory_button")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.addCategory_button)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.addCategory_button)
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.label)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        self.formLayout.setItem(2, QtWidgets.QFormLayout.FieldRole, spacerItem)
+        self.formLayout.setItem(1, QtWidgets.QFormLayout.SpanningRole, spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.formLayout.setItem(3, QtWidgets.QFormLayout.SpanningRole, spacerItem1)
         self.verticalLayout.addWidget(self.frame)
 
         self.retranslateUi(addCategory_window)

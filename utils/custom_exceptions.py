@@ -9,10 +9,3 @@ class NoInputException(Error):
     
     def __init__(self, error_message):
         self.error_message = error_message
-
-    def showMessage(self):
-        error_box = QMessageBox()
-        error_box.setIcon(QMessageBox.Critical)
-        error_box.setText(self.error_message)
-        error_box.setWindowTitle('Error')
-        error_box.exec_()

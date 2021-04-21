@@ -11,6 +11,7 @@ from utils.constants import COVER_PATH
 from os.path import join
 from PyQt5.QtCore import QUrl
 import shutil
+from utils.functions import openDialog
 
 class AddBookView(QWidget):
     
@@ -31,7 +32,7 @@ class AddBookView(QWidget):
 
         self.show()
 
-    def update(self):
+    def updateComboBox(self):
         self.ui.author_comboBox.clear()
         self.ui.category_comboBox.clear()
 
@@ -107,14 +108,14 @@ class AddBookView(QWidget):
                 #print(book.title, author.name, author.surname, category.name)
 
             self.clearAll()
+
+            openDialog(QMessageBox.Information, 'Book added', 'Success')
+
         except NoInputException as e:
-            e.showMessage()
+            message = e.error_message
+            openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Book already inserted')
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            openDialog(QMessageBox.Critical, 'Book already inserted', 'Error')
             session.rollback()
 
     def clearAll(self):

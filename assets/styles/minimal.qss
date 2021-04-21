@@ -90,3 +90,21 @@ QTableView {
     color: rgb(0, 0, 0);
 }
 
+QTabWidget::pane {
+  border: 2px solid rgb(255, 255, 255);
+  background: rgb(26, 26, 29);; 
+} 
+
+QTabBar::tab {
+  background-color: rgb(26, 26, 29); 
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px;
+  font-size: 10pt;
+} 
+
+QTabBar::tab:selected { 
+  background-color: rgb(65, 179, 164); 
+  color: rgb(0, 0, 0); 
+}
+
+

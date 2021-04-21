@@ -4,6 +4,7 @@ from ui.addCategory_window import *
 from database.db import session
 from database.models import Category
 from utils.custom_exceptions import NoInputException
+from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 
 class AddCategoryView(QWidget):
@@ -27,19 +28,14 @@ class AddCategoryView(QWidget):
             session.commit()
 
             self.clearField()
+            openDialog(QMessageBox.Information, 'Category inserted', 'Success')
+            
         except NoInputException as e:
-            e.showMessage()
+            message = e.error_message
+            openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText('Category already inserted')
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            openDialog(QMessageBox.Critical, 'Category already inserted', 'Error')
             session.rollback()
 
     def clearField(self):
-        self.ui.categoryName_lineEdit.clear()
-
-
-    def clearAll(self):
         self.ui.categoryName_lineEdit.clear()
