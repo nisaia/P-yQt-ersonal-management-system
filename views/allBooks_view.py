@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from assets.ui_PY.allBooks_window import *
+from ui.allBooks_window import *
 from database.db import session
 from database.models import *
 from views.book_view import BookView

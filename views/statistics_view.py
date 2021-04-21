@@ -1,6 +1,6 @@
 import sys
 
-from assets.ui_PY.statistics_window import *
+from ui.statistics_window import *
 from PyQt5.QtWidgets import QWidget
 from database.db import session
 from database.models import *

@@ -1,18 +1,22 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox, QMainWindow, QDialog
-from assets.ui_PY.addBook_window import *
+from ui.addBook_window import *
 from views.coverIllustration_view import *
 from database.db import session
 from database.models import *
 from PyQt5.QtGui import QPixmap
 from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
+from utils.constants import COVER_PATH
+from os.path import join
+from PyQt5.QtCore import QUrl
+import shutil
 
 class AddBookView(QWidget):
     
     def __init__(self, parent):
 
-        self.cover_path = ""
+        self.file_name = ""
 
         super().__init__(parent)
         self.ui = Ui_addBook_window()
@@ -51,9 +55,8 @@ class AddBookView(QWidget):
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        self.cover_path = file_name
-        if len(self.cover_path) != 0:
-            self.ui.coverPath_label.setText(self.cover_path)
+        if len(file_name) != 0:
+            self.ui.coverPath_label.setText(file_name)
             self.ui.coverPath_label.setVisible(True)
             self.ui.preview_button.setVisible(True)
 
@@ -61,9 +64,10 @@ class AddBookView(QWidget):
         coverIllustration_window = CoverIllustrationView()
         coverIllustration_window.setModal(True)
         
-        image = QPixmap(self.cover_path)
+        image = QPixmap(self.ui.coverPath_label.text())
         image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
         coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
+        coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
 
         coverIllustration_window.exec_()
 
@@ -74,11 +78,15 @@ class AddBookView(QWidget):
             author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
             category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex() + 1).first()
 
+
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
             elif author == None: raise NoInputException('Enter the author of the book')
             elif category == None: raise NoInputException('Enter the category of the book')
 
+            old_cover_path = self.ui.coverPath_label.text()
+            file_name = QUrl.fromLocalFile(old_cover_path).fileName()
+            new_cover_path = join(COVER_PATH, file_name)
             description = self.ui.description_plainTextEdit.toPlainText()
 
             book = Book(title=book_title,
@@ -86,10 +94,12 @@ class AddBookView(QWidget):
                         author_id=author.id,
                         category_id=category.id,
                         description=description,
-                        image_path=self.cover_path)
+                        cover_path=new_cover_path)
             
             session.add(book)
             session.commit()
+
+            shutil.copy(old_cover_path, new_cover_path)
 
             #results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
             #print(session.query(Book).join(Book.category_id).join(Book.author_id)).all()
@@ -98,12 +108,7 @@ class AddBookView(QWidget):
 
             self.clearAll()
         except NoInputException as e:
-            message = e.error_message
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText(message)
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            e.showMessage()
         except IntegrityError:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)
@@ -111,7 +116,6 @@ class AddBookView(QWidget):
             error_message.setWindowTitle('Error')
             error_message.exec_()
             session.rollback()
-
 
     def clearAll(self):
         self.ui.bookTitle_lineEdit.clear()

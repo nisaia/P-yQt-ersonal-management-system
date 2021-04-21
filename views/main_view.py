@@ -1,6 +1,6 @@
 import sys
 
-from assets.ui_PY.main_window import *
+from ui.main_window import *
 from PyQt5.QtWidgets import QMainWindow
 from views.addBook_view import AddBookView
 from views.addAuthor_view import AddAuthorView

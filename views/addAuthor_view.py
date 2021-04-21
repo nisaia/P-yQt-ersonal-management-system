@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QMessageBox
-from assets.ui_PY.addAuthor_window import *
+from ui.addAuthor_window import *
 from database.db import session
 from database.models import Author
 from utils.custom_exceptions import *

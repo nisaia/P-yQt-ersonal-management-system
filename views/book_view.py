@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget
-from assets.ui_PY.book_window import *
+from ui.book_window import *
 from PyQt5.QtGui import QPixmap
 from database.models import *
 from database.db import session
@@ -72,9 +72,10 @@ class BookView(QWidget):
         # FIRST TAB
         self.ui.title.setText(self.book.title)
         self.ui.isbn.setText(self.book.isbn)
-        image = QPixmap(self.book.image_path)
+        image = QPixmap(self.book.cover_path)
         image = image.scaled(self.ui.cover.width(), self.ui.cover.height(), QtCore.Qt.KeepAspectRatio)
         self.ui.cover.setPixmap(image)
+        self.ui.cover.setScaledContents(True)
         self.ui.author.setText(self.author.name + " " + self.author.surname)
         self.ui.category.setText(self.category.name)
         self.ui.description.setText(self.book.description)
@@ -83,12 +84,6 @@ class BookView(QWidget):
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.isbn_lineEdit.setText(self.book.isbn)
 
-        #LEVARE QUANDO SISTEMERÒ I MODELS
-        if len(self.book.image_path) == 0:
-            self.ui.coverPath_label.setVisible(False)
-            self.ui.preview_button.setVisible(False)
-        else:
-            self.ui.coverPath_label.setText(self.book.image_path)
         self.ui.description_plainTextEdit.setPlainText(self.book.description)
 
 
@@ -126,12 +121,7 @@ class BookView(QWidget):
             message.exec_()
 
         except NoInputException as e:
-            message = e.error_message
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText(message)
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            e.showMessage()
         except IntegrityError:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)

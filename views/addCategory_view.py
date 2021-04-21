@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QMessageBox
-from assets.ui_PY.addCategory_window import *
+from ui.addCategory_window import *
 from database.db import session
 from database.models import Category
 from utils.custom_exceptions import NoInputException
@@ -28,12 +28,7 @@ class AddCategoryView(QWidget):
 
             self.clearField()
         except NoInputException as e:
-            message = e.error_message
-            error_message = QMessageBox()
-            error_message.setIcon(QMessageBox.Critical)
-            error_message.setText(message)
-            error_message.setWindowTitle('Error')
-            error_message.exec_()
+            e.showMessage()
         except IntegrityError:
             error_message = QMessageBox()
             error_message.setIcon(QMessageBox.Critical)

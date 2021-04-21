@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget
-from assets.ui_PY.home_window import *
+from ui.home_window import *
 
 class HomeView(QWidget):
 

@@ -13,7 +13,7 @@ class Book(Base):
     title = Column(String(255), unique=True, nullable=False)
     isbn = Column(String(255), unique=True, nullable=False)
     description = Column(String(255))
-    image_path = Column(String(255))
+    cover_path = Column(String(255), nullable=False)
     category_id = Column(Integer(), ForeignKey('categories.id'))
     author_id = Column(Integer(), ForeignKey('authors.id'))
     created_at = Column(DateTime, default=datetime.now)
