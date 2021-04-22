@@ -123,7 +123,7 @@ class BookView(QWidget):
 
             session.commit()
 
-            shutil.copy(old_cover_path, new_cover_path)
+            if old_cover_path != new_cover_path: shutil.copy(old_cover_path, new_cover_path)
 
             openDialog(QMessageBox.Information, 'Book edited', 'Success')
 

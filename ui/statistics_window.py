@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/ui_XML/statistics_window.ui'
+# Form implementation generated from reading ui file 'assets/XML/statistics_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -62,6 +62,6 @@ class Ui_statistics_window(object):
     def retranslateUi(self, statistics_window):
         _translate = QtCore.QCoreApplication.translate
         statistics_window.setWindowTitle(_translate("statistics_window", "Form"))
-        self.categories_labes.setText(_translate("statistics_window", "Categories"))
-        self.authors_label.setText(_translate("statistics_window", "Authors"))
-        self.books_label.setText(_translate("statistics_window", "Books"))
+        self.categories_labes.setText(_translate("statistics_window", "Categories:"))
+        self.authors_label.setText(_translate("statistics_window", "Authors:"))
+        self.books_label.setText(_translate("statistics_window", "Books:"))
