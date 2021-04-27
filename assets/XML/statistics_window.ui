@@ -17,9 +17,9 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="2">
-      <widget class="QLabel" name="categories_labes">
+      <widget class="QLabel" name="genres_labes">
        <property name="text">
-        <string>Categories:</string>
+        <string>Genres:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -37,7 +37,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLabel" name="categories_counter_label">
+      <widget class="QLabel" name="genres_counter_label">
        <property name="text">
         <string/>
        </property>

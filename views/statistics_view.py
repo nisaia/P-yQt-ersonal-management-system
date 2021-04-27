@@ -1,11 +1,13 @@
 import sys
 
 from ui.statistics_window import *
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMessageBox
 from database.db import session
 from database.models import *
 from PyQt5.QtChart import QPieSeries, QChart, QChartView, QPieSlice
 from PyQt5.QtGui import QPainter
+from utils.functions import openDialog
+
 
 class StatisticsView(QWidget):
 
@@ -15,10 +17,10 @@ class StatisticsView(QWidget):
         self.ui = Ui_statistics_window()
         self.ui.setupUi(self)
 
-        self.category_series = QPieSeries()
+        self.genre_series = QPieSeries()
         self.author_series = QPieSeries()
 
-        self.createChart('Book percentages category', self.category_series)
+        self.createChart('Book percentages genre', self.genre_series)
         self.createChart('Book percentages author', self.author_series)
 
         self.show()
@@ -26,13 +28,12 @@ class StatisticsView(QWidget):
     def getValues(self):
         books = session.query(Book).count()
         authors = session.query(Author).count()
-        categories = session.query(Category).count()
+        genres = session.query(Genre).count()
 
         self.ui.books_counter_label.setText(str(books))
         self.ui.authors_counter_label.setText(str(authors))
-        self.ui.categories_counter_label.setText(str(categories))
+        self.ui.genres_counter_label.setText(str(genres))
         
-
     def createChart(self, title, series):
 
         chart = QChart()
@@ -49,26 +50,31 @@ class StatisticsView(QWidget):
         self.ui.horizontalLayout.addWidget(chartview)
 
     def updateValues(self):
-        books = session.query(Book).count()
+        try:
 
-        categories = session.query(Category).all()
-        self.category_series.clear()
-        for category in categories:
-            category_books = session.query(Book).filter_by(category_id=category.id).count()
-            self.category_series.append(category.name, category_books/books)
+            books = session.query(Book).count()
 
-        for i in range(len(self.category_series)):
-            slice = QPieSlice()
-            slice = self.category_series.slices()[i]
-            slice.setLabelVisible(True)
+            genres = session.query(Genre).all()
+            self.genre_series.clear()
+            for genre in genres:
+                genre_books = session.query(Book).filter_by(genre_id=genre.id).count()
+                self.genre_series.append(genre.name, genre_books/books)
 
-        authors = session.query(Author).all()
-        self.author_series.clear()
-        for author in authors:
-            author_books = session.query(Book).filter_by(author_id=author.id).count()
-            self.author_series.append(author.name + " " + author.surname, author_books/books)
+            for i in range(len(self.genre_series)):
+                slice = QPieSlice()
+                slice = self.genre_series.slices()[i]
+                slice.setLabelVisible(True)
 
-        for i in range(len(self.author_series)):
-            slice = QPieSlice()
-            slice = self.author_series.slices()[i]
-            slice.setLabelVisible(True)
+            authors = session.query(Author).all()
+            self.author_series.clear()
+            for author in authors:
+                author_books = session.query(Book).filter_by(author_id=author.id).count()
+                self.author_series.append(author.name + " " + author.surname, author_books/books)
+
+            for i in range(len(self.author_series)):
+                slice = QPieSlice()
+                slice = self.author_series.slices()[i]
+                slice.setLabelVisible(True)
+        
+        except ZeroDivisionError:
+            openDialog(QMessageBox.Critical, 'Insufficient data for chart', 'Error')

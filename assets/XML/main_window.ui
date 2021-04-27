@@ -49,9 +49,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="addCategory_button">
+       <widget class="QPushButton" name="addGenre_button">
         <property name="text">
-         <string>Add category</string>
+         <string>Add genre</string>
         </property>
        </widget>
       </item>

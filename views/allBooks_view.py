@@ -14,7 +14,7 @@ class AllBooksView(QWidget):
         self.ui = Ui_allBooks_window()
         self.ui.setupUi(self)
 
-        self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Category']
+        self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Genre']
 
         self.ui.tableView.clicked.connect(self.book_details)
 
@@ -22,7 +22,7 @@ class AllBooksView(QWidget):
 
 
     def loadData(self):
-        results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
+        results = session.query(Book, Author, Genre).select_from(Book).join(Author).join(Genre).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -30,7 +30,7 @@ class AllBooksView(QWidget):
         self.filter_proxy_model.setFilterKeyColumn(-1)
         self.filter_proxy_model.setSourceModel(self.model)
         
-        for row, (book, author, category) in enumerate(results):
+        for row, (book, author, genre) in enumerate(results):
             book_id = QStandardItem(str(book.id))
             book_id.setTextAlignment(Qt.AlignCenter)
             book_title = QStandardItem(book.title)
@@ -39,13 +39,13 @@ class AllBooksView(QWidget):
             book_isbn.setTextAlignment(Qt.AlignCenter)
             authorI = QStandardItem(author.name + " " + author.surname)
             authorI.setTextAlignment(Qt.AlignCenter)
-            categoryI = QStandardItem(category.name)
-            categoryI.setTextAlignment(Qt.AlignCenter)
+            genreI = QStandardItem(genre.name)
+            genreI.setTextAlignment(Qt.AlignCenter)
             self.model.setItem(row, 0, book_id)
             self.model.setItem(row, 1, book_title)
             self.model.setItem(row, 2, book_isbn)
             self.model.setItem(row, 3, authorI)
-            self.model.setItem(row, 4, categoryI)
+            self.model.setItem(row, 4, genreI)
 
         self.ui.tableView.setModel(self.filter_proxy_model)
 
@@ -54,8 +54,8 @@ class AllBooksView(QWidget):
     def book_details(self):
         row = self.ui.tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        result = session.query(Book, Author, Category).select_from(Book).filter_by(id=id).join(Author).join(Category).first()
-        book, author, category = result
+        result = session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
+        book, author, genre = result
         book_view = self.parent().findChild(QWidget, 'book_window')
-        book_view.updateValues(book, author, category)
+        book_view.updateValues(book, author, genre)
         self.parent().setCurrentWidget(book_view)

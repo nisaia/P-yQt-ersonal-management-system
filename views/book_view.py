@@ -10,6 +10,7 @@ from sqlalchemy.exc import IntegrityError
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
+import os
 from os.path import join
 from utils.constants import COVER_PATH
 import shutil
@@ -45,9 +46,9 @@ class BookView(QWidget):
 
         coverIllustration_window.exec_()
 
-    def updateValues(self, book, author, category):
+    def updateValues(self, book, author, genre):
         self.ui.author_comboBox.clear()
-        self.ui.category_comboBox.clear()
+        self.ui.genre_comboBox.clear()
 
         authors = session.query(Author).all()
         if len(authors) == 0:
@@ -58,18 +59,18 @@ class BookView(QWidget):
                 self.ui.author_comboBox.addItem(str(author.name + " " + author.surname))
             self.ui.author_comboBox.setDisabled(False)
 
-        categories = session.query(Category).all()
-        if len(categories) == 0:
-            self.ui.category_comboBox.addItem('No categories founded')
-            self.ui.category_comboBox.setDisabled(True)
+        genres = session.query(Genre).all()
+        if len(genres) == 0:
+            self.ui.genre_comboBox.addItem('No genres founded')
+            self.ui.genre_comboBox.setDisabled(True)
         else:
-            for category in categories:
-                self.ui.category_comboBox.addItem(category.name)
-            self.ui.category_comboBox.setDisabled(False)
+            for genre in genres:
+                self.ui.genre_comboBox.addItem(genre.name)
+            self.ui.genre_comboBox.setDisabled(False)
 
         self.book = book
         self.author = author
-        self.category = category
+        self.genre = genre
 
         # FIRST TAB
         self.ui.title.setText(self.book.title)
@@ -79,7 +80,7 @@ class BookView(QWidget):
         self.ui.cover.setPixmap(image)
         self.ui.cover.setScaledContents(True)
         self.ui.author.setText(self.author.name + " " + self.author.surname)
-        self.ui.category.setText(self.category.name)
+        self.ui.genre.setText(self.genre.name)
         self.ui.description.setText(self.book.description)
 
         #SECOND TAB
@@ -95,17 +96,24 @@ class BookView(QWidget):
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.isbn_lineEdit.text()
             author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
-            category = session.query(Category).filter_by(id=self.ui.category_comboBox.currentIndex() + 1).first()
+            genre = session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
             elif author == None: raise NoInputException('Enter the author of the book')
-            elif category == None: raise NoInputException('Enter the category of the book')
+            elif genre == None: raise NoInputException('Enter the genre of the book')
 
-            old_cover_path = self.ui.coverPath_label.text()
-            file_name = QUrl.fromLocalFile(old_cover_path).fileName()
-            print(file_name)
-            new_cover_path = join(COVER_PATH, file_name)
+            cover_path = self.ui.coverPath_label.text()
+            book_cover_path = self.book.cover_path
+
+            if cover_path != book_cover_path:
+                file_name = QUrl.fromLocalFile(cover_path).fileName()
+                print(file_name)
+                new_cover_path = join(COVER_PATH, file_name)
+                os.remove(book_cover_path)
+                shutil.copy(cover_path, new_cover_path)
+            else:
+                new_cover_path = self.book.cover_path
 
             description = self.ui.description_plainTextEdit.toPlainText()
 
@@ -113,7 +121,7 @@ class BookView(QWidget):
                 'title': book_title,
                 'isbn': isbn,
                 'author_id': author.id,
-                'category_id': category.id,
+                'genre_id': genre.id,
                 'cover_path': new_cover_path,
                 'description': description
             }
@@ -122,8 +130,6 @@ class BookView(QWidget):
                 setattr(self.book, key, value)
 
             session.commit()
-
-            if old_cover_path != new_cover_path: shutil.copy(old_cover_path, new_cover_path)
 
             openDialog(QMessageBox.Information, 'Book edited', 'Success')
 

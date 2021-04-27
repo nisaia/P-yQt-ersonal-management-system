@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>addCategory_window</class>
- <widget class="QWidget" name="addCategory_window">
+ <class>addGenre_window</class>
+ <widget class="QWidget" name="addGenre_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,7 +34,7 @@
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="2" column="0">
-       <widget class="QLabel" name="categoryName_label">
+       <widget class="QLabel" name="genreName_label">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -48,17 +48,17 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="categoryName_lineEdit"/>
+       <widget class="QLineEdit" name="genreName_lineEdit"/>
       </item>
       <item row="4" column="1">
-       <widget class="QPushButton" name="addCategory_button">
+       <widget class="QPushButton" name="addGenre_button">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>Add category</string>
+         <string>Add genre</string>
         </property>
        </widget>
       </item>

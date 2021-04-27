@@ -4,7 +4,7 @@ from ui.main_window import *
 from PyQt5.QtWidgets import QMainWindow
 from views.addBook_view import AddBookView
 from views.addAuthor_view import AddAuthorView
-from views.addCategory_view import AddCategoryView
+from views.addGenre_view import AddGenreView
 from views.home_view import HomeView
 from views.allBooks_view import AllBooksView
 from views.book_view import BookView
@@ -23,7 +23,7 @@ class MainView(QMainWindow):
         self.addBook_view = AddBookView(parent=self)
         self.allBooks_view = AllBooksView(parent=self)
         self.addAuthor_view = AddAuthorView(parent=self)
-        self.addCategory_view = AddCategoryView(parent=self)
+        self.addGenre_view = AddGenreView(parent=self)
         self.book_view = BookView(parent=self)
         self.statistics_view = StatisticsView(parent=self)
         self.settings_view = SettingsView(parent=self)
@@ -32,7 +32,7 @@ class MainView(QMainWindow):
         self.ui.stackedWidget.addWidget(self.addBook_view)
         self.ui.stackedWidget.addWidget(self.allBooks_view)
         self.ui.stackedWidget.addWidget(self.addAuthor_view)
-        self.ui.stackedWidget.addWidget(self.addCategory_view)
+        self.ui.stackedWidget.addWidget(self.addGenre_view)
         self.ui.stackedWidget.addWidget(self.book_view)
         self.ui.stackedWidget.addWidget(self.statistics_view)
         self.ui.stackedWidget.addWidget(self.settings_view)
@@ -41,7 +41,7 @@ class MainView(QMainWindow):
         self.ui.addBook_button.clicked.connect(self.addBook)
         self.ui.allBooks_button.clicked.connect(self.allBooks)
         self.ui.addAuthor_button.clicked.connect(self.addAuthor)
-        self.ui.addCategory_button.clicked.connect(self.addCategory)
+        self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.statistics_button.clicked.connect(self.getStatistics)
         self.ui.settings_button.clicked.connect(self.settings)
 
@@ -58,7 +58,7 @@ class MainView(QMainWindow):
         self.allBooks_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allBooks_view)
     def addAuthor(self): self.ui.stackedWidget.setCurrentWidget(self.addAuthor_view)
-    def addCategory(self): self.ui.stackedWidget.setCurrentWidget(self.addCategory_view)
+    def addGenre(self): self.ui.stackedWidget.setCurrentWidget(self.addGenre_view)
     def getStatistics(self):
         self.statistics_view.getValues()
         self.statistics_view.updateValues()

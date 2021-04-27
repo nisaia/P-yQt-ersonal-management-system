@@ -14,7 +14,7 @@ class Book(Base):
     isbn = Column(String(255), unique=True, nullable=False)
     description = Column(String(255))
     cover_path = Column(String(255), nullable=False)
-    category_id = Column(Integer(), ForeignKey('categories.id'))
+    genre_id = Column(Integer(), ForeignKey('genres.id'))
     author_id = Column(Integer(), ForeignKey('authors.id'))
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
@@ -33,8 +33,8 @@ class Author(Base):
     def repr(self):
         return '%r' % self.id
 
-class Category(Base):
-    __tablename__ = "categories"
+class Genre(Base):
+    __tablename__ = "genres"
     id = Column(Integer, primary_key = True)
     name = Column(String(255), unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.now)
