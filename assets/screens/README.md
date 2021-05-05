@@ -10,6 +10,14 @@
 
 <img src="allBooks.png" width="550">
 
+# Details single book
+
+<img src="details.png" width="550">
+
+# Edit/Delete book
+
+<img src="edit_delete.png" width="550">
+
 # Add author
 
 <img src="addAuthor.png" width="550">
