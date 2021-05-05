@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/ui_XML/settings_window.ui'
+# Form implementation generated from reading ui file 'assets/XML/settings_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -19,12 +19,6 @@ class Ui_settings_window(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.label_2 = QtWidgets.QLabel(settings_window)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
-        self.comboBox = QtWidgets.QComboBox(settings_window)
-        self.comboBox.setObjectName("comboBox")
-        self.gridLayout.addWidget(self.comboBox, 1, 1, 1, 1)
         self.changeStyle_button = QtWidgets.QPushButton(settings_window)
         self.changeStyle_button.setObjectName("changeStyle_button")
         self.gridLayout.addWidget(self.changeStyle_button, 1, 2, 1, 1)
@@ -37,6 +31,23 @@ class Ui_settings_window(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 3)
+        self.style_comboBox = QtWidgets.QComboBox(settings_window)
+        self.style_comboBox.setObjectName("style_comboBox")
+        self.gridLayout.addWidget(self.style_comboBox, 1, 1, 1, 1)
+        self.label_2 = QtWidgets.QLabel(settings_window)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+        self.label_3 = QtWidgets.QLabel(settings_window)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
+        self.language_comboBox = QtWidgets.QComboBox(settings_window)
+        self.language_comboBox.setObjectName("language_comboBox")
+        self.gridLayout.addWidget(self.language_comboBox, 2, 1, 1, 1)
+        self.changeLanguage_button = QtWidgets.QPushButton(settings_window)
+        self.changeLanguage_button.setObjectName("changeLanguage_button")
+        self.gridLayout.addWidget(self.changeLanguage_button, 2, 2, 1, 1)
         self.verticalLayout_2.addLayout(self.gridLayout)
 
         self.retranslateUi(settings_window)
@@ -45,6 +56,8 @@ class Ui_settings_window(object):
     def retranslateUi(self, settings_window):
         _translate = QtCore.QCoreApplication.translate
         settings_window.setWindowTitle(_translate("settings_window", "Form"))
-        self.label_2.setText(_translate("settings_window", "Style:"))
         self.changeStyle_button.setText(_translate("settings_window", "Change style"))
         self.label.setText(_translate("settings_window", "Settings"))
+        self.label_2.setText(_translate("settings_window", "Style:"))
+        self.label_3.setText(_translate("settings_window", "Language"))
+        self.changeLanguage_button.setText(_translate("settings_window", "Change language"))

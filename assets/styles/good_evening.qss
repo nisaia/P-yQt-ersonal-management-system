@@ -1,0 +1,107 @@
+/* DEFAULT SETTINGS */
+
+QMainWindow {
+    background-color: rgb(28, 39, 67);
+}
+
+QTextBrowser {
+    font-size: 14pt;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(253, 149, 100);
+}
+
+QFrame {
+    font-size: 14pt;
+    color: rgb(253, 149, 100);
+    border: none;
+}
+
+QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover {
+    background-color: rgb(227, 70, 63);
+}
+
+QPushButton {
+    padding: 0.35em 1.2em;
+    background-color: rgb(33, 56, 98);
+    color: rgb(253, 149, 100);
+    border-radius: 0.12em;
+    height: 50px;
+    width: 100px;
+    font-size: 12pt;
+}
+
+QPushButton::hover {
+    background-color: rgb(180, 99, 130);
+    color: rgb(33, 56, 98);
+}
+
+QLineEdit {
+    background-color: rgba(0, 0, 0, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(253, 149, 100);
+    color: rgb(253, 149, 100);
+    font-size: 14pt;
+}
+
+QLineEdit::focus {
+    border-color: rgb(180, 99, 130);
+}
+
+QPlainTextEdit {
+    border: 2px solid rgb(253, 149, 100);
+    border-radius: 0.12em;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(253, 149, 100);
+}
+
+QPlainTextEdit::focus {
+    border-color: rgb(180, 99, 130);
+}
+
+QComboBox {
+    color: rgb(28, 39, 67);
+    font-size: 14pt;
+}
+
+QComboBox QAbstractItemView {
+    color: rgb(253, 149, 100);
+    background-color: rgb(33, 56, 98);
+    border: 2px solid rgb(253, 149, 100);
+}
+
+QComboBox:!editable {
+    background-color: rgb(180, 99, 130);
+    color: rgb(253, 149, 100);
+}
+
+QHeaderView {
+    background-color: rgb(180, 99, 130);
+    color: rgb(28, 39, 67);
+}
+
+QTableView {
+    font-size: 12pt;
+    background-color: rgb(33, 56, 98);
+    color: rgb(253, 149, 100);
+    border: 2px solid rgb(180, 99, 130);
+}
+
+QTabWidget::pane {
+    background-color: rgb(28, 39, 67);
+    border: none;
+}
+
+QTabBar::tab {
+    background-color: rgb(28, 39, 67);
+    padding: 10px;
+    font-size: 10pt;
+    color: rgb(253, 149, 100);
+}
+
+QTabBar::tab::selected {
+    background-color: rgb(180, 99, 130);
+    color: rgb(33, 56, 98);
+}
+

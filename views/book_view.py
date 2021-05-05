@@ -29,6 +29,12 @@ class BookView(QWidget):
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
 
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+        for combobox in self.findChildren(QtWidgets.QComboBox):
+            combobox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
         self.show()
 
     def get_image_file(self):
@@ -130,6 +136,9 @@ class BookView(QWidget):
                 setattr(self.book, key, value)
 
             session.commit()
+
+            allBooks_window = self.parent().findChild(QWidget, 'allBooks_window')
+            self.parent().setCurrentWidget(allBooks_window)
 
             openDialog(QMessageBox.Information, 'Book edited', 'Success')
 

@@ -13,8 +13,15 @@ class AddAuthorView(QWidget):
         self.ui = Ui_addAuthor_window()
         self.ui.setupUi(self)
 
+
         self.ui.addAuthor_button.clicked.connect(self.addAuthor)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
+
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+        self.show()
+
 
     def addAuthor(self):
         try:

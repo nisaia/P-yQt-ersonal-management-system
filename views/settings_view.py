@@ -16,18 +16,21 @@ class SettingsView(QWidget):
 
         self.ui.changeStyle_button.clicked.connect(self.changeStyle)
 
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
         self.show()
     
     def updateStyles(self):
-        self.ui.comboBox.clear()
+        self.ui.style_comboBox.clear()
         
         for file in listdir(STYLES_PATH):
             if isfile(join(STYLES_PATH, file)):
-                self.ui.comboBox.addItem(file)
+                self.ui.style_comboBox.addItem(file)
 
     def changeStyle(self):
         app = QtWidgets.QApplication.instance()
-        currentStyle = self.ui.comboBox.currentText()
+        currentStyle = self.ui.style_comboBox.currentText()
         with open(join(STYLES_PATH, currentStyle), 'r') as f:
             qss = f.read()
             app.setStyleSheet(qss)

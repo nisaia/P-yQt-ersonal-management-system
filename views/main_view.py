@@ -45,9 +45,13 @@ class MainView(QMainWindow):
         self.ui.statistics_button.clicked.connect(self.getStatistics)
         self.ui.settings_button.clicked.connect(self.settings)
 
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        
         self.show()
 
     def home(self): self.ui.stackedWidget.setCurrentWidget(self.home_view)
+    
     def addBook(self):
         self.addBook_view.updateComboBox()
         self.ui.stackedWidget.setCurrentWidget(self.addBook_view)
@@ -57,8 +61,11 @@ class MainView(QMainWindow):
     def allBooks(self):
         self.allBooks_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allBooks_view)
+    
     def addAuthor(self): self.ui.stackedWidget.setCurrentWidget(self.addAuthor_view)
+    
     def addGenre(self): self.ui.stackedWidget.setCurrentWidget(self.addGenre_view)
+    
     def getStatistics(self):
         self.statistics_view.getValues()
         self.statistics_view.updateValues()

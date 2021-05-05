@@ -16,6 +16,9 @@ class AddGenreView(QWidget):
 
         self.ui.addGenre_button.clicked.connect(self.addCategory)
 
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
         self.show()
 
     def addCategory(self):

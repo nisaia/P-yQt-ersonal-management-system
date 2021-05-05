@@ -30,6 +30,12 @@ class AddBookView(QWidget):
         self.ui.addBook_button.clicked.connect(self.addBook)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
+        for button in self.findChildren(QtWidgets.QPushButton):
+            button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+        for combobox in self.findChildren(QtWidgets.QComboBox):
+            combobox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
         self.show()
 
     def updateComboBox(self):
