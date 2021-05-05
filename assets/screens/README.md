@@ -8,7 +8,7 @@
 
 # All books
 
-<img src="allBooks" width="550">
+<img src="allBooks.png" width="550">
 
 # Add author
 
