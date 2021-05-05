@@ -65,7 +65,7 @@
       <item row="0" column="0" colspan="2">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Add category</string>
+         <string>Add genre</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

@@ -110,7 +110,7 @@ class Ui_book_window(object):
         self.verticalLayout.addWidget(self.tabWidget)
 
         self.retranslateUi(book_window)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(book_window)
 
     def retranslateUi(self, book_window):
@@ -122,7 +122,7 @@ class Ui_book_window(object):
         self.title.setText(_translate("book_window", "Title"))
         self.author.setText(_translate("book_window", "Author"))
         self.cover.setText(_translate("book_window", "Cover"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("book_window", "Tab 1"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("book_window", "Details"))
         self.editBook_label.setText(_translate("book_window", "Edit book"))
         self.bookTitle_label.setText(_translate("book_window", "Title:"))
         self.isbn_label.setText(_translate("book_window", "ISBN:"))
@@ -134,4 +134,4 @@ class Ui_book_window(object):
         self.description_label.setText(_translate("book_window", "Description:"))
         self.editBook_button.setText(_translate("book_window", "Edit book"))
         self.deleteBook_button.setText(_translate("book_window", "Delete book"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("book_window", "Tab 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("book_window", "Edit/Delete"))

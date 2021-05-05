@@ -53,6 +53,10 @@ class BookView(QWidget):
         coverIllustration_window.exec_()
 
     def updateValues(self, book, author, genre):
+        self.book = book
+        self.author = author
+        self.genre = genre
+
         self.ui.author_comboBox.clear()
         self.ui.genre_comboBox.clear()
 
@@ -61,8 +65,8 @@ class BookView(QWidget):
             self.ui.author_comboBox.addItem('No authors founded')
             self.ui.author_comboBox.setDisabled(True)
         else:
-            for author in authors:
-                self.ui.author_comboBox.addItem(str(author.name + " " + author.surname))
+            for author_item in authors:
+                self.ui.author_comboBox.addItem(str(author_item.name + " " + author_item.surname))
             self.ui.author_comboBox.setDisabled(False)
 
         genres = session.query(Genre).all()
@@ -73,10 +77,6 @@ class BookView(QWidget):
             for genre in genres:
                 self.ui.genre_comboBox.addItem(genre.name)
             self.ui.genre_comboBox.setDisabled(False)
-
-        self.book = book
-        self.author = author
-        self.genre = genre
 
         # FIRST TAB
         self.ui.title.setText(self.book.title)
@@ -93,6 +93,9 @@ class BookView(QWidget):
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.isbn_lineEdit.setText(self.book.isbn)
         self.ui.coverPath_label.setText(self.book.cover_path)
+
+        self.ui.author_comboBox.setCurrentIndex(self.author.id - 1)
+        self.ui.genre_comboBox.setCurrentIndex(self.genre.id - 1)
 
         self.ui.description_plainTextEdit.setPlainText(self.book.description)
 
@@ -137,8 +140,8 @@ class BookView(QWidget):
 
             session.commit()
 
-            allBooks_window = self.parent().findChild(QWidget, 'allBooks_window')
-            self.parent().setCurrentWidget(allBooks_window)
+            home_window = self.parent().findChild(QWidget, 'home_window')
+            self.parent().setCurrentWidget(home_window)
 
             openDialog(QMessageBox.Information, 'Book edited', 'Success')
 

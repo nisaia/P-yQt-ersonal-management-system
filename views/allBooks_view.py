@@ -55,7 +55,9 @@ class AllBooksView(QWidget):
         row = self.ui.tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         result = session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
+
         book, author, genre = result
+        print(book.id, author.id, genre.id)
         book_view = self.parent().findChild(QWidget, 'book_window')
         book_view.updateValues(book, author, genre)
         self.parent().setCurrentWidget(book_view)

@@ -12,6 +12,6 @@ if __name__ == "__main__":
         qss = f.read()
         app.setStyleSheet(qss)
     main_window = MainView()
-    main_window.setWindowTitle('PyBooks')
+    main_window.setWindowTitle('P(yQt)ersonal book library')
     main_window.show()
     sys.exit(app.exec_())

@@ -64,4 +64,4 @@ class Ui_addGenre_window(object):
         addGenre_window.setWindowTitle(_translate("addGenre_window", "Form"))
         self.genreName_label.setText(_translate("addGenre_window", "Name:"))
         self.addGenre_button.setText(_translate("addGenre_window", "Add genre"))
-        self.label.setText(_translate("addGenre_window", "Add category"))
+        self.label.setText(_translate("addGenre_window", "Add genre"))
