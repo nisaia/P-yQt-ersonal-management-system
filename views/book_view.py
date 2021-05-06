@@ -35,6 +35,8 @@ class BookView(QWidget):
         for combobox in self.findChildren(QtWidgets.QComboBox):
             combobox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
 
+        self.findChild(QtWidgets.QTabWidget).tabBar().setCursor(QtCore.Qt.PointingHandCursor)
+
         self.show()
 
     def get_image_file(self):

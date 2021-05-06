@@ -1,7 +1,7 @@
 import sys
 
 from ui.main_window import *
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
 from views.addBook_view import AddBookView
 from views.addAuthor_view import AddAuthorView
 from views.addGenre_view import AddGenreView
@@ -43,14 +43,16 @@ class MainView(QMainWindow):
         self.ui.addAuthor_button.clicked.connect(self.addAuthor)
         self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.statistics_button.clicked.connect(self.getStatistics)
-        self.ui.settings_button.clicked.connect(self.settings)
+        self.ui.settings_button.clicked.connect(self.changeSettings)
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         
         self.show()
 
-    def home(self): self.ui.stackedWidget.setCurrentWidget(self.home_view)
+    def home(self):
+        print(self.home_view)
+        self.ui.stackedWidget.setCurrentWidget(self.home_view)
     
     def addBook(self):
         self.addBook_view.updateComboBox()
@@ -72,6 +74,6 @@ class MainView(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.statistics_view)
         #app = QtWidgets.QApplication.instance()
 
-    def settings(self):
-        self.settings_view.updateStyles()
+    def changeSettings(self):
+        self.settings_view.updateValues()
         self.ui.stackedWidget.setCurrentWidget(self.settings_view)

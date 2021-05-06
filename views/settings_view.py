@@ -1,8 +1,9 @@
 import sys
 
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMainWindow
+from PyQt5.QtCore import QTranslator
 from ui.settings_window import *
-from utils.constants import STYLES_PATH
+from utils.constants import STYLES_PATH, TRANSLATIONS_PATH, BASIC_QT_CLASSES
 from os import listdir
 from os.path import isfile, join
 
@@ -15,18 +16,27 @@ class SettingsView(QWidget):
         self.ui.setupUi(self)
 
         self.ui.changeStyle_button.clicked.connect(self.changeStyle)
+        self.ui.changeFont_button.clicked.connect(self.changeFont)
+        self.ui.changeLanguage_button.clicked.connect(self.changeLanguage)
+
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
 
         self.show()
     
-    def updateStyles(self):
+    def updateValues(self):
         self.ui.style_comboBox.clear()
         
         for file in listdir(STYLES_PATH):
-            if isfile(join(STYLES_PATH, file)):
-                self.ui.style_comboBox.addItem(file)
+            self.ui.style_comboBox.addItem(file)
+
+        self.ui.language_comboBox.clear()
+
+        for file in listdir(TRANSLATIONS_PATH):
+            self.ui.language_comboBox.addItem(file)
+
+        #CONTINUE
 
     def changeStyle(self):
         app = QtWidgets.QApplication.instance()
@@ -35,5 +45,16 @@ class SettingsView(QWidget):
             qss = f.read()
             app.setStyleSheet(qss)
 
-        
-                
+    def changeLanguage(self):
+        """app = QtWidgets.QApplication.instance()
+        translator = QTranslator()
+        currentLanguage = self.ui.language_comboBox.currentText()
+        app.installTranslator(translator)"""
+        pass
+
+    def changeFont(self):
+        app = QtWidgets.QApplication.instance()
+        currentFont = self.ui.fontComboBox.currentFont()
+        for _class in BASIC_QT_CLASSES:
+            app.setFont(currentFont, _class)
+        app.setFont(currentFont)

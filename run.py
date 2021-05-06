@@ -1,17 +1,14 @@
 import sys
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtGui import QIcon
-from views.main_view import MainView
+from PyQt5.QtGui import QIcon, QFont
 from os.path import join
 from utils.constants import STYLES_PATH, ICONS_PATH
+from gui import GUI
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(join(ICONS_PATH, 'book_window_icon.png')))
-    with open(join(STYLES_PATH, 'light_minimal.qss'), 'r') as f:
-        qss = f.read()
-        app.setStyleSheet(qss)
-    main_window = MainView()
-    main_window.setWindowTitle('P(yQt)ersonal book library')
-    main_window.show()
+    gui = GUI()
+    gui.setWindowTitle('P(yQt)ersonal book library')
+    gui.loadSettings()
     sys.exit(app.exec_())
