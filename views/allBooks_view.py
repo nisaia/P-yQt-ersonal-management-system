@@ -5,7 +5,6 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from ui.allBooks_window import *
 from database.db import session
 from database.models import *
-from views.book_view import BookView
 
 class AllBooksView(QWidget):
 

@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QLabel
 from ui.book_window import *
 from PyQt5.QtGui import QPixmap
 from database.models import *
@@ -87,7 +87,14 @@ class BookView(QWidget):
         image = image.scaled(self.ui.cover.width(), self.ui.cover.height(), QtCore.Qt.KeepAspectRatio)
         self.ui.cover.setPixmap(image)
         self.ui.cover.setScaledContents(True)
-        self.ui.author.setText(self.author.name + " " + self.author.surname)
+
+        linkTemplate = '<a href={0}>{1}</a>'
+        wikipedia_header = 'https://it.wikipedia.org/wiki/'
+        author_url = self.author.name + '_' + self.author.surname
+        print(wikipedia_header+author_url)
+
+        self.ui.author.setText(linkTemplate.format(wikipedia_header + author_url, author_url.replace('_', ' ')))
+
         self.ui.genre.setText(self.genre.name)
         self.ui.description.setText(self.book.description)
 

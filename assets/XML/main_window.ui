@@ -49,13 +49,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="allAuthors_button">
-        <property name="text">
-         <string>All authors</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="addGenre_button">
         <property name="text">
          <string>Add genre</string>

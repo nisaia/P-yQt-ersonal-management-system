@@ -72,6 +72,12 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="0" column="0" rowspan="4">
