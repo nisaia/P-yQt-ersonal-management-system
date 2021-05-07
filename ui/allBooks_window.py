@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/ui_XML/allBooks_window.ui'
+# Form implementation generated from reading ui file 'assets/XML/allBooks_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -21,15 +21,17 @@ class Ui_allBooks_window(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.lineEdit = QtWidgets.QLineEdit(allBooks_window)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setPlaceholderText('Search book for [Title - ISBN - Author - Category]')
+        self.lineEdit.setPlaceholderText('Search author for [Title - ISBN - Author - Genre]')
         self.horizontalLayout.addWidget(self.lineEdit)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        self.verticalLayout.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout.addItem(spacerItem1)
         self.tableView = QtWidgets.QTableView(allBooks_window)
         self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)

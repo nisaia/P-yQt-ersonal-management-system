@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel, QMessageBox, QFileDialog
 from ui.book_window import *
 from PyQt5.QtGui import QPixmap
 from database.models import *
@@ -7,7 +7,6 @@ from database.db import session
 from utils.custom_exceptions import *
 from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
-from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
@@ -88,13 +87,7 @@ class BookView(QWidget):
         self.ui.cover.setPixmap(image)
         self.ui.cover.setScaledContents(True)
 
-        linkTemplate = '<a href={0}>{1}</a>'
-        wikipedia_header = 'https://it.wikipedia.org/wiki/'
-        author_url = self.author.name + '_' + self.author.surname
-        print(wikipedia_header+author_url)
-
-        self.ui.author.setText(linkTemplate.format(wikipedia_header + author_url, author_url.replace('_', ' ')))
-
+        self.ui.author.setText(self.author.name + ' ' + self.author.surname)
         self.ui.genre.setText(self.genre.name)
         self.ui.description.setText(self.book.description)
 

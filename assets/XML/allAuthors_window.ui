@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>allBooks_window</class>
- <widget class="QWidget" name="allBooks_window">
+ <class>allAuthors_window</class>
+ <widget class="QWidget" name="allAuthors_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,11 +13,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>All books</string>
+      <string>All authors</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -41,11 +41,7 @@
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="lineEdit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -67,9 +63,6 @@
     <widget class="QTableView" name="tableView">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
      </property>
     </widget>
    </item>

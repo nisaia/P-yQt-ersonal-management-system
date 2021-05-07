@@ -53,7 +53,7 @@ class AddBookView(QWidget):
 
         genres = session.query(Genre).all()
         if len(genres) == 0:
-            self.ui.genre_comboBox.addItem('No categories founded')
+            self.ui.genre_comboBox.addItem('No genres founded')
             self.ui.genre_comboBox.setDisabled(True)
         else:
             for genre in genres:
