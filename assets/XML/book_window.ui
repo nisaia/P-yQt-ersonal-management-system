@@ -185,14 +185,14 @@
        <item row="9" column="1">
         <widget class="QPlainTextEdit" name="description_plainTextEdit"/>
        </item>
-       <item row="10" column="1">
+       <item row="11" column="1">
         <widget class="QPushButton" name="editBook_button">
          <property name="text">
           <string>Edit book</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
+       <item row="12" column="1">
         <widget class="QPushButton" name="deleteBook_button">
          <property name="text">
           <string>Delete book</string>
@@ -201,6 +201,22 @@
        </item>
        <item row="1" column="0" colspan="2">
         <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="10" column="0" colspan="2">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

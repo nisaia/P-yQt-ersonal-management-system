@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/XML/allBooks_window.ui'
+# Form implementation generated from reading ui file 'assets/XML/allGenres_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,28 +11,25 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_allBooks_window(object):
-    def setupUi(self, allBooks_window):
-        allBooks_window.setObjectName("allBooks_window")
-        allBooks_window.resize(890, 730)
-        self.verticalLayout = QtWidgets.QVBoxLayout(allBooks_window)
+class Ui_allGenres_window(object):
+    def setupUi(self, allGenres_window):
+        allGenres_window.setObjectName("allGenres_window")
+        allGenres_window.resize(890, 730)
+        self.verticalLayout = QtWidgets.QVBoxLayout(allGenres_window)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(allBooks_window)
+        self.label = QtWidgets.QLabel(allGenres_window)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(allBooks_window)
+        self.lineEdit = QtWidgets.QLineEdit(allGenres_window)
+        self.lineEdit.setPlaceholderText('Search genre for [Name]')
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setPlaceholderText('Search book for [Title - ISBN - Author - Genre]')
-        self.horizontalLayout.addWidget(self.lineEdit)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addWidget(self.lineEdit)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem1)
-        self.tableView = QtWidgets.QTableView(allBooks_window)
+        self.tableView = QtWidgets.QTableView(allGenres_window)
         self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -41,10 +38,10 @@ class Ui_allBooks_window(object):
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
 
-        self.retranslateUi(allBooks_window)
-        QtCore.QMetaObject.connectSlotsByName(allBooks_window)
+        self.retranslateUi(allGenres_window)
+        QtCore.QMetaObject.connectSlotsByName(allGenres_window)
 
-    def retranslateUi(self, allBooks_window):
+    def retranslateUi(self, allGenres_window):
         _translate = QtCore.QCoreApplication.translate
-        allBooks_window.setWindowTitle(_translate("allBooks_window", "Form"))
-        self.label.setText(_translate("allBooks_window", "All books"))
+        allGenres_window.setWindowTitle(_translate("allGenres_window", "Form"))
+        self.label.setText(_translate("allGenres_window", "All genres"))

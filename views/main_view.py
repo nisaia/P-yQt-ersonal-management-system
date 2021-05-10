@@ -12,6 +12,8 @@ from views.statistics_view import StatisticsView
 from views.settings_view import SettingsView
 from views.allAuthors_view import AllAuthorsView
 from views.author_view import AuthorView
+from views.allGenres_view import AllGenresView
+from views.genre_view import GenreView
 
 class MainView(QMainWindow):
 
@@ -29,6 +31,8 @@ class MainView(QMainWindow):
         self.allAuthors_view = AllAuthorsView(parent=self)
         self.author_view = AuthorView(parent=self)
         self.addGenre_view = AddGenreView(parent=self)
+        self.allGenres_view = AllGenresView(parent=self)
+        self.genre_view = GenreView(parent=self)
         self.statistics_view = StatisticsView(parent=self)
         self.settings_view = SettingsView(parent=self)
 
@@ -40,6 +44,8 @@ class MainView(QMainWindow):
         self.ui.stackedWidget.addWidget(self.allAuthors_view)
         self.ui.stackedWidget.addWidget(self.author_view)
         self.ui.stackedWidget.addWidget(self.addGenre_view)
+        self.ui.stackedWidget.addWidget(self.allGenres_view)
+        self.ui.stackedWidget.addWidget(self.genre_view)
         self.ui.stackedWidget.addWidget(self.statistics_view)
         self.ui.stackedWidget.addWidget(self.settings_view)
     
@@ -49,6 +55,7 @@ class MainView(QMainWindow):
         self.ui.addAuthor_button.clicked.connect(self.addAuthor)
         self.ui.allAuthors_button.clicked.connect(self.allAuthors)
         self.ui.addGenre_button.clicked.connect(self.addGenre)
+        self.ui.allGenres_button.clicked.connect(self.allGenres)
         self.ui.statistics_button.clicked.connect(self.getStatistics)
         self.ui.settings_button.clicked.connect(self.changeSettings)
 
@@ -78,12 +85,15 @@ class MainView(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.allAuthors_view)
     
     def addGenre(self): self.ui.stackedWidget.setCurrentWidget(self.addGenre_view)
+
+    def allGenres(self):
+        self.allGenres_view.loadData()
+        self.ui.stackedWidget.setCurrentWidget(self.allGenres_view)
     
     def getStatistics(self):
         self.statistics_view.getValues()
         self.statistics_view.updateValues()
         self.ui.stackedWidget.setCurrentWidget(self.statistics_view)
-        #app = QtWidgets.QApplication.instance()
 
     def changeSettings(self):
         self.settings_view.updateValues()
