@@ -11,11 +11,14 @@ For more informations, check the link -> [here](https://riverbankcomputing.com/s
 ```bash
 git clone https://github.com/nisaia/P_yQt_ersonal-library.git your-project-name
 ```
-2. Enter into project folder and create a virtual enviroment:
+
+2. Enter into project folder and run the **build.sh** file:
 
 ```bash
-python3 -m venv virtual_enviroment
+./build.sh
 ```
+
+This script will create a virtual enviroment, install the necessary dependencies and create the database engine
 
 3. Once the virtual enviroment is created, activate it:
 
@@ -23,20 +26,13 @@ python3 -m venv virtual_enviroment
 . virtual_enviroment/bin/activate
 ```
 
-4. Now the dependencies must be installed from **requirements.txt**:
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Usage
 
-Enter into console and run the **run.sh** file:
+Enter into console and run the **run.py** file:
 
 ```bash
-./run.sh
+python3 run.py
 ```
-
 
 Enjoy
 
