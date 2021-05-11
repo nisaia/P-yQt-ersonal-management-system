@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#CREATE VIRTUAL ENVIROMENT
+echo "Creating virtual enviroment"
+python3 -m venv virtual_enviroment
+
 #INSTALL DEPENDENCIES
 
 echo "Installing dependencies"
