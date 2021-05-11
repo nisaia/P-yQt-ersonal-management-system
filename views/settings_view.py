@@ -26,21 +26,21 @@ class SettingsView(QWidget):
         self.show()
     
     def updateValues(self):
-        self.ui.style_comboBox.clear()
+        self.ui.applicationStyle_comboBox.clear()
         
         for file in listdir(STYLES_PATH):
-            self.ui.style_comboBox.addItem(file)
+            self.ui.applicationStyle_comboBox.addItem(file)
 
-        self.ui.language_comboBox.clear()
+        self.ui.applicationLanguage_comboBox.clear()
 
         for file in listdir(TRANSLATIONS_PATH):
-            self.ui.language_comboBox.addItem(file)
+            self.ui.applicationLanguage_comboBox.addItem(file)
 
         #CONTINUE
 
     def changeStyle(self):
         app = QtWidgets.QApplication.instance()
-        currentStyle = self.ui.style_comboBox.currentText()
+        currentStyle = self.ui.applicationStyle_comboBox.currentText()
         with open(join(STYLES_PATH, currentStyle), 'r') as f:
             qss = f.read()
             app.setStyleSheet(qss)
@@ -54,7 +54,7 @@ class SettingsView(QWidget):
 
     def changeFont(self):
         app = QtWidgets.QApplication.instance()
-        currentFont = self.ui.fontComboBox.currentFont()
+        currentFont = self.ui.applicationFont_comboBox.currentFont()
         for _class in BASIC_QT_CLASSES:
             app.setFont(currentFont, _class)
         app.setFont(currentFont)

@@ -15,7 +15,7 @@ class AllGenresView(QWidget):
 
         self.labels = ['Id', 'Name']
 
-        self.ui.tableView.clicked.connect(self.editGenre)
+        self.ui.allGenres_tableView.clicked.connect(self.editGenre)
 
         self.show()
 
@@ -36,12 +36,12 @@ class AllGenresView(QWidget):
             self.model.setItem(row, 0, genre_id)
             self.model.setItem(row, 1, genre_name)
 
-        self.ui.tableView.setModel(self.filter_proxy_model)
+        self.ui.allGenres_tableView.setModel(self.filter_proxy_model)
 
-        self.ui.lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+        self.ui.searchGenre_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def editGenre(self):
-        row = self.ui.tableView.selectionModel().selectedRows()[0].row()
+        row = self.ui.allGenres_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         genre = session.query(Genre).filter_by(id=id).first()
         genre_view = self.parent().findChild(QWidget, 'genre_window')

@@ -17,7 +17,7 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="2">
-      <widget class="QLabel" name="genres_labes">
+      <widget class="QLabel" name="genres_label">
        <property name="text">
         <string>Genres:</string>
        </property>
@@ -37,7 +37,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLabel" name="genres_counter_label">
+      <widget class="QLabel" name="genresCounter_label">
        <property name="text">
         <string/>
        </property>
@@ -47,7 +47,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="books_counter_label">
+      <widget class="QLabel" name="booksCounter_label">
        <property name="text">
         <string/>
        </property>
@@ -57,7 +57,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="authors_counter_label">
+      <widget class="QLabel" name="authorsCounter_label">
        <property name="text">
         <string/>
        </property>

@@ -30,9 +30,9 @@ class StatisticsView(QWidget):
         authors = session.query(Author).count()
         genres = session.query(Genre).count()
 
-        self.ui.books_counter_label.setText(str(books))
-        self.ui.authors_counter_label.setText(str(authors))
-        self.ui.genres_counter_label.setText(str(genres))
+        self.ui.booksCounter_label.setText(str(books))
+        self.ui.authorsCounter_label.setText(str(authors))
+        self.ui.genresCounter_label.setText(str(genres))
         
     def createChart(self, title, series):
 

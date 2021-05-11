@@ -15,7 +15,7 @@ class AllBooksView(QWidget):
 
         self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Genre']
 
-        self.ui.tableView.clicked.connect(self.book_details)
+        self.ui.allBooks_tableView.clicked.connect(self.book_details)
 
         self.show()
 
@@ -46,12 +46,12 @@ class AllBooksView(QWidget):
             self.model.setItem(row, 3, authorI)
             self.model.setItem(row, 4, genreI)
 
-        self.ui.tableView.setModel(self.filter_proxy_model)
+        self.ui.allBooks_tableView.setModel(self.filter_proxy_model)
 
-        self.ui.lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+        self.ui.searchBook_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def book_details(self):
-        row = self.ui.tableView.selectionModel().selectedRows()[0].row()
+        row = self.ui.allBooks_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         result = session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
 

@@ -25,7 +25,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="2" column="0">
-        <widget class="QLabel" name="wikipedia">
+        <widget class="QLabel" name="authorWikipedia_label">
          <property name="text">
           <string>Wikipedia</string>
          </property>
@@ -41,7 +41,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="surname">
+        <widget class="QLabel" name="authorSurname_label">
          <property name="text">
           <string>Surname</string>
          </property>
@@ -51,7 +51,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="name">
+        <widget class="QLabel" name="authorName_label">
          <property name="text">
           <string>Name</string>
          </property>
@@ -94,24 +94,24 @@
         </spacer>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="name_label">
+        <widget class="QLabel" name="authorName_label_2">
          <property name="text">
           <string>Name:</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="name_lineEdit"/>
+        <widget class="QLineEdit" name="authorName_lineEdit"/>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="isbn_label">
+        <widget class="QLabel" name="authorSurname_label_2">
          <property name="text">
           <string>Surname:</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="surname_lineEdit"/>
+        <widget class="QLineEdit" name="authorSurname_lineEdit"/>
        </item>
        <item row="5" column="1">
         <widget class="QPushButton" name="editAuthor_button">

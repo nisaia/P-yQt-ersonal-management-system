@@ -23,7 +23,7 @@ class BookView(QWidget):
         self.ui.setupUi(self)
 
         self.ui.uploadCover_button.clicked.connect(self.get_image_file)
-        self.ui.preview_button.clicked.connect(self.displayCover)
+        self.ui.bookPreview_button.clicked.connect(self.displayCover)
 
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
@@ -40,7 +40,7 @@ class BookView(QWidget):
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        self.ui.coverPath_label.setText(file_name)
+        self.ui.bookCoverPath_label.setText(file_name)
 
     def displayCover(self):
         coverIllustration_window = CoverIllustrationView()
@@ -58,54 +58,54 @@ class BookView(QWidget):
         self.author = author
         self.genre = genre
 
-        self.ui.author_comboBox.clear()
-        self.ui.genre_comboBox.clear()
+        self.ui.bookAuthor_comboBox.clear()
+        self.ui.bookGenre_comboBox.clear()
 
         authors = session.query(Author).all()
         if len(authors) == 0:
-            self.ui.author_comboBox.addItem('No authors founded')
-            self.ui.author_comboBox.setDisabled(True)
+            self.ui.bookAuthor_comboBox.addItem('No authors founded')
+            self.ui.bookAuthor_comboBox.setDisabled(True)
         else:
             for author_item in authors:
-                self.ui.author_comboBox.addItem(str(author_item.name + " " + author_item.surname))
-            self.ui.author_comboBox.setDisabled(False)
+                self.ui.bookAuthor_comboBox.addItem(str(author_item.name + " " + author_item.surname))
+            self.ui.bookAuthor_comboBox.setDisabled(False)
 
         genres = session.query(Genre).all()
         if len(genres) == 0:
-            self.ui.genre_comboBox.addItem('No genres founded')
-            self.ui.genre_comboBox.setDisabled(True)
+            self.ui.bookGenre_comboBox.addItem('No genres founded')
+            self.ui.bookGenre_comboBox.setDisabled(True)
         else:
             for genre in genres:
-                self.ui.genre_comboBox.addItem(genre.name)
-            self.ui.genre_comboBox.setDisabled(False)
+                self.ui.bookGenre_comboBox.addItem(genre.name)
+            self.ui.bookGenre_comboBox.setDisabled(False)
 
         # FIRST TAB
-        self.ui.title.setText(self.book.title)
-        self.ui.isbn.setText(self.book.isbn)
+        self.ui.bookTitle_label.setText(self.book.title)
+        self.ui.bookIsbn_label.setText(self.book.isbn)
         image = QPixmap(self.book.cover_path)
-        image = image.scaled(self.ui.cover.width(), self.ui.cover.height(), QtCore.Qt.KeepAspectRatio)
-        self.ui.cover.setPixmap(image)
-        self.ui.cover.setScaledContents(True)
+        image = image.scaled(self.ui.bookCover_label.width(), self.ui.bookCover_label.height(), QtCore.Qt.KeepAspectRatio)
+        self.ui.bookCover_label.setPixmap(image)
+        self.ui.bookCover_label.setScaledContents(True)
 
-        self.ui.author.setText(self.author.name + ' ' + self.author.surname)
-        self.ui.genre.setText(self.genre.name)
-        self.ui.description.setText(self.book.description)
+        self.ui.bookAuthor_label.setText(self.author.name + ' ' + self.author.surname)
+        self.ui.bookGenre_label.setText(self.genre.name)
+        self.ui.bookDescription_label.setText(self.book.description)
 
         #SECOND TAB
         self.ui.bookTitle_lineEdit.setText(self.book.title)
-        self.ui.isbn_lineEdit.setText(self.book.isbn)
-        self.ui.coverPath_label.setText(self.book.cover_path)
+        self.ui.bookIsbn_lineEdit.setText(self.book.isbn)
+        self.ui.bookCoverPath_label.setText(self.book.cover_path)
 
-        self.ui.author_comboBox.setCurrentIndex(self.author.id - 1)
-        self.ui.genre_comboBox.setCurrentIndex(self.genre.id - 1)
+        self.ui.bookAuthor_comboBox.setCurrentIndex(self.author.id - 1)
+        self.ui.bookGenre_comboBox.setCurrentIndex(self.genre.id - 1)
 
-        self.ui.description_plainTextEdit.setPlainText(self.book.description)
+        self.ui.bookDescription_plainTextEdit.setPlainText(self.book.description)
 
 
     def editBook(self):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
-            isbn = self.ui.isbn_lineEdit.text()
+            isbn = self.ui.bookIsbn_lineEdit.text()
             author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
             genre = session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
 
@@ -114,7 +114,7 @@ class BookView(QWidget):
             elif author == None: raise NoInputException('Enter the author of the book')
             elif genre == None: raise NoInputException('Enter the genre of the book')
 
-            cover_path = self.ui.coverPath_label.text()
+            cover_path = self.ui.bookCoverPath_label.text()
             book_cover_path = self.book.cover_path
 
             if cover_path != book_cover_path:

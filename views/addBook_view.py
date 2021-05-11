@@ -25,7 +25,7 @@ class AddBookView(QWidget):
 
         
         self.ui.uploadCover_button.clicked.connect(self.get_image_file)
-        self.ui.preview_button.clicked.connect(self.displayCover)
+        self.ui.bookPreview_button.clicked.connect(self.displayCover)
                 
         self.ui.addBook_button.clicked.connect(self.addBook)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
@@ -39,39 +39,39 @@ class AddBookView(QWidget):
         self.show()
 
     def updateComboBox(self):
-        self.ui.author_comboBox.clear()
-        self.ui.genre_comboBox.clear()
+        self.ui.bookAuthor_comboBox.clear()
+        self.ui.bookGenre_comboBox.clear()
 
         authors = session.query(Author).all()
         if len(authors) == 0:
-            self.ui.author_comboBox.addItem('No authors founded')
-            self.ui.author_comboBox.setDisabled(True)
+            self.ui.bookAuthor_comboBox.addItem('No authors founded')
+            self.ui.bookAuthor_comboBox.setDisabled(True)
         else:
             for author in authors:
-                self.ui.author_comboBox.addItem(str(author.name + " " + author.surname))
-            self.ui.author_comboBox.setDisabled(False)
+                self.ui.bookAuthor_comboBox.addItem(str(author.name + " " + author.surname))
+            self.ui.bookAuthor_comboBox.setDisabled(False)
 
         genres = session.query(Genre).all()
         if len(genres) == 0:
-            self.ui.genre_comboBox.addItem('No genres founded')
-            self.ui.genre_comboBox.setDisabled(True)
+            self.ui.bookGenre_comboBox.addItem('No genres founded')
+            self.ui.bookGenre_comboBox.setDisabled(True)
         else:
             for genre in genres:
-                self.ui.genre_comboBox.addItem(genre.name)
-            self.ui.genre_comboBox.setDisabled(False)
+                self.ui.bookGenre_comboBox.addItem(genre.name)
+            self.ui.bookGenre_comboBox.setDisabled(False)
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
         if len(file_name) != 0:
-            self.ui.coverPath_label.setText(file_name)
-            self.ui.coverPath_label.setVisible(True)
-            self.ui.preview_button.setVisible(True)
+            self.ui.bookCoverPath_label.setText(file_name)
+            self.ui.bookCoverPath_label.setVisible(True)
+            self.ui.bookPreview_button.setVisible(True)
 
     def displayCover(self):
         coverIllustration_window = CoverIllustrationView()
         coverIllustration_window.setModal(True)
         
-        image = QPixmap(self.ui.coverPath_label.text())
+        image = QPixmap(self.ui.bookCoverPath_label.text())
         image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
         coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
         coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
@@ -81,10 +81,10 @@ class AddBookView(QWidget):
     def addBook(self):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
-            isbn = self.ui.isbn_lineEdit.text()
-            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
-            genre = session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
-            cover_path = self.ui.coverPath_label.text()
+            isbn = self.ui.bookIsbn_lineEdit.text()
+            author = session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
+            genre = session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
+            cover_path = self.ui.bookCoverPath_label.text()
 
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
@@ -95,7 +95,7 @@ class AddBookView(QWidget):
 
             file_name = QUrl.fromLocalFile(cover_path).fileName()
             new_cover_path = join(COVER_PATH, file_name)
-            description = self.ui.description_plainTextEdit.toPlainText()
+            description = self.ui.bookDescription_plainTextEdit.toPlainText()
 
             book = Book(title=book_title,
                         isbn=isbn,
@@ -127,10 +127,10 @@ class AddBookView(QWidget):
 
     def clearAll(self):
         self.ui.bookTitle_lineEdit.clear()
-        self.ui.isbn_lineEdit.clear()
-        self.ui.author_comboBox.setCurrentIndex(0)
-        self.ui.genre_comboBox.setCurrentIndex(0)
-        self.ui.coverPath_label.setText("")
-        self.ui.coverPath_label.setVisible(False)
-        self.ui.preview_button.setVisible(False)
-        self.ui.description_plainTextEdit.clear()
+        self.ui.bookIsbn_lineEdit.clear()
+        self.ui.bookAuthor_comboBox.setCurrentIndex(0)
+        self.ui.bookGenre_comboBox.setCurrentIndex(0)
+        self.ui.bookCoverPath_label.setText("")
+        self.ui.bookCoverPath_label.setVisible(False)
+        self.ui.bookPreview_button.setVisible(False)
+        self.ui.bookDescription_plainTextEdit.clear()

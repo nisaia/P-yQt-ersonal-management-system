@@ -24,11 +24,11 @@ class GenreView(QWidget):
 
     def updateValues(self, genre):
         self.genre = genre
-        self.ui.name_lineEdit.setText(self.genre.name)
+        self.ui.genreName_lineEdit.setText(self.genre.name)
 
     def editGenre(self):
         try:
-            genre_name = self.ui.name_lineEdit.text()
+            genre_name = self.ui.genreName_lineEdit.text()
             
             if len(genre_name) == 0: raise NoInputException('Enter the name of the genre')
 

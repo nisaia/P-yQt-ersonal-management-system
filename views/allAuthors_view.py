@@ -15,7 +15,7 @@ class AllAuthorsView(QWidget):
 
         self.labels = ['Id', 'Name', 'Surname']
 
-        self.ui.tableView.clicked.connect(self.author_details)
+        self.ui.allAuthors_tableView.clicked.connect(self.author_details)
 
         self.show()
 
@@ -40,12 +40,12 @@ class AllAuthorsView(QWidget):
             self.model.setItem(row, 1, author_name)
             self.model.setItem(row, 2, author_surname)
 
-        self.ui.tableView.setModel(self.filter_proxy_model)
+        self.ui.allAuthors_tableView.setModel(self.filter_proxy_model)
 
-        self.ui.lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+        self.ui.searchAuthor_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def author_details(self):
-        row = self.ui.tableView.selectionModel().selectedRows()[0].row()
+        row = self.ui.allAuthors_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         author = session.query(Author).filter_by(id=id).first()
         author_view = self.parent().findChild(QWidget, 'author_window')

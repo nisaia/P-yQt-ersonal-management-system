@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="allGenres_label">
      <property name="text">
       <string>All genres</string>
      </property>
@@ -41,7 +41,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit"/>
+    <widget class="QLineEdit" name="searchGenre_lineEdit"/>
    </item>
    <item>
     <spacer name="verticalSpacer_2">
@@ -60,7 +60,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QTableView" name="tableView">
+    <widget class="QTableView" name="allGenres_tableView">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>

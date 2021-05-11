@@ -26,23 +26,23 @@ class AuthorView(QWidget):
         self.author = author
 
         #FIRST TAB
-        self.ui.name.setText(self.author.name)
-        self.ui.surname.setText(self.author.surname)
+        self.ui.authorName_label.setText(self.author.name)
+        self.ui.authorSurname_label.setText(self.author.surname)
 
         linkTemplate = '<a href={0}>{1}</a>'
         wikipedia_header = 'https://it.wikipedia.org/wiki/'
         author_url = self.author.name + '_' + self.author.surname
 
-        self.ui.wikipedia.setText(linkTemplate.format(wikipedia_header + author_url, author_url.replace('_', ' ')))
+        self.ui.authorWikipedia_label.setText(linkTemplate.format(wikipedia_header + author_url, author_url.replace('_', ' ')))
 
         #SECOND TAB
-        self.ui.name_lineEdit.setText(self.author.name)
-        self.ui.surname_lineEdit.setText(self.author.surname)
+        self.ui.authorName_lineEdit.setText(self.author.name)
+        self.ui.authorSurname_lineEdit.setText(self.author.surname)
 
     def editAuthor(self):
         try:
-            name = self.ui.name_lineEdit.text()
-            surname = self.ui.surname_lineEdit.text()
+            name = self.ui.authorName_lineEdit.text()
+            surname = self.ui.authorSurname_lineEdit.text()
 
             if len(name) == 0: raise NoInputException('Enter name of the author')
             elif len(surname) == 0: raise NoInputException('Enter surname of the author')
