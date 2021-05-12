@@ -28,7 +28,7 @@ This script will create a virtual enviroment, install the necessary dependencies
 
 ## Usage
 
-Enter into console and run the **run.py** file:
+Enter into console, activate the virtual enviroment and run the **run.py** file:
 
 ```bash
 python3 run.py
