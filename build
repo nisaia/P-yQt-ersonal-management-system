@@ -4,6 +4,8 @@ GREEN="\e[32m"
 END_COLOR="\e[0m"
 venv='virtual_enviroment'
 
+clear
+
 #CREATE VIRTUAL ENVIROMENT
 echo -e "${GREEN}Creating virtual enviroment...${END_COLOR}"
 sleep 3

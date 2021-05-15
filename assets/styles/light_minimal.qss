@@ -10,13 +10,17 @@ QTextBrowser {
     color: rgb(0, 0, 0);
 }
 
-QFrame {
+QLabel {
     font-size: 14pt;
     color: rgb(0, 0, 0);
-    border: none;
 }
 
-QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover {
+QPushButton#addBook_button_1::hover, QPushButton#addGenre_button_1::hover, QPushButton#addAuthor_button_1::hover,
+QPushButton#editBook_button::hover, QPushButton#editGenre_button::hover, QPushButton#editAuthor_button::hover {
+    background-color: rgb(46, 139, 86);
+}
+
+QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover, QPushButton#deleteAuthor_button::hover, QPushButton#deleteGenre_button::hover {
     background-color: rgb(255, 0, 0);
 }
 

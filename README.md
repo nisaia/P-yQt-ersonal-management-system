@@ -15,7 +15,7 @@ git clone https://github.com/nisaia/P_yQt_ersonal-library.git your-project-name
 2. Enter into project folder and run the **build.sh** file:
 
 ```bash
-./build.sh
+./build
 ```
 
 This script will create a virtual enviroment, install the necessary dependencies and create the database engine

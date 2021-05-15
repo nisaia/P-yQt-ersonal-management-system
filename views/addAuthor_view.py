@@ -14,7 +14,7 @@ class AddAuthorView(QWidget):
         self.ui.setupUi(self)
 
 
-        self.ui.addAuthor_button.clicked.connect(self.addAuthor)
+        self.ui.addAuthor_button_1.clicked.connect(self.addAuthor)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
         for button in self.findChildren(QtWidgets.QPushButton):

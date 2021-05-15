@@ -10,10 +10,9 @@ QTextBrowser {
     color: rgb(255, 255, 255);
 }
 
-QFrame {
+QLabel {
     font-size: 14pt;
     color: rgb(255, 255, 255);
-    border: none;
 }
 
 QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover {
@@ -21,7 +20,7 @@ QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover {
 }
 
 QPushButton {
-    padding:0.35em 1.2em;
+    padding: 0.35em 1.2em;
     color: rgb(255, 255, 255);
     border: 0.1em solid rgb(255, 255, 255);
     border-radius: 0.12em;

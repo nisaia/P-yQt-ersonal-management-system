@@ -27,7 +27,7 @@ class AddBookView(QWidget):
         self.ui.uploadCover_button.clicked.connect(self.get_image_file)
         self.ui.bookPreview_button.clicked.connect(self.displayCover)
                 
-        self.ui.addBook_button.clicked.connect(self.addBook)
+        self.ui.addBook_button_1.clicked.connect(self.addBook)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
         for button in self.findChildren(QtWidgets.QPushButton):
