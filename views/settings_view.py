@@ -1,9 +1,10 @@
 import sys
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTranslator
 from ui.settings_window import *
-from utils.constants import STYLES_PATH, TRANSLATIONS_PATH, BASIC_QT_CLASSES
+from utils.constants import STYLES_PATH, TRANSLATIONS_PATH, BASIC_QT_CLASSES, FLAGS_PATH
 from os import listdir
 from os.path import isfile, join
 
@@ -19,6 +20,12 @@ class SettingsView(QWidget):
         self.ui.changeFont_button.clicked.connect(self.changeFont)
         self.ui.changeLanguage_button.clicked.connect(self.changeLanguage)
 
+        self.languages_dict = {
+            'Italy': 'it',
+            'UK': 'uk',
+            'Spain': 'es'
+        }
+
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -28,22 +35,26 @@ class SettingsView(QWidget):
     def updateValues(self):
         self.ui.applicationStyle_comboBox.clear()
         
+        self.ui.applicationStyle_comboBox.addItem("No style")
         for file in listdir(STYLES_PATH):
             self.ui.applicationStyle_comboBox.addItem(file)
 
         self.ui.applicationLanguage_comboBox.clear()
 
-        for file in listdir(TRANSLATIONS_PATH):
-            self.ui.applicationLanguage_comboBox.addItem(file)
+        for lang in self.languages_dict:
+            self.ui.applicationLanguage_comboBox.addItem(QIcon(join(FLAGS_PATH, self.languages_dict[lang]+'.png')), lang)
+
 
         #CONTINUE
 
     def changeStyle(self):
         app = QtWidgets.QApplication.instance()
         currentStyle = self.ui.applicationStyle_comboBox.currentText()
-        with open(join(STYLES_PATH, currentStyle), 'r') as f:
-            qss = f.read()
-            app.setStyleSheet(qss)
+        if currentStyle == "No style": app.setStyleSheet("")
+        else:
+            with open(join(STYLES_PATH, currentStyle), 'r') as f:
+                qss = f.read()
+                app.setStyleSheet(qss)
 
     def changeLanguage(self):
         """app = QtWidgets.QApplication.instance()

@@ -4,6 +4,7 @@ STYLES_PATH = 'assets/styles'
 COVER_PATH = 'database/cover_folder'
 ICONS_PATH = 'assets/images/icons'
 TRANSLATIONS_PATH = 'translations'
+FLAGS_PATH = 'assets/images/icons/flags'
 
 #BASIC QT CLASSES
 

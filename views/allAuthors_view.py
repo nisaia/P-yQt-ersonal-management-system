@@ -41,6 +41,7 @@ class AllAuthorsView(QWidget):
             self.model.setItem(row, 2, author_surname)
 
         self.ui.allAuthors_tableView.setModel(self.filter_proxy_model)
+        self.ui.allAuthors_tableView.setColumnHidden(0, True)
 
         self.ui.searchAuthor_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 

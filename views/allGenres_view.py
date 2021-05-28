@@ -37,6 +37,7 @@ class AllGenresView(QWidget):
             self.model.setItem(row, 1, genre_name)
 
         self.ui.allGenres_tableView.setModel(self.filter_proxy_model)
+        self.ui.allGenres_tableView.setColumnHidden(0, True)
 
         self.ui.searchGenre_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 

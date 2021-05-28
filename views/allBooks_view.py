@@ -47,6 +47,7 @@ class AllBooksView(QWidget):
             self.model.setItem(row, 4, genreI)
 
         self.ui.allBooks_tableView.setModel(self.filter_proxy_model)
+        self.ui.allBooks_tableView.setColumnHidden(0, True)
 
         self.ui.searchBook_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
