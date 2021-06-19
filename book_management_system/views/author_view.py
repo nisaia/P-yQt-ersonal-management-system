@@ -1,10 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QLabel, QMessageBox
-from ui.author_window import *
-from database.models import Author, Book
-from database.db import session
-from utils.custom_exceptions import *
-from utils.functions import openDialog
+from book_management_system.ui.author_window import *
+from database.book_models import Author, Book
+from database.db import book_session
+from book_management_system.utils.custom_exceptions import *
+from book_management_system.utils.functions import openDialog
 
 
 class AuthorView(QWidget):
@@ -56,7 +56,7 @@ class AuthorView(QWidget):
                 for key, value in updates.items():
                     setattr(self.author, key, value)
                 
-                session.commit()
+                book_session.commit()
                 openDialog(QMessageBox.Information, 'Author edited', 'Success')
             else:
                 openDialog(QMessageBox.Information, 'Nothing changed', 'Success')
@@ -72,14 +72,14 @@ class AuthorView(QWidget):
     def deleteAuthor(self):
         
         #CANCELLO TUTTI I LIBRI ASSOCIATI ALL'AUTORE
-        books = session.query(Book).filter_by(author_id=self.author.id).all()
+        books = book_session.query(Book).filter_by(author_id=self.author.id).all()
 
         for book in books:
-            session.delete(book)
+            book_session.delete(book)
 
-        session.delete(self.author)
+        book_session.delete(self.author)
 
-        session.commit()
+        book_session.commit()
         home_window = self.parent().findChild(QWidget, 'home_window')
         self.parent().setCurrentWidget(home_window)
 

@@ -1,10 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QWidget
-from database.models import Genre
+from database.book_models import Genre
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from ui.allGenres_window import *
-from database.db import session
+from book_management_system.ui.allGenres_window import *
+from database.db import book_session
 
 class AllGenresView(QWidget):
 
@@ -20,7 +20,7 @@ class AllGenresView(QWidget):
         self.show()
 
     def loadData(self):
-        genres = session.query(Genre).all()
+        genres = book_session.query(Genre).all()
         self.model = QStandardItemModel(len(genres), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -44,7 +44,7 @@ class AllGenresView(QWidget):
     def editGenre(self):
         row = self.ui.allGenres_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        genre = session.query(Genre).filter_by(id=id).first()
+        genre = book_session.query(Genre).filter_by(id=id).first()
         genre_view = self.parent().findChild(QWidget, 'genre_window')
         genre_view.updateValues(genre)
         self.parent().setCurrentWidget(genre_view)

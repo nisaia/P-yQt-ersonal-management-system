@@ -1,16 +1,17 @@
 import sys
 from PyQt5.QtWidgets import QWidget
-from database.db import session
-from database.models import Genre
-from utils.custom_exceptions import *
-from utils.functions import openDialog
+from database.db import book_session
+from database.book_models import Genre
+from book_management_system.utils.custom_exceptions import *
+from book_management_system.utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
-from ui.genre_window import *
+from book_management_system.ui.genre_window import *
 
 class GenreView(QWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
+        
         self.ui = Ui_genre_window()
         self.ui.setupUi(self)
 
@@ -34,7 +35,7 @@ class GenreView(QWidget):
 
             setattr(self.genre, 'name', genre_name)
 
-            session.commit()
+            book_session.commit()
 
             home_window = self.parent().findChild(QWidget, 'home_window')
             self.parent().setCurrentWidget(home_window)
@@ -46,11 +47,11 @@ class GenreView(QWidget):
             openDialog(QMessageBox.Critical, message,'Error')
         except IntegrityError:
             openDialog(QMessageBox.Critical, 'Field already inserted', 'Error')
-            session.rollback()
+            book_session.rollback()
 
     def deleteGenre(self):
-        session.delete(self.genre)
-        session.commit()
+        book_session.delete(self.genre)
+        book_session.commit()
         home_window = self.parent().findChild(QWidget, 'home_window')
         self.parent().setCurrentWidget(home_window)
 

@@ -13,86 +13,81 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="home_button">
-        <property name="text">
-         <string>Home</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addBook_button">
-        <property name="text">
-         <string>Add book</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="allBooks_button">
-        <property name="text">
-         <string>All books</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addAuthor_button">
-        <property name="text">
-         <string>Add author</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="allAuthors_button">
-        <property name="text">
-         <string>All authors</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addGenre_button">
-        <property name="text">
-         <string>Add genre</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="allGenres_button">
-        <property name="text">
-         <string>All genres</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="statistics_button">
-        <property name="text">
-         <string>Statistics</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="settings_button">
-        <property name="text">
-         <string>Settings</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+      <widget class="QWidget" name="page">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Personal management system</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="bookManagementSystem_button">
+            <property name="text">
+             <string>Book management system</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="movieManagementSystem_button">
+            <property name="text">
+             <string>Movie management system</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="musicManagementSystem_button">
+            <property name="text">
+             <string>Music management system</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

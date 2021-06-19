@@ -1,17 +1,17 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QLabel, QMessageBox, QFileDialog
-from ui.book_window import *
+from book_management_system.ui.book_window import *
 from PyQt5.QtGui import QPixmap
-from database.models import *
-from database.db import session
-from utils.custom_exceptions import *
-from utils.functions import openDialog
+from database.book_models import *
+from database.db import book_session
+from book_management_system.utils.custom_exceptions import *
+from book_management_system.utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
-from views.coverIllustration_view import *
+from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
 from os.path import join
-from utils.constants import COVER_PATH
+from book_management_system.utils.constants import COVER_PATH
 import shutil
 
 
@@ -61,7 +61,7 @@ class BookView(QWidget):
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
 
-        authors = session.query(Author).all()
+        authors = book_session.query(Author).all()
         if len(authors) == 0:
             self.ui.bookAuthor_comboBox.addItem('No authors founded')
             self.ui.bookAuthor_comboBox.setDisabled(True)
@@ -70,7 +70,7 @@ class BookView(QWidget):
                 self.ui.bookAuthor_comboBox.addItem(str(author_item.name + " " + author_item.surname))
             self.ui.bookAuthor_comboBox.setDisabled(False)
 
-        genres = session.query(Genre).all()
+        genres = book_session.query(Genre).all()
         if len(genres) == 0:
             self.ui.bookGenre_comboBox.addItem('No genres founded')
             self.ui.bookGenre_comboBox.setDisabled(True)
@@ -106,8 +106,8 @@ class BookView(QWidget):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
-            author = session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
-            genre = session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
+            author = book_session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
+            genre = book_session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
@@ -140,7 +140,7 @@ class BookView(QWidget):
             for key, value in updates.items():
                 setattr(self.book, key, value)
 
-            session.commit()
+            book_session.commit()
 
             home_window = self.parent().findChild(QWidget, 'home_window')
             self.parent().setCurrentWidget(home_window)
@@ -152,11 +152,11 @@ class BookView(QWidget):
             openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
             openDialog(QMessageBox.Critical, 'Field already inserted', 'Error')
-            session.rollback()
+            book_session.rollback()
 
     def deleteBook(self):
-        session.delete(self.book)
-        session.commit()
+        book_session.delete(self.book)
+        book_session.commit()
         home_window = self.parent().findChild(QWidget, 'home_window')
         self.parent().setCurrentWidget(home_window)
 

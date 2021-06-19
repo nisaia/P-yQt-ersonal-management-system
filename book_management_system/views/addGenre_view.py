@@ -1,10 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QMessageBox
-from ui.addGenre_window import *
-from database.db import session
-from database.models import Genre
-from utils.custom_exceptions import NoInputException
-from utils.functions import openDialog
+from book_management_system.ui.addGenre_window import *
+from database.db import book_session
+from database.book_models import Genre
+from book_management_system.utils.custom_exceptions import NoInputException
+from book_management_system.utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 
 class AddGenreView(QWidget):
@@ -27,8 +27,8 @@ class AddGenreView(QWidget):
             if len(name) == 0: raise NoInputException('Enter category name')
 
             genre = Genre(name=name)
-            session.add(genre)
-            session.commit()
+            book_session.add(genre)
+            book_session.commit()
 
             self.clearField()
             openDialog(QMessageBox.Information, 'Genre inserted', 'Success')
@@ -38,7 +38,7 @@ class AddGenreView(QWidget):
             openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
             openDialog(QMessageBox.Critical, 'Genre already inserted', 'Error')
-            session.rollback()
+            book_session.rollback()
 
     def clearField(self):
         self.ui.genreName_lineEdit.clear()

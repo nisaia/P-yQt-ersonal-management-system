@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from ui.allBooks_window import *
-from database.db import session
-from database.models import *
+from book_management_system.ui.allBooks_window import *
+from database.db import book_session
+from database.book_models import *
 
 class AllBooksView(QWidget):
 
@@ -21,7 +21,7 @@ class AllBooksView(QWidget):
 
 
     def loadData(self):
-        results = session.query(Book, Author, Genre).select_from(Book).join(Author).join(Genre).all()
+        results = book_session.query(Book, Author, Genre).select_from(Book).join(Author).join(Genre).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -54,7 +54,7 @@ class AllBooksView(QWidget):
     def book_details(self):
         row = self.ui.allBooks_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        result = session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
+        result = book_session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
 
         book, author, genre = result
         print(book.id, author.id, genre.id)

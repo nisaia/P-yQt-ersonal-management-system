@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from ui.allAuthors_window import *
-from database.db import session
-from database.models import Author
+from book_management_system.ui.allAuthors_window import *
+from database.db import book_session
+from database.book_models import Author
 
 class AllAuthorsView(QWidget):
 
@@ -20,7 +20,7 @@ class AllAuthorsView(QWidget):
         self.show()
 
     def loadData(self):
-        authors = session.query(Author).all()
+        authors = book_session.query(Author).all()
         self.model = QStandardItemModel(len(authors), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -48,7 +48,7 @@ class AllAuthorsView(QWidget):
     def author_details(self):
         row = self.ui.allAuthors_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        author = session.query(Author).filter_by(id=id).first()
+        author = book_session.query(Author).filter_by(id=id).first()
         author_view = self.parent().findChild(QWidget, 'author_window')
         author_view.updateValues(author)
         self.parent().setCurrentWidget(author_view)

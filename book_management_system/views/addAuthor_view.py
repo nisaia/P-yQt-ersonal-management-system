@@ -1,10 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QMessageBox
-from ui.addAuthor_window import *
-from database.db import session
-from database.models import Author
-from utils.custom_exceptions import *
-from utils.functions import openDialog
+from book_management_system.ui.addAuthor_window import *
+from database.db import book_session
+from database.book_models import Author
+from book_management_system.utils.custom_exceptions import *
+from book_management_system.utils.functions import openDialog
 
 class AddAuthorView(QWidget):
 
@@ -32,8 +32,8 @@ class AddAuthorView(QWidget):
             if len(surname) == 0: raise NoInputException('Enter author surname')
 
             author = Author(name=name, surname=surname)
-            session.add(author)
-            session.commit()
+            book_session.add(author)
+            book_session.commit()
 
             self.clearAll()
             openDialog(QMessageBox.Information, 'Author inserted', 'Success')

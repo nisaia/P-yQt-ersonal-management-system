@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship
 
 Base = declarative_base()
-metadata = Base.metadata
+books_metadata = Base.metadata
 
 class Book(Base):
     __tablename__ = "books"
@@ -24,7 +24,7 @@ class Book(Base):
 
 class Author(Base):
     __tablename__ = "authors"
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer(), primary_key = True)
     name = Column(String(255), nullable=False)
     surname = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now)

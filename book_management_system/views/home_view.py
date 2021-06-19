@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget
-from ui.home_window import *
+from book_management_system.ui.home_window import *
 
 class HomeView(QWidget):
 

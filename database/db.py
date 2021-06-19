@@ -1,10 +1,21 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from .models import metadata
+from .book_models import books_metadata
+from .movie_models import movies_metadata
 
-engine = create_engine("sqlite:///database/database.db", echo=True)
-Session = sessionmaker(bind=engine)
-session = Session()
+book_engine = create_engine("sqlite:///database/books_database.db", echo=True)
+movies_engine = create_engine("sqlite:///database/movies_database.db", echo=True)
+#music_engine = create_engine("sqlite:///database/music_database.db", echo=True)
+
+Book_session = sessionmaker(bind=book_engine)
+book_session = Book_session()
+
+Movies_session = sessionmaker(bind=movies_engine)
+movies_session = Movies_session()
+
+#Music_session = sessionmaker(bind=music_engine)
+#music_session = Music_session()
 
 def create_database():
-    metadata.create_all(engine)
+    books_metadata.create_all(book_engine)
+    movies_metadata.create_all(movies_engine)

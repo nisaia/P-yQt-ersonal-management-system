@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QDialog, QApplication
-from ui.coverIllustration_window import *
+from book_management_system.ui.coverIllustration_window import *
 
 class CoverIllustrationView(QDialog):
 

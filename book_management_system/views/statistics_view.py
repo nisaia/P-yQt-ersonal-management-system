@@ -1,12 +1,12 @@
 import sys
 
-from ui.statistics_window import *
+from book_management_system.ui.statistics_window import *
 from PyQt5.QtWidgets import QWidget, QMessageBox
-from database.db import session
-from database.models import *
+from database.db import book_session
+from database.book_models import *
 from PyQt5.QtChart import QPieSeries, QChart, QChartView, QPieSlice
 from PyQt5.QtGui import QPainter
-from utils.functions import openDialog
+from book_management_system.utils.functions import openDialog
 
 
 class StatisticsView(QWidget):
@@ -26,9 +26,9 @@ class StatisticsView(QWidget):
         self.show()
 
     def getValues(self):
-        books = session.query(Book).count()
-        authors = session.query(Author).count()
-        genres = session.query(Genre).count()
+        books = book_session.query(Book).count()
+        authors = book_session.query(Author).count()
+        genres = book_session.query(Genre).count()
 
         self.ui.booksCounter_label.setText(str(books))
         self.ui.authorsCounter_label.setText(str(authors))
@@ -52,12 +52,12 @@ class StatisticsView(QWidget):
     def updateValues(self):
         try:
 
-            books = session.query(Book).count()
+            books = book_session.query(Book).count()
 
-            genres = session.query(Genre).all()
+            genres = book_session.query(Genre).all()
             self.genre_series.clear()
             for genre in genres:
-                genre_books = session.query(Book).filter_by(genre_id=genre.id).count()
+                genre_books = book_session.query(Book).filter_by(genre_id=genre.id).count()
                 self.genre_series.append(genre.name, genre_books/books)
 
             for i in range(len(self.genre_series)):
@@ -65,10 +65,10 @@ class StatisticsView(QWidget):
                 slice = self.genre_series.slices()[i]
                 slice.setLabelVisible(True)
 
-            authors = session.query(Author).all()
+            authors = book_session.query(Author).all()
             self.author_series.clear()
             for author in authors:
-                author_books = session.query(Book).filter_by(author_id=author.id).count()
+                author_books = book_session.query(Book).filter_by(author_id=author.id).count()
                 self.author_series.append(author.name + " " + author.surname, author_books/books)
 
             for i in range(len(self.author_series)):
