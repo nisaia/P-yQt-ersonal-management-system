@@ -9,7 +9,6 @@ from book_management_system.views.home_view import HomeView
 from book_management_system.views.allBooks_view import AllBooksView
 from book_management_system.views.book_view import BookView
 from book_management_system.views.statistics_view import StatisticsView
-from book_management_system.views.settings_view import SettingsView
 from book_management_system.views.allAuthors_view import AllAuthorsView
 from book_management_system.views.author_view import AuthorView
 from book_management_system.views.allGenres_view import AllGenresView
@@ -34,7 +33,6 @@ class BookMainView(QWidget):
         self.allGenres_view = AllGenresView(parent=self)
         self.genre_view = GenreView(parent=self)
         self.statistics_view = StatisticsView(parent=self)
-        self.settings_view = SettingsView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.home_view)
         self.ui.stackedWidget.addWidget(self.addBook_view)
@@ -47,7 +45,6 @@ class BookMainView(QWidget):
         self.ui.stackedWidget.addWidget(self.allGenres_view)
         self.ui.stackedWidget.addWidget(self.genre_view)
         self.ui.stackedWidget.addWidget(self.statistics_view)
-        self.ui.stackedWidget.addWidget(self.settings_view)
     
         self.ui.home_button.clicked.connect(self.home)
         self.ui.addBook_button.clicked.connect(self.addBook)
@@ -57,10 +54,11 @@ class BookMainView(QWidget):
         self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.allGenres_button.clicked.connect(self.allGenres)
         self.ui.statistics_button.clicked.connect(self.getStatistics)
-        self.ui.settings_button.clicked.connect(self.changeSettings)
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+        self.ui.stackedWidget.setCurrentWidget(self.home_view)
         
         self.show()
 
@@ -94,7 +92,3 @@ class BookMainView(QWidget):
         self.statistics_view.getValues()
         self.statistics_view.updateValues()
         self.ui.stackedWidget.setCurrentWidget(self.statistics_view)
-
-    def changeSettings(self):
-        self.settings_view.updateValues()
-        self.ui.stackedWidget.setCurrentWidget(self.settings_view)

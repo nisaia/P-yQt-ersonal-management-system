@@ -5,13 +5,13 @@ from book_management_system.views.coverIllustration_view import *
 from database.db import book_session
 from database.book_models import *
 from PyQt5.QtGui import QPixmap
-from book_management_system.utils.custom_exceptions import NoInputException
+from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
-from book_management_system.utils.constants import COVER_PATH
+from utils.constants import COVER_PATH
 from os.path import join
 from PyQt5.QtCore import QUrl
 import shutil
-from book_management_system.utils.functions import openDialog
+from utils.functions import openDialog
 
 class AddBookView(QWidget):
     

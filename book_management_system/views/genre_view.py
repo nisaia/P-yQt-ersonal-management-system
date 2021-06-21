@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import QWidget
 from database.db import book_session
 from database.book_models import Genre
-from book_management_system.utils.custom_exceptions import *
-from book_management_system.utils.functions import openDialog
+from utils.custom_exceptions import *
+from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 from book_management_system.ui.genre_window import *
 

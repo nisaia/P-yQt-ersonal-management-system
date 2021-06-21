@@ -13,6 +13,7 @@ class Movie(Base):
     title = Column(String(255), unique=True, nullable=False)
     cover_path = Column(String(255), nullable=False)
     year = Column(Integer(), nullable=False)
+    description = Column(String(255))
     film_director_id = Column(Integer(), ForeignKey('film_directors.id'))
     genre_id = Column(Integer(), ForeignKey('genres.id'))
     created_at = Column(DateTime, default=datetime.now)

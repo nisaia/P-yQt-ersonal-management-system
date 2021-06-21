@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'book_management_system/assets/XML/main_window.ui'
+# Form implementation generated from reading ui file 'movie-management-system/assets/XML/main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -22,18 +22,18 @@ class Ui_main_window(object):
         self.home_button = QtWidgets.QPushButton(main_window)
         self.home_button.setObjectName("home_button")
         self.verticalLayout.addWidget(self.home_button)
-        self.addBook_button = QtWidgets.QPushButton(main_window)
-        self.addBook_button.setObjectName("addBook_button")
-        self.verticalLayout.addWidget(self.addBook_button)
-        self.allBooks_button = QtWidgets.QPushButton(main_window)
-        self.allBooks_button.setObjectName("allBooks_button")
-        self.verticalLayout.addWidget(self.allBooks_button)
-        self.addAuthor_button = QtWidgets.QPushButton(main_window)
-        self.addAuthor_button.setObjectName("addAuthor_button")
-        self.verticalLayout.addWidget(self.addAuthor_button)
-        self.allAuthors_button = QtWidgets.QPushButton(main_window)
-        self.allAuthors_button.setObjectName("allAuthors_button")
-        self.verticalLayout.addWidget(self.allAuthors_button)
+        self.addMovie_button = QtWidgets.QPushButton(main_window)
+        self.addMovie_button.setObjectName("addMovie_button")
+        self.verticalLayout.addWidget(self.addMovie_button)
+        self.allMovies_button = QtWidgets.QPushButton(main_window)
+        self.allMovies_button.setObjectName("allMovies_button")
+        self.verticalLayout.addWidget(self.allMovies_button)
+        self.addFilmDirector_button = QtWidgets.QPushButton(main_window)
+        self.addFilmDirector_button.setObjectName("addFilmDirector_button")
+        self.verticalLayout.addWidget(self.addFilmDirector_button)
+        self.allFilmDirectors_button = QtWidgets.QPushButton(main_window)
+        self.allFilmDirectors_button.setObjectName("allFilmDirectors_button")
+        self.verticalLayout.addWidget(self.allFilmDirectors_button)
         self.addGenre_button = QtWidgets.QPushButton(main_window)
         self.addGenre_button.setObjectName("addGenre_button")
         self.verticalLayout.addWidget(self.addGenre_button)
@@ -46,12 +46,6 @@ class Ui_main_window(object):
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.stackedWidget = QtWidgets.QStackedWidget(main_window)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.stackedWidget.addWidget(self.page)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.stackedWidget.addWidget(self.page_2)
         self.horizontalLayout.addWidget(self.stackedWidget)
 
         self.retranslateUi(main_window)
@@ -61,10 +55,10 @@ class Ui_main_window(object):
         _translate = QtCore.QCoreApplication.translate
         main_window.setWindowTitle(_translate("main_window", "Form"))
         self.home_button.setText(_translate("main_window", "Home"))
-        self.addBook_button.setText(_translate("main_window", "Add book"))
-        self.allBooks_button.setText(_translate("main_window", "All books"))
-        self.addAuthor_button.setText(_translate("main_window", "Add author"))
-        self.allAuthors_button.setText(_translate("main_window", "All authors"))
+        self.addMovie_button.setText(_translate("main_window", "Add movie"))
+        self.allMovies_button.setText(_translate("main_window", "All movies"))
+        self.addFilmDirector_button.setText(_translate("main_window", "Add film director"))
+        self.allFilmDirectors_button.setText(_translate("main_window", "All film directors"))
         self.addGenre_button.setText(_translate("main_window", "Add genre"))
         self.allGenres_button.setText(_translate("main_window", "All genres"))
         self.statistics_button.setText(_translate("main_window", "Statistics"))

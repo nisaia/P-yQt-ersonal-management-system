@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/XML/author_window.ui'
+# Form implementation generated from reading ui file 'book_management_system/assets/XML/author_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -81,10 +81,10 @@ class Ui_author_window(object):
         self.authorWikipedia_label.setText(_translate("author_window", "Wikipedia"))
         self.authorSurname_label.setText(_translate("author_window", "Surname"))
         self.authorName_label.setText(_translate("author_window", "Name"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("author_window", "Tab 1"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("author_window", "Details"))
         self.editAuthor_label.setText(_translate("author_window", "Edit author"))
         self.authorName_label_2.setText(_translate("author_window", "Name:"))
         self.authorSurname_label_2.setText(_translate("author_window", "Surname:"))
         self.editAuthor_button.setText(_translate("author_window", "Edit author"))
         self.deleteAuthor_button.setText(_translate("author_window", "Delete author"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("author_window", "Tab 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("author_window", "Edit/Delete"))

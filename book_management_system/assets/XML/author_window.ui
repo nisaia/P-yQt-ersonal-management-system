@@ -21,7 +21,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>Details</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="2" column="0">
@@ -64,7 +64,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Edit/Delete</string>
       </attribute>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0" colspan="2">

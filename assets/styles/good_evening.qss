@@ -15,6 +15,12 @@ QWidget {
     color: rgb(253, 149, 100);
 }
 
+QPushButton#bookManagementSystem_button::hover, QPushButton#movieManagementSystem_button::hover,
+QPushButton#musicManagementSystem_button::hover, QPushButton#settings_button::hover {
+    background-color: rgb(253, 149, 100);
+    color: rgb(33, 56, 98);
+}
+
 QPushButton#addBook_button_1::hover, QPushButton#addGenre_button_1::hover, QPushButton#addAuthor_button_1::hover,
 QPushButton#editBook_button::hover, QPushButton#editGenre_button::hover, QPushButton#editAuthor_button::hover {
     background-color: rgb(46, 139, 86);

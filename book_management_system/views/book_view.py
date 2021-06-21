@@ -4,14 +4,14 @@ from book_management_system.ui.book_window import *
 from PyQt5.QtGui import QPixmap
 from database.book_models import *
 from database.db import book_session
-from book_management_system.utils.custom_exceptions import *
-from book_management_system.utils.functions import openDialog
+from utils.custom_exceptions import *
+from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
 from os.path import join
-from book_management_system.utils.constants import COVER_PATH
+from utils.constants import COVER_PATH
 import shutil
 
 

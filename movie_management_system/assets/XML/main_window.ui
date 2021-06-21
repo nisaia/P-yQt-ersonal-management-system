@@ -24,30 +24,30 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addBook_button">
+      <widget class="QPushButton" name="addMovie_button">
        <property name="text">
-        <string>Add book</string>
+        <string>Add movie</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="allBooks_button">
+      <widget class="QPushButton" name="allMovies_button">
        <property name="text">
-        <string>All books</string>
+        <string>All movies</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addAuthor_button">
+      <widget class="QPushButton" name="addFilmDirector_button">
        <property name="text">
-        <string>Add author</string>
+        <string>Add film director</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="allAuthors_button">
+      <widget class="QPushButton" name="allFilmDirectors_button">
        <property name="text">
-        <string>All authors</string>
+        <string>All film directors</string>
        </property>
       </widget>
      </item>
@@ -75,10 +75,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QStackedWidget" name="stackedWidget">
-     <widget class="QWidget" name="page"/>
-     <widget class="QWidget" name="page_2"/>
-    </widget>
+    <widget class="QStackedWidget" name="stackedWidget"/>
    </item>
   </layout>
  </widget>

@@ -2,7 +2,7 @@ from views.main_view import MainView
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QFont
-from book_management_system.utils.constants import BASIC_QT_CLASSES
+from utils.constants import BASIC_QT_CLASSES
 
 class GUI(MainView):
 

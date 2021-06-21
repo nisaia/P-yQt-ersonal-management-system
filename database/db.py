@@ -10,8 +10,8 @@ movies_engine = create_engine("sqlite:///database/movies_database.db", echo=True
 Book_session = sessionmaker(bind=book_engine)
 book_session = Book_session()
 
-Movies_session = sessionmaker(bind=movies_engine)
-movies_session = Movies_session()
+Movie_session = sessionmaker(bind=movies_engine)
+movie_session = Movie_session()
 
 #Music_session = sessionmaker(bind=music_engine)
 #music_session = Music_session()

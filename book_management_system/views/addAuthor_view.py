@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 from book_management_system.ui.addAuthor_window import *
 from database.db import book_session
 from database.book_models import Author
-from book_management_system.utils.custom_exceptions import *
-from book_management_system.utils.functions import openDialog
+from utils.custom_exceptions import *
+from utils.functions import openDialog
 
 class AddAuthorView(QWidget):
 

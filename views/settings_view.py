@@ -3,8 +3,8 @@ import sys
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTranslator
-from book_management_system.ui.settings_window import *
-from book_management_system.utils.constants import STYLES_PATH, TRANSLATIONS_PATH, BASIC_QT_CLASSES, FLAGS_PATH
+from ui.settings_window import *
+from utils.constants import STYLES_PATH, TRANSLATIONS_PATH, BASIC_QT_CLASSES, FLAGS_PATH
 from os import listdir
 from os.path import isfile, join
 

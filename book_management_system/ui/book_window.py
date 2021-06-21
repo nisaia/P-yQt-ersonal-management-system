@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/XML/book_window.ui'
+# Form implementation generated from reading ui file 'book_management_system/assets/XML/book_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -129,7 +129,7 @@ class Ui_book_window(object):
         self.bookTitle_label.setText(_translate("book_window", "Title"))
         self.bookAuthor_label.setText(_translate("book_window", "Author"))
         self.bookCover_label.setText(_translate("book_window", "Cover"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("book_window", "Tab 1"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("book_window", "Details"))
         self.editBook_label.setText(_translate("book_window", "Edit book"))
         self.bookTitle_label_2.setText(_translate("book_window", "Title:"))
         self.bookIsbn_label_2.setText(_translate("book_window", "ISBN:"))
@@ -141,4 +141,4 @@ class Ui_book_window(object):
         self.editBook_button.setText(_translate("book_window", "Edit book"))
         self.deleteBook_button.setText(_translate("book_window", "Delete book"))
         self.uploadCover_button.setText(_translate("book_window", "..."))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("book_window", "Tab 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("book_window", "Edit/Delete"))

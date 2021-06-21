@@ -6,7 +6,7 @@ from database.db import book_session
 from database.book_models import *
 from PyQt5.QtChart import QPieSeries, QChart, QChartView, QPieSlice
 from PyQt5.QtGui import QPainter
-from book_management_system.utils.functions import openDialog
+from utils.functions import openDialog
 
 
 class StatisticsView(QWidget):

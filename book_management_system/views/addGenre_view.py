@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 from book_management_system.ui.addGenre_window import *
 from database.db import book_session
 from database.book_models import Genre
-from book_management_system.utils.custom_exceptions import NoInputException
-from book_management_system.utils.functions import openDialog
+from utils.custom_exceptions import NoInputException
+from utils.functions import openDialog
 from sqlalchemy.exc import IntegrityError
 
 class AddGenreView(QWidget):
