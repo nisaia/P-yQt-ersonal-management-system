@@ -26,6 +26,7 @@ class SettingsView(QWidget):
             'Spain': 'es'
         }
 
+        self.translator = QTranslator()
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -57,11 +58,12 @@ class SettingsView(QWidget):
                 app.setStyleSheet(qss)
 
     def changeLanguage(self):
-        """app = QtWidgets.QApplication.instance()
-        translator = QTranslator()
-        currentLanguage = self.ui.language_comboBox.currentText()
-        app.installTranslator(translator)"""
-        pass
+        app = QtWidgets.QApplication.instance()
+        #translator = QTranslator()
+        currentItem = self.ui.applicationLanguage_comboBox.currentText()
+        currentLanguage = join(TRANSLATIONS_PATH, self.languages_dict[currentItem] + ".qm")
+        print(self.translator.load(currentLanguage))
+        app.installTranslator(self.translator)
 
     def changeFont(self):
         app = QtWidgets.QApplication.instance()

@@ -12,7 +12,8 @@ function usage {
     echo 'List of options:
     
          -h: Display the help message
-         -c: Create database engine'
+         -c: Create database engine
+         -a: Create the virtual enviroment and create database engine'
 }
 
 function all {
@@ -32,7 +33,7 @@ function all {
     echo -e "${GREEN}Upgrading pip command...${END_COLOR}"
     python -m pip install --upgrade pip
     pip install -r requirements.txt
-    if [ $? -ne 0]; then
+    if [ $? -ne 0 ]; then
         echo -e "${RED}Installation failed.${END_COLOR}"
         exit 1
     else
@@ -69,8 +70,11 @@ function header {
 clear
 header
 
-while getopts "hc" opt; do
+while getopts "ach" opt; do
     case ${opt} in
+        a )
+            all
+            ;;
         h )
             usage
             ;;
@@ -89,6 +93,6 @@ while getopts "hc" opt; do
 done
 
 if [ $OPTIND -eq 1 ]; then
-    all
+    usage
     exit 0
 fi

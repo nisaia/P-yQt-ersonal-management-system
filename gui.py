@@ -1,5 +1,5 @@
 from views.main_view import MainView
-from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QSettings, QLocale
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QFont
 from utils.constants import BASIC_QT_CLASSES
@@ -29,3 +29,4 @@ class GUI(MainView):
         app = QApplication.instance()
         self.settings.setValue('app_style', app.styleSheet())
         self.settings.setValue('app_font', app.font().toString())
+        self.settings.setValue('app_lang', QLocale().name().split('_')[0])

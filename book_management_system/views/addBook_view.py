@@ -61,7 +61,7 @@ class AddBookView(QWidget):
             self.ui.bookGenre_comboBox.setDisabled(False)
 
     def get_image_file(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
+        file_name, _ = QFileDialog.getOpenFileName(self, 'Open image file', r"/", "Image files (*.jpg *.png)")
         if len(file_name) != 0:
             self.ui.bookCoverPath_label.setText(file_name)
             self.ui.bookCoverPath_label.setVisible(True)
@@ -85,6 +85,7 @@ class AddBookView(QWidget):
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
             cover_path = self.ui.bookCoverPath_label.text()
+            description = self.ui.bookDescription_plainTextEdit.toPlainText()
 
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
@@ -95,7 +96,6 @@ class AddBookView(QWidget):
 
             file_name = QUrl.fromLocalFile(cover_path).fileName()
             new_cover_path = join(COVER_PATH, file_name)
-            description = self.ui.bookDescription_plainTextEdit.toPlainText()
 
             book = Book(title=book_title,
                         isbn=isbn,
