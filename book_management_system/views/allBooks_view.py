@@ -1,10 +1,12 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
 from book_management_system.ui.allBooks_window import *
 from database.db import book_session
 from database.book_models import *
+from utils.constants import COVER_PATH
+from utils.functions import getColorStatus
 
 class AllBooksView(QWidget):
 
@@ -13,7 +15,7 @@ class AllBooksView(QWidget):
         self.ui = Ui_allBooks_window()
         self.ui.setupUi(self)
 
-        self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Genre']
+        self.labels = ['Id', 'Title', 'ISBN', 'Author', 'Genre', 'Status']
 
         self.ui.allBooks_tableView.clicked.connect(self.book_details)
 
@@ -40,11 +42,16 @@ class AllBooksView(QWidget):
             authorI.setTextAlignment(Qt.AlignCenter)
             genreI = QStandardItem(genre.name)
             genreI.setTextAlignment(Qt.AlignCenter)
+            status = QStandardItem(book.status)
+            status.setTextAlignment(Qt.AlignCenter)
+            status.setForeground(QBrush(getColorStatus(book.status)))
+            
             self.model.setItem(row, 0, book_id)
             self.model.setItem(row, 1, book_title)
             self.model.setItem(row, 2, book_isbn)
             self.model.setItem(row, 3, authorI)
             self.model.setItem(row, 4, genreI)
+            self.model.setItem(row, 5, status)
 
         self.ui.allBooks_tableView.setModel(self.filter_proxy_model)
         self.ui.allBooks_tableView.setColumnHidden(0, True)

@@ -11,6 +11,8 @@ class Movie(Base):
     __tablename__ = "movies"
     id = Column(Integer, primary_key=True)
     title = Column(String(255), unique=True, nullable=False)
+    film_length = Column(Integer, nullable=False)
+    status = Column(String(255), nullable=False)
     cover_path = Column(String(255), nullable=False)
     year = Column(Integer(), nullable=False)
     description = Column(String(255))

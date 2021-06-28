@@ -41,6 +41,7 @@ class AddBookView(QWidget):
     def updateComboBox(self):
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
+        self.ui.bookStatus_comboBox.clear()
 
         authors = book_session.query(Author).all()
         if len(authors) == 0:
@@ -59,6 +60,9 @@ class AddBookView(QWidget):
             for genre in genres:
                 self.ui.bookGenre_comboBox.addItem(genre.name)
             self.ui.bookGenre_comboBox.setDisabled(False)
+        
+        for value in ['Completed', 'In progress', 'Not completed']:
+            self.ui.bookStatus_comboBox.addItem(value)
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open image file', r"/", "Image files (*.jpg *.png)")
@@ -82,14 +86,17 @@ class AddBookView(QWidget):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
+            pages = self.ui.bookPages_lineEdit.text()
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
             cover_path = self.ui.bookCoverPath_label.text()
             description = self.ui.bookDescription_plainTextEdit.toPlainText()
+            status = self.ui.bookStatus_comboBox.currentText()
 
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
+            elif len(pages) == 0: raise NoInputException('Enter book number pages')
             elif author == None: raise NoInputException('Enter the author of the book')
             elif genre == None: raise NoInputException('Enter the genre of the book')
             elif len(cover_path) == 0: raise NoInputException('Enter the cover image')
@@ -99,9 +106,11 @@ class AddBookView(QWidget):
 
             book = Book(title=book_title,
                         isbn=isbn,
+                        pages=pages,
                         author_id=author.id,
                         genre_id=genre.id,
                         description=description,
+                        status=status,
                         cover_path=new_cover_path)
             
             book_session.add(book)

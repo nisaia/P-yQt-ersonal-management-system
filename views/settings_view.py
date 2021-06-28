@@ -1,6 +1,6 @@
 import sys
-
-from PyQt5.QtWidgets import QWidget, QMainWindow
+import PyQt5.QtWidgets
+from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTranslator
 from ui.settings_window import *
@@ -62,8 +62,22 @@ class SettingsView(QWidget):
         #translator = QTranslator()
         currentItem = self.ui.applicationLanguage_comboBox.currentText()
         currentLanguage = join(TRANSLATIONS_PATH, self.languages_dict[currentItem] + ".qm")
-        print(self.translator.load(currentLanguage))
+        #print(self.translator.load(currentLanguage))
         app.installTranslator(self.translator)
+
+        import inspect
+        allClasses = [m[0] for m in inspect.getmembers(PyQt5.QtWidgets, inspect.isclass) if m[1].__module__ == 'PyQt5.QtWidgets']
+
+        for widget in app.allWidgets():
+            flag = False
+            for _class in allClasses:
+                if isinstance(widget, eval(_class)):
+                    print(widget)
+                    flag = True
+                    break
+            if not flag:
+                print(widget)
+            
 
     def changeFont(self):
         app = QtWidgets.QApplication.instance()
