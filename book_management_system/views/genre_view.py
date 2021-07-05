@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget
 from database.db import book_session
+from database.book_models import *
 from database.book_models import Genre
 from utils.custom_exceptions import *
 from utils.functions import openDialog
@@ -50,6 +51,12 @@ class GenreView(QWidget):
             book_session.rollback()
 
     def deleteGenre(self):
+
+        books = book_session.query(Book).filter_by(genre_id=self.genre.id).all()
+
+        for book in books:
+            book_session.delete(book)
+
         book_session.delete(self.genre)
         book_session.commit()
         home_window = self.parent().findChild(QWidget, 'home_window')

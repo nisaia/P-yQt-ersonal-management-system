@@ -5,9 +5,9 @@ from book_management_system.views.coverIllustration_view import *
 from database.db import book_session
 from database.book_models import *
 from PyQt5.QtGui import QPixmap
-from utils.custom_exceptions import NoInputException
+from utils.custom_exceptions import NoInputException, NoNumericInputException
 from sqlalchemy.exc import IntegrityError
-from utils.constants import COVER_PATH
+from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH
 from os.path import join
 from PyQt5.QtCore import QUrl
 import shutil
@@ -60,9 +60,10 @@ class AddBookView(QWidget):
             for genre in genres:
                 self.ui.bookGenre_comboBox.addItem(genre.name)
             self.ui.bookGenre_comboBox.setDisabled(False)
-        
-        for value in ['Completed', 'In progress', 'Not completed']:
-            self.ui.bookStatus_comboBox.addItem(value)
+
+        status = book_session.query(Status).all()
+        for stat in status:
+            self.ui.bookStatus_comboBox.addItem(stat.name)
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open image file', r"/", "Image files (*.jpg *.png)")
@@ -91,7 +92,7 @@ class AddBookView(QWidget):
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
             cover_path = self.ui.bookCoverPath_label.text()
             description = self.ui.bookDescription_plainTextEdit.toPlainText()
-            status = self.ui.bookStatus_comboBox.currentText()
+            status = book_session.query(Status).filter_by(id=self.ui.bookStatus_comboBox.currentIndex() + 1).first()
 
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
@@ -99,10 +100,17 @@ class AddBookView(QWidget):
             elif len(pages) == 0: raise NoInputException('Enter book number pages')
             elif author == None: raise NoInputException('Enter the author of the book')
             elif genre == None: raise NoInputException('Enter the genre of the book')
-            elif len(cover_path) == 0: raise NoInputException('Enter the cover image')
 
-            file_name = QUrl.fromLocalFile(cover_path).fileName()
-            new_cover_path = join(COVER_PATH, file_name)
+            if not pages.isdigit(): raise NoNumericInputException('Pages value not valid')
+            
+            if len(cover_path) == 0:
+                new_cover_path = NO_COVER_AVAILABLE_PATH
+            else:
+                file_name = QUrl.fromLocalFile(cover_path).fileName()
+                new_cover_path = join(COVER_PATH, file_name)
+                shutil.copy(cover_path, new_cover_path)
+
+            print(new_cover_path)
 
             book = Book(title=book_title,
                         isbn=isbn,
@@ -110,13 +118,11 @@ class AddBookView(QWidget):
                         author_id=author.id,
                         genre_id=genre.id,
                         description=description,
-                        status=status,
+                        status=status.id,
                         cover_path=new_cover_path)
             
             book_session.add(book)
             book_session.commit()
-
-            shutil.copy(cover_path, new_cover_path)
 
             #results = session.query(Book, Author, Category).select_from(Book).join(Author).join(Category).all()
             #print(session.query(Book).join(Book.category_id).join(Book.author_id)).all()
@@ -130,6 +136,9 @@ class AddBookView(QWidget):
         except NoInputException as e:
             message = e.error_message
             openDialog(QMessageBox.Critical, message, 'Error')
+        except NoNumericInputException as e:
+            message = e.error_message
+            openDialog(QMessageBox.Critical, message, 'Error')
         except IntegrityError:
             openDialog(QMessageBox.Critical, 'Book already inserted', 'Error')
             book_session.rollback()
@@ -140,6 +149,7 @@ class AddBookView(QWidget):
         self.ui.bookAuthor_comboBox.setCurrentIndex(0)
         self.ui.bookGenre_comboBox.setCurrentIndex(0)
         self.ui.bookCoverPath_label.setText("")
+        self.ui.bookPages_lineEdit.clear()
         self.ui.bookCoverPath_label.setVisible(False)
         self.ui.bookPreview_button.setVisible(False)
         self.ui.bookDescription_plainTextEdit.clear()

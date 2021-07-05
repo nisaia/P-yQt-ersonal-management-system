@@ -13,11 +13,11 @@ class Book(Base):
     title = Column(String(255), unique=True, nullable=False)
     isbn = Column(String(255), unique=True, nullable=False)
     pages = Column(Integer, nullable=False)
-    status = Column(String(255), nullable=False)
     description = Column(String(255))
     cover_path = Column(String(255), nullable=False)
     genre_id = Column(Integer(), ForeignKey('genres.id'))
     author_id = Column(Integer(), ForeignKey('authors.id'))
+    status_id = Column(Integer(), ForeignKey('status.id'))
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -44,3 +44,10 @@ class Genre(Base):
     
     def repr(self):
         return '%r' % self.name
+
+class Status(Base):
+    __tablename__ = "status"
+    id = Column(Integer, primary_key = True)
+    name = Column(String(255), unique=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

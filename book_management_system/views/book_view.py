@@ -46,17 +46,18 @@ class BookView(QWidget):
         coverIllustration_window = CoverIllustrationView()
         coverIllustration_window.setModal(True)
         
-        image = QPixmap(self.ui.coverPath_label.text())
+        image = QPixmap(self.ui.bookCoverPath_label.text())
         image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
         coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
         coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
 
         coverIllustration_window.exec_()
 
-    def updateValues(self, book, author, genre):
+    def updateValues(self, book, author, genre, status):
         self.book = book
         self.author = author
         self.genre = genre
+        self.status = status
 
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
@@ -94,20 +95,22 @@ class BookView(QWidget):
         #SECOND TAB
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.bookIsbn_lineEdit.setText(self.book.isbn)
+        self.ui.bookPages_lineEdit.setText(self.book.pages)
         self.ui.bookCoverPath_label.setText(self.book.cover_path)
 
         self.ui.bookAuthor_comboBox.setCurrentIndex(self.author.id - 1)
         self.ui.bookGenre_comboBox.setCurrentIndex(self.genre.id - 1)
 
         self.ui.bookDescription_plainTextEdit.setPlainText(self.book.description)
+        
 
 
     def editBook(self):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
-            author = book_session.query(Author).filter_by(id=self.ui.author_comboBox.currentIndex() + 1).first()
-            genre = book_session.query(Genre).filter_by(id=self.ui.genre_comboBox.currentIndex() + 1).first()
+            author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
+            genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
@@ -126,7 +129,7 @@ class BookView(QWidget):
             else:
                 new_cover_path = self.book.cover_path
 
-            description = self.ui.description_plainTextEdit.toPlainText()
+            description = self.ui.bookDescription_plainTextEdit.toPlainText()
 
             updates = {
                 'title': book_title,

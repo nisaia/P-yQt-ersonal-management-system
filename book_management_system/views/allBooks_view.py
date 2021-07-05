@@ -23,7 +23,7 @@ class AllBooksView(QWidget):
 
 
     def loadData(self):
-        results = book_session.query(Book, Author, Genre).select_from(Book).join(Author).join(Genre).all()
+        results = book_session.query(Book, Author, Genre, Status).select_from(Book).join(Author).join(Genre).join(Status).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -31,7 +31,7 @@ class AllBooksView(QWidget):
         self.filter_proxy_model.setFilterKeyColumn(-1)
         self.filter_proxy_model.setSourceModel(self.model)
         
-        for row, (book, author, genre) in enumerate(results):
+        for row, (book, author, genre, status) in enumerate(results):
             book_id = QStandardItem(str(book.id))
             book_id.setTextAlignment(Qt.AlignCenter)
             book_title = QStandardItem(book.title)
@@ -42,7 +42,7 @@ class AllBooksView(QWidget):
             authorI.setTextAlignment(Qt.AlignCenter)
             genreI = QStandardItem(genre.name)
             genreI.setTextAlignment(Qt.AlignCenter)
-            status = QStandardItem(book.status)
+            status = QStandardItem(status.name)
             status.setTextAlignment(Qt.AlignCenter)
             status.setForeground(QBrush(getColorStatus(book.status)))
             
@@ -61,10 +61,10 @@ class AllBooksView(QWidget):
     def book_details(self):
         row = self.ui.allBooks_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        result = book_session.query(Book, Author, Genre).select_from(Book).filter_by(id=id).join(Author).join(Genre).first()
+        result = book_session.query(Book, Author, Genre, Status).select_from(Book).filter_by(id=id).join(Author).join(Genre).join(Status).first()
 
-        book, author, genre = result
-        print(book.id, author.id, genre.id)
+        book, author, genre, status = result
+        print(book.id, author.id, genre.id, status.id)
         book_view = self.parent().findChild(QWidget, 'book_window')
-        book_view.updateValues(book, author, genre)
+        book_view.updateValues(book, author, genre, status)
         self.parent().setCurrentWidget(book_view)

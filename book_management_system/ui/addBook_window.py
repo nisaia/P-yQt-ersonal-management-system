@@ -75,6 +75,7 @@ class Ui_addBook_window(object):
         self.horizontalLayout.addWidget(self.uploadCover_button)
         self.bookCoverPath_label = QtWidgets.QLabel(addBook_window)
         self.bookCoverPath_label.setText("")
+        self.bookCoverPath_label.setVisible(False)
         self.bookCoverPath_label.setObjectName("bookCoverPath_label")
         self.horizontalLayout.addWidget(self.bookCoverPath_label)
         self.formLayout.setLayout(6, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)

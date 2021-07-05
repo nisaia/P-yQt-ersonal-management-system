@@ -9,3 +9,9 @@ class NoInputException(Error):
     
     def __init__(self, error_message):
         self.error_message = error_message
+
+class NoNumericInputException(Error):
+    '''Raised when input is not a number'''
+
+    def __init__(self, error_message):
+        self.error_message = error_message
