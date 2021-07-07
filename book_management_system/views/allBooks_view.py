@@ -44,7 +44,7 @@ class AllBooksView(QWidget):
             genreI.setTextAlignment(Qt.AlignCenter)
             status = QStandardItem(status.name)
             status.setTextAlignment(Qt.AlignCenter)
-            status.setForeground(QBrush(getColorStatus(book.status)))
+            status.setForeground(QBrush(getColorStatus(book.status_id)))
             
             self.model.setItem(row, 0, book_id)
             self.model.setItem(row, 1, book_title)
@@ -63,6 +63,7 @@ class AllBooksView(QWidget):
         id = self.filter_proxy_model.index(row, 0).data()
         result = book_session.query(Book, Author, Genre, Status).select_from(Book).filter_by(id=id).join(Author).join(Genre).join(Status).first()
 
+        print(result)
         book, author, genre, status = result
         print(book.id, author.id, genre.id, status.id)
         book_view = self.parent().findChild(QWidget, 'book_window')

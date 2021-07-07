@@ -118,7 +118,7 @@ class AddBookView(QWidget):
                         author_id=author.id,
                         genre_id=genre.id,
                         description=description,
-                        status=status.id,
+                        status_id=status.id,
                         cover_path=new_cover_path)
             
             book_session.add(book)
@@ -153,3 +153,4 @@ class AddBookView(QWidget):
         self.ui.bookCoverPath_label.setVisible(False)
         self.ui.bookPreview_button.setVisible(False)
         self.ui.bookDescription_plainTextEdit.clear()
+        self.ui.bookStatus_comboBox.setCurrentIndex(0)

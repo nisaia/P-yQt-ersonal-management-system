@@ -79,16 +79,11 @@ class StatisticsView(QWidget):
                 slice.setLabelVisible(True)
 
             self.status_series.clear()
-            books = book_session.query(Book).all()
+            all_status = book_session.query(Status).all()
             counter_status = {}
-            for book in books:
-                if book.status not in counter_status:
-                    counter_status[book.status] = 1
-                else:
-                    counter_status[book.status] += 1
-            
-            for key in counter_status:
-                self.status_series.append(key, counter_status[key]/counter_books)
+            for status in all_status:
+                book_status = book_session.query(Book).filter_by(status_id=status.id).count()
+                self.status_series.append(status.name, book_status/counter_books)
             
             for i in range(len(self.status_series)):
                 slice = QPieSlice()

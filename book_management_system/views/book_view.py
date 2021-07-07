@@ -11,7 +11,7 @@ from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
 from os.path import join
-from utils.constants import COVER_PATH
+from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH
 import shutil
 
 
@@ -40,7 +40,8 @@ class BookView(QWidget):
 
     def get_image_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        self.ui.bookCoverPath_label.setText(file_name)
+        if len(file_name) != 0:
+            self.ui.bookCoverPath_label.setText(file_name)
 
     def displayCover(self):
         coverIllustration_window = CoverIllustrationView()
@@ -61,6 +62,7 @@ class BookView(QWidget):
 
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
+        self.ui.bookStatus_comboBox.clear()
 
         authors = book_session.query(Author).all()
         if len(authors) == 0:
@@ -80,6 +82,10 @@ class BookView(QWidget):
                 self.ui.bookGenre_comboBox.addItem(genre.name)
             self.ui.bookGenre_comboBox.setDisabled(False)
 
+        all_status = book_session.query(Status).all()
+        for status in all_status:
+            self.ui.bookStatus_comboBox.addItem(status.name)
+
         # FIRST TAB
         self.ui.bookTitle_label.setText(self.book.title)
         self.ui.bookIsbn_label.setText(self.book.isbn)
@@ -95,11 +101,12 @@ class BookView(QWidget):
         #SECOND TAB
         self.ui.bookTitle_lineEdit.setText(self.book.title)
         self.ui.bookIsbn_lineEdit.setText(self.book.isbn)
-        self.ui.bookPages_lineEdit.setText(self.book.pages)
+        self.ui.bookPages_lineEdit.setText(str(self.book.pages))
         self.ui.bookCoverPath_label.setText(self.book.cover_path)
 
         self.ui.bookAuthor_comboBox.setCurrentIndex(self.author.id - 1)
         self.ui.bookGenre_comboBox.setCurrentIndex(self.genre.id - 1)
+        self.ui.bookStatus_comboBox.setCurrentIndex(self.status.id -1)
 
         self.ui.bookDescription_plainTextEdit.setPlainText(self.book.description)
         
@@ -109,13 +116,19 @@ class BookView(QWidget):
         try:
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
+            pages = self.ui.bookPages_lineEdit.text()
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
+            status = book_session.query(Status).filter_by(id=self.ui.bookStatus_comboBox.currentIndex() + 1).first()
+
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')
             elif len(isbn) == 0: raise NoInputException('Enter the ISBN of book')
+            elif len(pages) == 0: raise NoInputException('Enter book number pages')
             elif author == None: raise NoInputException('Enter the author of the book')
             elif genre == None: raise NoInputException('Enter the genre of the book')
+
+            if not pages.isdigit(): raise NoNumericInputException('Pages value not valid')
 
             cover_path = self.ui.bookCoverPath_label.text()
             book_cover_path = self.book.cover_path
@@ -124,8 +137,9 @@ class BookView(QWidget):
                 file_name = QUrl.fromLocalFile(cover_path).fileName()
                 print(file_name)
                 new_cover_path = join(COVER_PATH, file_name)
-                os.remove(book_cover_path)
                 shutil.copy(cover_path, new_cover_path)
+                if cover_path != NO_COVER_AVAILABLE_PATH:
+                    os.remove(book_cover_path)
             else:
                 new_cover_path = self.book.cover_path
 
@@ -134,9 +148,11 @@ class BookView(QWidget):
             updates = {
                 'title': book_title,
                 'isbn': isbn,
+                'pages': pages,
                 'author_id': author.id,
                 'genre_id': genre.id,
                 'cover_path': new_cover_path,
+                'status_id': status.id,
                 'description': description
             }
 

@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from .book_models import books_metadata
+from .book_models import books_metadata, Status
 from .movie_models import movies_metadata
 
 book_engine = create_engine("sqlite:///database/books_database.db", echo=True)
@@ -19,3 +19,11 @@ movie_session = Movie_session()
 def create_database():
     books_metadata.create_all(book_engine)
     movies_metadata.create_all(movies_engine)
+
+    #SISTEMARE QUESTA COSA# VIOLA IL VINCOLO DI UNICITÀ
+    
+    for value in ['Not completed', 'In progress', 'Completed']:
+        status = Status(name=value)
+        book_session.add(status)
+    book_session.commit()
+
