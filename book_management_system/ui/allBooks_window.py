@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'assets/XML/allBooks_window.ui'
+# Form implementation generated from reading ui file 'book_management_system/assets/XML/allBooks_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -24,9 +24,11 @@ class Ui_allBooks_window(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
         self.searchBook_lineEdit = QtWidgets.QLineEdit(allBooks_window)
-        self.searchBook_lineEdit.setPlaceholderText('Search book by [Title - ISBN - Author - Genre - Status]')
         self.searchBook_lineEdit.setObjectName("searchBook_lineEdit")
         self.verticalLayout.addWidget(self.searchBook_lineEdit)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout.addLayout(self.verticalLayout_2)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem1)
         self.allBooks_tableView = QtWidgets.QTableView(allBooks_window)

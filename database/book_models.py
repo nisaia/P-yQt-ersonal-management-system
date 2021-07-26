@@ -13,6 +13,7 @@ class Book(Base):
     title = Column(String(255), unique=True, nullable=False)
     isbn = Column(String(255), unique=True, nullable=False)
     pages = Column(Integer, nullable=False)
+    year = Column(Integer, nullable=False)
     description = Column(String(255))
     cover_path = Column(String(255), nullable=False)
     genre_id = Column(Integer(), ForeignKey('genres.id'))

@@ -11,7 +11,7 @@ from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
 from os.path import join
-from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH
+from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH, ICONS_PATH, FIRST_YEAR_BOOK, ACTUAL_YEAR
 import shutil
 
 
@@ -27,6 +27,18 @@ class BookView(QWidget):
 
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
+
+        isbnIcon = QPixmap(join(ICONS_PATH, 'isbn.png'))
+        self.ui.bookIsbnIcon_label.setPixmap(isbnIcon)
+
+        pagesIcon = QPixmap(join(ICONS_PATH, 'pages.png'))
+        self.ui.bookPagesIcon_label.setPixmap(pagesIcon)
+
+        yearIcon = QPixmap(join(ICONS_PATH, 'release.png'))
+        self.ui.bookYearIcon_label.setPixmap(yearIcon)
+
+        genreIcon = QPixmap(join(ICONS_PATH, 'genre.png'))
+        self.ui.bookGenreIcon_label.setPixmap(genreIcon)
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -60,10 +72,14 @@ class BookView(QWidget):
         self.genre = genre
         self.status = status
 
+        self.ui.bookYear_comboBox.clear()
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
         self.ui.bookStatus_comboBox.clear()
 
+        for year in range(FIRST_YEAR_BOOK, ACTUAL_YEAR):
+            self.ui.bookYear_comboBox.addItem(str(year))
+    
         authors = book_session.query(Author).all()
         if len(authors) == 0:
             self.ui.bookAuthor_comboBox.addItem('No authors founded')
@@ -87,14 +103,17 @@ class BookView(QWidget):
             self.ui.bookStatus_comboBox.addItem(status.name)
 
         # FIRST TAB
-        self.ui.bookTitle_label.setText(self.book.title)
+
+        self.ui.bookTitle_label.setText(self.book.title + ', ' + self.author.name + ' ' + self.author.surname)
         self.ui.bookIsbn_label.setText(self.book.isbn)
+        self.ui.bookPages_label_2.setText(str(self.book.pages))
+        self.ui.bookYear_label_2.setText(str(self.book.year))
         image = QPixmap(self.book.cover_path)
         image = image.scaled(self.ui.bookCover_label.width(), self.ui.bookCover_label.height(), QtCore.Qt.KeepAspectRatio)
         self.ui.bookCover_label.setPixmap(image)
         self.ui.bookCover_label.setScaledContents(True)
 
-        self.ui.bookAuthor_label.setText(self.author.name + ' ' + self.author.surname)
+        #self.ui.bookAuthor_label.setText(self.author.name + ' ' + self.author.surname)
         self.ui.bookGenre_label.setText(self.genre.name)
         self.ui.bookDescription_label.setText(self.book.description)
 
@@ -104,6 +123,7 @@ class BookView(QWidget):
         self.ui.bookPages_lineEdit.setText(str(self.book.pages))
         self.ui.bookCoverPath_label.setText(self.book.cover_path)
 
+        self.ui.bookYear_comboBox.setCurrentText(str(self.book.year))
         self.ui.bookAuthor_comboBox.setCurrentIndex(self.author.id - 1)
         self.ui.bookGenre_comboBox.setCurrentIndex(self.genre.id - 1)
         self.ui.bookStatus_comboBox.setCurrentIndex(self.status.id -1)
@@ -117,6 +137,7 @@ class BookView(QWidget):
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
             pages = self.ui.bookPages_lineEdit.text()
+            year = str(self.ui.bookYear_comboBox.currentText())
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
             status = book_session.query(Status).filter_by(id=self.ui.bookStatus_comboBox.currentIndex() + 1).first()
@@ -149,6 +170,7 @@ class BookView(QWidget):
                 'title': book_title,
                 'isbn': isbn,
                 'pages': pages,
+                'year': year,
                 'author_id': author.id,
                 'genre_id': genre.id,
                 'cover_path': new_cover_path,

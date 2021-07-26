@@ -6,7 +6,7 @@ from database.movie_models import *
 from PyQt5.QtGui import QPixmap
 from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
-from utils.constants import COVER_PATH
+from utils.constants import COVER_PATH, FIRST_YEAR_MOVIE, ACTUAL_YEAR
 from os.path import join
 from utils.functions import openDialog
 import datetime
@@ -39,7 +39,7 @@ class AddMovieView(QWidget):
         self.ui.movieGenre_comboBox.clear()
 
         # 1888 ANNO DI USCITA PRIMO FILM DEL CINEMA
-        for year in range(1888, datetime.datetime.now().year + 1):
+        for year in range(FIRST_YEAR_MOVIE, ACTUAL_YEAR + 1):
             self.ui.movieYear_comboBox.addItem(str(year))
 
         filmDirectors = movie_session.query(Film_director).all()

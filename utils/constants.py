@@ -1,3 +1,5 @@
+import datetime
+
 #PATHS
 
 STYLES_PATH = 'assets/styles'
@@ -10,3 +12,13 @@ NO_COVER_AVAILABLE_PATH = 'database/cover_folder/no_cover_available.jpg'
 #BASIC QT CLASSES
 
 BASIC_QT_CLASSES = ['QPushButton', 'QWidget']
+
+#YEARS
+
+#FIRST YEAR MOVIE
+FIRST_YEAR_MOVIE = 1888
+
+#FIRST YEAR BOOK
+FIRST_YEAR_BOOK = 1455
+
+ACTUAL_YEAR = datetime.datetime.now().year

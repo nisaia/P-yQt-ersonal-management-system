@@ -60,34 +60,51 @@
    <item row="4" column="1">
     <widget class="QLineEdit" name="bookIsbn_lineEdit"/>
    </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="bookPages_label">
+     <property name="text">
+      <string>Pages:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLineEdit" name="bookPages_lineEdit"/>
+   </item>
    <item row="6" column="0">
+    <widget class="QLabel" name="bookYear_label">
+     <property name="text">
+      <string>Year:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
     <widget class="QLabel" name="bookAuthor_label">
      <property name="text">
       <string>Author:</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="7" column="1">
     <widget class="QComboBox" name="bookAuthor_comboBox"/>
    </item>
-   <item row="7" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="bookGenre_label">
      <property name="text">
       <string>Genre:</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
+   <item row="8" column="1">
     <widget class="QComboBox" name="bookGenre_comboBox"/>
    </item>
-   <item row="8" column="0">
+   <item row="9" column="0">
     <widget class="QLabel" name="bookCover_label">
      <property name="text">
       <string>Cover:</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
+   <item row="9" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="uploadCover_button">
@@ -105,34 +122,34 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="1">
+   <item row="11" column="1">
     <widget class="QPushButton" name="bookPreview_button">
      <property name="text">
       <string>Preview</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="0">
+   <item row="13" column="0">
     <widget class="QLabel" name="bookDescription_label">
      <property name="text">
       <string>Description:</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="1">
+   <item row="13" column="1">
     <widget class="QPlainTextEdit" name="bookDescription_plainTextEdit"/>
    </item>
-   <item row="13" column="0">
+   <item row="14" column="0">
     <widget class="QLabel" name="bookStatus_label">
      <property name="text">
       <string>Status:</string>
      </property>
     </widget>
    </item>
-   <item row="13" column="1">
+   <item row="14" column="1">
     <widget class="QComboBox" name="bookStatus_comboBox"/>
    </item>
-   <item row="14" column="0" colspan="2">
+   <item row="15" column="0" colspan="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -148,29 +165,22 @@
      </property>
     </spacer>
    </item>
-   <item row="15" column="1">
+   <item row="16" column="1">
     <widget class="QPushButton" name="addBook_button_1">
      <property name="text">
       <string>Add book</string>
      </property>
     </widget>
    </item>
-   <item row="16" column="1">
+   <item row="17" column="1">
     <widget class="QPushButton" name="clearAll_button">
      <property name="text">
       <string>Clear all</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="bookPages_label">
-     <property name="text">
-      <string>Pages:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="bookPages_lineEdit"/>
+   <item row="6" column="1">
+    <widget class="QComboBox" name="bookYear_comboBox"/>
    </item>
   </layout>
  </widget>

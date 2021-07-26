@@ -7,6 +7,7 @@ from database.db import book_session
 from database.book_models import *
 from utils.constants import COVER_PATH
 from utils.functions import getColorStatus
+from qtrangeslider import QRangeSlider, QLabeledRangeSlider
 
 class AllBooksView(QWidget):
 
@@ -19,8 +20,18 @@ class AllBooksView(QWidget):
 
         self.ui.allBooks_tableView.clicked.connect(self.book_details)
 
+        pagesSlider = self.createRangeSlider()
+        yearSlider = self.createRangeSlider()
+
         self.show()
 
+
+    def createRangeSlider(self):
+        slider = QRangeSlider(Qt.Horizontal)
+        self.ui.verticalLayout_2.addWidget(slider)
+        QLabeledRangeSlider.LabelPosition.LabelsAbove
+
+        return slider
 
     def loadData(self):
         results = book_session.query(Book, Author, Genre, Status).select_from(Book).join(Author).join(Genre).join(Status).all()

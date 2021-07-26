@@ -7,7 +7,7 @@ from database.book_models import *
 from PyQt5.QtGui import QPixmap
 from utils.custom_exceptions import NoInputException, NoNumericInputException
 from sqlalchemy.exc import IntegrityError
-from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH
+from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH, FIRST_YEAR_BOOK, ACTUAL_YEAR
 from os.path import join
 from PyQt5.QtCore import QUrl
 import shutil
@@ -39,9 +39,13 @@ class AddBookView(QWidget):
         self.show()
 
     def updateComboBox(self):
+        self.ui.bookYear_comboBox.clear()
         self.ui.bookAuthor_comboBox.clear()
         self.ui.bookGenre_comboBox.clear()
         self.ui.bookStatus_comboBox.clear()
+
+        for year in range(FIRST_YEAR_BOOK, ACTUAL_YEAR + 1):
+            self.ui.bookYear_comboBox.addItem(str(year))
 
         authors = book_session.query(Author).all()
         if len(authors) == 0:
@@ -88,6 +92,7 @@ class AddBookView(QWidget):
             book_title = self.ui.bookTitle_lineEdit.text()
             isbn = self.ui.bookIsbn_lineEdit.text()
             pages = self.ui.bookPages_lineEdit.text()
+            year = int(self.ui.bookYear_comboBox.currentText())
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
             cover_path = self.ui.bookCoverPath_label.text()
@@ -115,6 +120,7 @@ class AddBookView(QWidget):
             book = Book(title=book_title,
                         isbn=isbn,
                         pages=pages,
+                        year=year,
                         author_id=author.id,
                         genre_id=genre.id,
                         description=description,
@@ -146,6 +152,7 @@ class AddBookView(QWidget):
     def clearAll(self):
         self.ui.bookTitle_lineEdit.clear()
         self.ui.bookIsbn_lineEdit.clear()
+        self.ui.bookYear_comboBox.setCurrentIndex(0)
         self.ui.bookAuthor_comboBox.setCurrentIndex(0)
         self.ui.bookGenre_comboBox.setCurrentIndex(0)
         self.ui.bookCoverPath_label.setText("")
