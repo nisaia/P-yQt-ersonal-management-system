@@ -5,9 +5,9 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
 from book_management_system.ui.allBooks_window import *
 from database.db import book_session
 from database.book_models import *
-from utils.constants import COVER_PATH
+from utils.constants import COVER_PATH, FIRST_YEAR_BOOK, ACTUAL_YEAR
 from utils.functions import getColorStatus
-from qtrangeslider import QRangeSlider, QLabeledRangeSlider
+#from qtrangeslider import QRangeSlider, QLabeledRangeSlider
 
 class AllBooksView(QWidget):
 
@@ -20,27 +20,42 @@ class AllBooksView(QWidget):
 
         self.ui.allBooks_tableView.clicked.connect(self.book_details)
 
-        pagesSlider = self.createRangeSlider()
-        yearSlider = self.createRangeSlider()
-
         self.show()
 
 
-    def createRangeSlider(self):
-        slider = QRangeSlider(Qt.Horizontal)
+    """def createRangeSlider(self):
+        slider = QLabeledRangeSlider(Qt.Horizontal)
         self.ui.verticalLayout_2.addWidget(slider)
-        QLabeledRangeSlider.LabelPosition.LabelsAbove
+        slider.setHandleLabelPosition(QLabeledRangeSlider.LabelPosition.LabelsAbove)
 
         return slider
 
+    def updateValues(self):
+        books = book_session.query(Book).all()
+        minPages, maxPages = books[0].pages, books[0].pages
+        for i in range(1, len(books)):
+            book = books[i]
+            if book.pages < minPages: minPages = book.pages
+            if book.pages > maxPages: maxPages = book.pages
+
+        self.pagesSlider.setMaximum(maxPages)
+        self.pagesSlider.setMinimum(minPages)
+
+        self.pagesSlider.setValue((minPages + (maxPages - minPages) / 5, maxPages - (maxPages - minPages) / 5))
+        
+        self.yearSlider.setMaximum(ACTUAL_YEAR)
+        self.yearSlider.setMinimum(FIRST_YEAR_BOOK)
+
+        self.yearSlider.setValue((FIRST_YEAR_BOOK + (ACTUAL_YEAR - FIRST_YEAR_BOOK) / 5, ACTUAL_YEAR - (ACTUAL_YEAR - FIRST_YEAR_BOOK) / 5))"""
+        
     def loadData(self):
         results = book_session.query(Book, Author, Genre, Status).select_from(Book).join(Author).join(Genre).join(Status).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
         self.filter_proxy_model = QSortFilterProxyModel()
-        self.filter_proxy_model.setFilterKeyColumn(-1)
-        self.filter_proxy_model.setSourceModel(self.model)
+        self.filter_proxy_model.setFilterKeyColumn(-1) # LETTURA DA TUTTE LE COLONNE
+        self.filter_proxy_model.setSourceModel(self.model)       
         
         for row, (book, author, genre, status) in enumerate(results):
             book_id = QStandardItem(str(book.id))
