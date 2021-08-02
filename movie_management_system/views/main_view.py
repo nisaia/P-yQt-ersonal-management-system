@@ -4,7 +4,8 @@ from movie_management_system.ui.main_window import *
 from PyQt5.QtWidgets import QApplication, QWidget
 from movie_management_system.views.addMovie_view import AddMovieView
 from movie_management_system.views.home_view import HomeView
-
+from movie_management_system.views.allMovies_view import AllMoviesView
+from movie_management_system.views.addFilmDirector_view import AddFilmDirectorView
 class MovieMainView(QWidget):
 
     def __init__(self, parent):
@@ -15,12 +16,18 @@ class MovieMainView(QWidget):
 
         self.addMovie_view = AddMovieView(parent=self)
         self.home_view = HomeView(parent=self)
+        self.allMovies_view = AllMoviesView(parent=self)
+        self.addFilmDirector_view = AddFilmDirectorView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.addMovie_view)
         self.ui.stackedWidget.addWidget(self.home_view)
+        self.ui.stackedWidget.addWidget(self.allMovies_view)
+        self.ui.stackedWidget.addWidget(self.addFilmDirector_view)
 
         self.ui.addMovie_button.clicked.connect(self.addMovie)
         self.ui.home_button.clicked.connect(self.home)
+        self.ui.allMovies_button.clicked.connect(self.allMovies)
+        self.ui.addFilmDirector_button.clicked.connect(self.addFilmDirector)
 
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
 
@@ -32,3 +39,9 @@ class MovieMainView(QWidget):
 
     def home(self):
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
+
+    def allMovies(self):
+        self.ui.stackedWidget.setCurrentWidget(self.allMovies_view)
+
+    def addFilmDirector(self):
+        self.ui.stackedWidget.setCurrentWidget(self.addFilmDirector_view)
