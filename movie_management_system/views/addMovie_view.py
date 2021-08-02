@@ -6,10 +6,11 @@ from database.movie_models import *
 from PyQt5.QtGui import QPixmap
 from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
-from utils.constants import COVER_PATH, FIRST_YEAR_MOVIE, ACTUAL_YEAR
+from utils.constants import COVER_PATH, FIRST_YEAR_MOVIE, ACTUAL_YEAR, NO_COVER_AVAILABLE_PATH
 from os.path import join
 from utils.functions import openDialog
 import datetime
+import shutil
 
 class AddMovieView(QWidget):
 
@@ -81,7 +82,13 @@ class AddMovieView(QWidget):
             if len(movie_title) == 0: raise NoInputException('Enter the title of movie')
             elif film_director == None: raise NoInputException('Enter the film director of the movie')
             elif genre == None: raise NoInputException('Enter the genre of the movie')
-            elif len(cover_path) == 0: raise NoInputException('Enter the cover image')
+            
+            if len(cover_path) == 0:
+                new_cover_path = NO_COVER_AVAILABLE_PATH
+            else:
+                file_name = QUrl.fromLocalFile(cover_path).fileName()
+                new_cover_path = join(COVER_PATH, file_name)
+                shutil.copy(cover_path, new_cover_path)
 
             movie = Movie(title=movie_title,
                           year=movie_year,

@@ -44,14 +44,11 @@ class MainView(QMainWindow):
         self.show()
 
     def book_management_system(self):
-        self.ui.label.setText('Book management system')
         self.ui.stackedWidget.setCurrentWidget(self.book_main_view)
 
     def movie_management_system(self):
-        self.ui.label.setText('Movie management system')
         self.ui.stackedWidget.setCurrentWidget(self.movie_main_view)
 
     def changeSettings(self):
-        self.ui.label.setText('Settings')
         self.settings_view.updateValues()
         self.ui.stackedWidget.setCurrentWidget(self.settings_view)
