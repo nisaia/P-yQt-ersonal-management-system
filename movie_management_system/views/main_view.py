@@ -46,6 +46,7 @@ class MovieMainView(QWidget):
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
 
     def allMovies(self):
+        self.allMovies_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allMovies_view)
 
     def addFilmDirector(self):

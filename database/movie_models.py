@@ -11,9 +11,9 @@ class Movie(Base):
     __tablename__ = "movies"
     id = Column(Integer, primary_key=True)
     title = Column(String(255), unique=True, nullable=False)
-    film_length = Column(Integer, nullable=False)
-    status = Column(String(255), nullable=False)
-    cover_path = Column(String(255), nullable=False)
+    film_length = Column(Integer)
+    status = Column(String(255))
+    cover_path = Column(String(255))
     year = Column(Integer(), nullable=False)
     description = Column(String(255))
     film_director_id = Column(Integer(), ForeignKey('film_directors.id'))

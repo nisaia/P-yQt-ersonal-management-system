@@ -19,5 +19,34 @@ class AllMoviesView(QWidget):
 
         self.show()
 
+    def loadData(self):
+        results = movie_session.query(Movie, Film_director, Genre).select_from(Movie).join(Film_director).join(Genre).all()
+        self.model = QStandardItemModel(len(results), len(self.labels))
+        self.model.setHorizontalHeaderLabels(self.labels)
+
+        self.filter_proxy_model = QSortFilterProxyModel()
+        self.filter_proxy_model.setFilterKeyColumn(-1)
+        self.filter_proxy_model.setSourceModel(self.model)
+
+        for row, (movie, film_director, genre) in enumerate(results):
+            movie_id = QStandardItem(str(movie.id))
+            movie_id.setTextAlignment(Qt.AlignCenter)
+            movie_title = QStandardItem(movie.title)
+            movie_title.setTextAlignment(Qt.AlignCenter)
+            filmDirector = QStandardItem(film_director.name + " " + film_director.surname)
+            filmDirector.setTextAlignment(Qt.AlignCenter)
+            genreI = QStandardItem(genre.name)
+            genreI.setTextAlignment(Qt.AlignCenter)
+
+            self.model.setItem(row, 0, movie_id)
+            self.model.setItem(row, 1, movie_title)
+            self.model.setItem(row, 2, filmDirector)
+            self.model.setItem(row, 3, genreI)
+
+        self.ui.allMovies_tableView.setModel(self.filter_proxy_model)
+        self.ui.allMovies_tableView.setColumnHidden(0, True)
+
+        self.ui.searchMovie_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+
     def movie_details(self):
         print("GOD")
