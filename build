@@ -18,6 +18,7 @@ function usage {
 
 function all {
     #CREATE VIRTUAL ENVIROMENT
+
     echo -e "${GREEN}Creating virtual enviroment...${END_COLOR}"
     sleep 3
     python3 -m venv $venv

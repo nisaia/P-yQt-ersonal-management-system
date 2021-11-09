@@ -31,6 +31,9 @@ class Ui_allBooks_window(object):
         self.allBooks_tableView = QtWidgets.QTableView(allBooks_window)
         self.allBooks_tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.allBooks_tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.allBooks_tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.allBooks_tableView.verticalHeader().setVisible(False)
+        self.allBooks_tableView.setCursor(QtCore.Qt.PointingHandCursor)
         self.allBooks_tableView.setObjectName("allBooks_tableView")
         self.verticalLayout.addWidget(self.allBooks_tableView)
 
