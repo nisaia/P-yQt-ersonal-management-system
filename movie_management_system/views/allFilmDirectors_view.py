@@ -4,14 +4,13 @@ from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
 from movie_management_system.ui.allFilmDirectors_window import *
 from database.db import movie_session
-from database.movie_models import *
-
+from database.movie_models import Film_director
 
 class AllFilmDirectorsView(QWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.ui = Ui_allFilmDirectors_window()
+        self.ui = Ui_AllFilmDirectors_window()
         self.ui.setupUi(self)
 
         self.labels = ['Id', 'Name', 'Surname']
@@ -45,4 +44,11 @@ class AllFilmDirectorsView(QWidget):
 
         self.ui.searchFilmDirector_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
-    def filmDirector_details(self): pass
+    def filmDirector_details(self):
+        print(self.ui.allFilmDirectors_tableView.selectionModel().selectedRows())
+        row = self.ui.allFilmDirectors_tableView.selectionModel().selectedRows()[0].row()
+        id = self.filter_proxy_model.index(row, 0).data()
+        filmDirector = movie_session.query(Film_director).filter_by(id=id).first()
+        filmDirector_view = self.parent().findChild(QWidget, 'filmDirector_window')
+        filmDirector_view.updateValues(filmDirector)
+        self.parent().setCurrentWidget(filmDirector_view)

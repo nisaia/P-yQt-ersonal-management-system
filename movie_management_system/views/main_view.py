@@ -8,6 +8,7 @@ from movie_management_system.views.allMovies_view import AllMoviesView
 from movie_management_system.views.addFilmDirector_view import AddFilmDirectorView
 from movie_management_system.views.addGenre_view import AddGenreView
 from movie_management_system.views.allFilmDirectors_view import AllFilmDirectorsView
+from movie_management_system.views.allGenres_view import AllGenresView
 
 class MovieMainView(QWidget):
 
@@ -23,6 +24,7 @@ class MovieMainView(QWidget):
         self.addFilmDirector_view = AddFilmDirectorView(parent=self)
         self.addGenre_view = AddGenreView(parent=self)
         self.allFilmDirectors_view = AllFilmDirectorsView(parent=self)
+        self.allGenres_view = AllGenresView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.addMovie_view)
         self.ui.stackedWidget.addWidget(self.home_view)
@@ -30,6 +32,7 @@ class MovieMainView(QWidget):
         self.ui.stackedWidget.addWidget(self.addFilmDirector_view)
         self.ui.stackedWidget.addWidget(self.addGenre_view)
         self.ui.stackedWidget.addWidget(self.allFilmDirectors_view)
+        self.ui.stackedWidget.addWidget(self.allGenres_view)
 
         self.ui.addMovie_button.clicked.connect(self.addMovie)
         self.ui.home_button.clicked.connect(self.home)
@@ -37,6 +40,7 @@ class MovieMainView(QWidget):
         self.ui.addFilmDirector_button.clicked.connect(self.addFilmDirector)
         self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.allFilmDirectors_button.clicked.connect(self.allFilmDirectors)
+        self.ui.allGenres_button.clicked.connect(self.allGenres)
 
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
 
@@ -62,3 +66,7 @@ class MovieMainView(QWidget):
     def allFilmDirectors(self):
         self.allFilmDirectors_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allFilmDirectors_view)
+
+    def allGenres(self):
+        self.allGenres_view.loadData()
+        self.ui.stackedWidget.setCurrentWidget(self.allGenres_view)

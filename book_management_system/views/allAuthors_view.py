@@ -46,6 +46,7 @@ class AllAuthorsView(QWidget):
         self.ui.searchAuthor_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def author_details(self):
+        print(self.ui.allAuthors_tableView.selectionModel().selectedRows())
         row = self.ui.allAuthors_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         author = book_session.query(Author).filter_by(id=id).first()
