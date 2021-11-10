@@ -44,7 +44,7 @@ class FilmDirectorView(QWidget):
             surname = self.ui.filmDirectorSurname_lineEdit.text()
 
             if len(name) == 0: raise NoInputException('Enter name of the author')
-            elif len(surname) == 0 raise NoInputException('Enter surname of the author')
+            elif len(surname) == 0: raise NoInputException('Enter surname of the author')
 
             if self.filmDirector.name != name or self.filmDirector.surname != surname:
                 updates = {

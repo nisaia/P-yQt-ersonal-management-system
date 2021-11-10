@@ -51,5 +51,6 @@ class AllAuthorsView(QWidget):
         id = self.filter_proxy_model.index(row, 0).data()
         author = book_session.query(Author).filter_by(id=id).first()
         author_view = self.parent().findChild(QWidget, 'author_window')
+        print(author_view)
         author_view.updateValues(author)
         self.parent().setCurrentWidget(author_view)

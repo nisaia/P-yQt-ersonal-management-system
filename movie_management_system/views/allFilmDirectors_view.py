@@ -45,7 +45,6 @@ class AllFilmDirectorsView(QWidget):
         self.ui.searchFilmDirector_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def filmDirector_details(self):
-        print(self.ui.allFilmDirectors_tableView.selectionModel().selectedRows())
         row = self.ui.allFilmDirectors_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
         filmDirector = movie_session.query(Film_director).filter_by(id=id).first()
