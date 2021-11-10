@@ -53,7 +53,7 @@ class FilmDirectorView(QWidget):
                 }
 
                 for key, value in updates.items():
-                    setattr(self.filmDirector, key, vale)
+                    setattr(self.filmDirector, key, value)
 
                 movie_session.commit()
                 openDialog(QMessageBox.Information, 'Film director edited', 'Success')
@@ -70,7 +70,7 @@ class FilmDirectorView(QWidget):
     def deleteFilmDirector(self):
 
         #CANCELLO TUTTI I FILM ASSOCIATI AL REGISTA
-        movies = movie_session.query(Movie).filter_by(film_director_id=self.film_director_id).all()
+        movies = movie_session.query(Movie).filter_by(film_director_id=self.filmDirector.id).all()
 
         for movie in movies:
             movie_session.delete(movie)

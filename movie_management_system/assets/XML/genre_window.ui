@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>allGenres_window</class>
- <widget class="QWidget" name="allGenres_window">
+ <class>genre_window</class>
+ <widget class="QWidget" name="genre_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,18 +13,18 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="allGenres_label">
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="editGenre_label">
      <property name="text">
-      <string>All genres</string>
+      <string>Edit genre</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -40,10 +40,17 @@
      </property>
     </spacer>
    </item>
-   <item>
-    <widget class="QLineEdit" name="searchGenre_lineEdit"/>
+   <item row="2" column="0">
+    <widget class="QLabel" name="genreName_label">
+     <property name="text">
+      <string>Name:</string>
+     </property>
+    </widget>
    </item>
-   <item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="genreName_lineEdit"/>
+   </item>
+   <item row="3" column="0" colspan="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -59,13 +66,17 @@
      </property>
     </spacer>
    </item>
-   <item>
-    <widget class="QTableView" name="allGenres_tableView">
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="editGenre_button">
+     <property name="text">
+      <string>Edit genre</string>
      </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="deleteGenre_button">
+     <property name="text">
+      <string>Delete genre</string>
      </property>
     </widget>
    </item>

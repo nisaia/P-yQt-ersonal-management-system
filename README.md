@@ -1,6 +1,6 @@
 ![logo](assets/images/logo_transparent.png)
 
-A simple and unstructured CRUD desktop application for managing books, movies and music. It's developed with PyQt, a set of Python bindings for [The Qt Company's](https://www.qt.io/) Qt application framework and runs on all platforms supported by Qt including Windows, macOS, Linux, iOS and Android.
+A simple, horrible, unstructured and incompleted CRUD desktop application for managing books, movies and music. It's developed with PyQt.
 
 For more informations, check the link -> [here](https://riverbankcomputing.com/software/pyqt)
 

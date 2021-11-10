@@ -24,6 +24,7 @@ class Ui_AllFilmDirectors_window(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
         self.searchFilmDirector_lineEdit = QtWidgets.QLineEdit(AllFilmDirectors_window)
+        self.searchFilmDirector_lineEdit.setPlaceholderText('Search film director by [Name - Surname]')
         self.searchFilmDirector_lineEdit.setObjectName("searchFilmDirector_lineEdit")
         self.verticalLayout.addWidget(self.searchFilmDirector_lineEdit)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
@@ -31,6 +32,9 @@ class Ui_AllFilmDirectors_window(object):
         self.allFilmDirectors_tableView = QtWidgets.QTableView(AllFilmDirectors_window)
         self.allFilmDirectors_tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.allFilmDirectors_tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.allFilmDirectors_tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.allFilmDirectors_tableView.verticalHeader().setVisible(False)
+        self.allFilmDirectors_tableView.setCursor(QtCore.Qt.PointingHandCursor)
         self.allFilmDirectors_tableView.setObjectName("allFilmDirectors_tableView")
         self.verticalLayout.addWidget(self.allFilmDirectors_tableView)
 

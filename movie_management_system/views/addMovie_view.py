@@ -11,6 +11,7 @@ from os.path import join
 from utils.functions import openDialog
 import datetime
 import shutil
+from QtCore import QUrl
 
 class AddMovieView(QWidget):
 
@@ -106,9 +107,9 @@ class AddMovieView(QWidget):
         except NoInputException as e:
             message = e.error_message
             openDialog(QMessageBox.Critical, message, 'Error')
-        #except IntegrityError:
-            #openDialog(QMessageBox.Critical, 'Movie already inserted', 'Error')
-            #movie_session.rollback()
+        except IntegrityError:
+            openDialog(QMessageBox.Critical, 'Movie already inserted', 'Error')
+            movie_session.rollback()
 
     def clearAll(self):
         self.ui.movieTitle_lineEdit.clear()
