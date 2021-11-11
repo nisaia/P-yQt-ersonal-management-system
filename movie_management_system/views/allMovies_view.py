@@ -5,6 +5,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor
 from movie_management_system.ui.allMovies_window import *
 from database.db import movie_session
 from database.movie_models import *
+from utils.functions import getColorStatus
 
 class AllMoviesView(QWidget):
 
@@ -13,14 +14,14 @@ class AllMoviesView(QWidget):
         self.ui = Ui_allMovies_window()
         self.ui.setupUi(self)
 
-        self.labels = ['Id', 'Title', 'Film director', 'Genre']
+        self.labels = ['Id', 'Title', 'Film director', 'Genre', 'Status']
 
         self.ui.allMovies_tableView.clicked.connect(self.movie_details)
 
         self.show()
 
     def loadData(self):
-        results = movie_session.query(Movie, Film_director, Genre).select_from(Movie).join(Film_director).join(Genre).all()
+        results = movie_session.query(Movie, Film_director, Genre, MovieStatus).select_from(Movie).join(Film_director).join(Genre).join(MovieStatus).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -28,7 +29,7 @@ class AllMoviesView(QWidget):
         self.filter_proxy_model.setFilterKeyColumn(-1)
         self.filter_proxy_model.setSourceModel(self.model)
 
-        for row, (movie, film_director, genre) in enumerate(results):
+        for row, (movie, film_director, genre, movie_status) in enumerate(results):
             movie_id = QStandardItem(str(movie.id))
             movie_id.setTextAlignment(Qt.AlignCenter)
             movie_title = QStandardItem(movie.title)
@@ -37,11 +38,15 @@ class AllMoviesView(QWidget):
             filmDirector.setTextAlignment(Qt.AlignCenter)
             genreI = QStandardItem(genre.name)
             genreI.setTextAlignment(Qt.AlignCenter)
+            status = QStandardItem(movie_status.name)
+            status.setTextAlignment(Qt.AlignCenter)
+            status.setForeground(QBrush(getColorStatus(movie.status_id, movie)))
 
             self.model.setItem(row, 0, movie_id)
             self.model.setItem(row, 1, movie_title)
             self.model.setItem(row, 2, filmDirector)
             self.model.setItem(row, 3, genreI)
+            self.model.setItem(row, 4, status)
 
         self.ui.allMovies_tableView.setModel(self.filter_proxy_model)
         self.ui.allMovies_tableView.setColumnHidden(0, True)

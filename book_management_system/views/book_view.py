@@ -98,7 +98,7 @@ class BookView(QWidget):
                 self.ui.bookGenre_comboBox.addItem(genre.name)
             self.ui.bookGenre_comboBox.setDisabled(False)
 
-        all_status = book_session.query(Status).all()
+        all_status = book_session.query(BookStatus).all()
         for status in all_status:
             self.ui.bookStatus_comboBox.addItem(status.name)
 
@@ -140,7 +140,7 @@ class BookView(QWidget):
             year = str(self.ui.bookYear_comboBox.currentText())
             author = book_session.query(Author).filter_by(id=self.ui.bookAuthor_comboBox.currentIndex() + 1).first()
             genre = book_session.query(Genre).filter_by(id=self.ui.bookGenre_comboBox.currentIndex() + 1).first()
-            status = book_session.query(Status).filter_by(id=self.ui.bookStatus_comboBox.currentIndex() + 1).first()
+            status = book_session.query(BookStatus).filter_by(id=self.ui.bookStatus_comboBox.currentIndex() + 1).first()
 
 
             if len(book_title) == 0: raise NoInputException('Enter the title of book')

@@ -8,10 +8,10 @@ from utils.custom_exceptions import NoInputException
 from sqlalchemy.exc import IntegrityError
 from utils.constants import COVER_PATH, FIRST_YEAR_MOVIE, ACTUAL_YEAR, NO_COVER_AVAILABLE_PATH
 from os.path import join
-from utils.functions import openDialog
+from utils.functions import openDialog, displayCover, get_image_file
 import datetime
 import shutil
-from QtCore import QUrl
+from PyQt5.QtCore import QUrl
 
 class AddMovieView(QWidget):
 
@@ -21,8 +21,8 @@ class AddMovieView(QWidget):
         self.ui = Ui_addMovie_window()
         self.ui.setupUi(self)
 
-        self.ui.uploadCover_button.clicked.connect(self.get_image_file)
-        self.ui.moviePreview_button.clicked.connect(self.displayCover)
+        self.ui.uploadCover_button.clicked.connect(lambda: get_image_file(parent=self, label=self.ui.movieCoverPath_label, button=self.ui.moviePreview_button))
+        self.ui.moviePreview_button.clicked.connect(lambda: displayCover(label=self.ui.movieCoverPath_label))
 
         self.ui.addMovie_button.clicked.connect(self.addMovie)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
@@ -39,6 +39,7 @@ class AddMovieView(QWidget):
         self.ui.movieYear_comboBox.clear()
         self.ui.filmDirector_comboBox.clear()
         self.ui.movieGenre_comboBox.clear()
+        self.ui.filmStatus_comboBox.clear()
 
         # 1888 ANNO DI USCITA PRIMO FILM DEL CINEMA
         for year in range(FIRST_YEAR_MOVIE, ACTUAL_YEAR + 1):
@@ -62,23 +63,20 @@ class AddMovieView(QWidget):
                 self.ui.movieGenre_comboBox.addItem(genre.name)
             self.ui.movieGenre_comboBox.setDisabled(False)
 
-    def get_image_file(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, 'Open image file', r"/", "Image files (*.jpg *.png)")
-        if len(file_name) != 0:
-            self.ui.movieCoverPath_label.setText(file_name)
-            self.ui.movieCoverPath_label.setVisible(True)
-            self.ui.moviePreview_button.setVisible(True)
-
-    def displayCover(self): pass
+        status = movie_session.query(MovieStatus).all()
+        for stat in status:
+            self.ui.filmStatus_comboBox.addItem(stat.name)
 
     def addMovie(self):
         try:
             movie_title = self.ui.movieTitle_lineEdit.text()
             movie_year = int(self.ui.movieYear_comboBox.currentText())
+            film_length = self.ui.hour_spinBox.value() * 60 + self.ui.minutes_spinBox.value()
             film_director = movie_session.query(Film_director).filter_by(id=self.ui.filmDirector_comboBox.currentIndex() + 1).first()
             genre = movie_session.query(Genre).filter_by(id=self.ui.movieGenre_comboBox.currentIndex() + 1).first()
             cover_path = self.ui.movieCoverPath_label.text()
             description = self.ui.movieDescription_plainTextEdit.toPlainText()
+            status = movie_session.query(MovieStatus).filter_by(id=self.ui.filmStatus_comboBox.currentIndex() + 1).first()
 
             if len(movie_title) == 0: raise NoInputException('Enter the title of movie')
             elif film_director == None: raise NoInputException('Enter the film director of the movie')
@@ -93,10 +91,12 @@ class AddMovieView(QWidget):
 
             movie = Movie(title=movie_title,
                           year=movie_year,
+                          film_length=film_length,
                           film_director_id=film_director.id,
                           genre_id=genre.id,
                           description=description,
-                          cover_path=cover_path)
+                          cover_path=cover_path,
+                          status_id=status.id)
             movie_session.add(movie)
             movie_session.commit()
 

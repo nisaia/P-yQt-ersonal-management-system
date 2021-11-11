@@ -63,7 +63,6 @@ class BookMainView(QWidget):
         self.show()
 
     def home(self):
-        print(self.home_view)
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
     
     def addBook(self):

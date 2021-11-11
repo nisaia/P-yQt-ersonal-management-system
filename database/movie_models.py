@@ -11,8 +11,8 @@ class Movie(Base):
     __tablename__ = "movies"
     id = Column(Integer, primary_key=True)
     title = Column(String(255), unique=True, nullable=False)
-    film_length = Column(Integer)
-    status = Column(String(255))
+    film_length = Column(Integer, nullable=False)
+    status_id = Column(Integer(), ForeignKey('movie_status.id'))
     cover_path = Column(String(255))
     year = Column(Integer(), nullable=False)
     description = Column(String(255))
@@ -45,3 +45,9 @@ class Genre(Base):
     def repr(self):
         return '%r' % self.name
 
+class MovieStatus(Base):
+    __tablename__ = "movie_status"
+    id = Column(Integer, primary_key = True)
+    name = Column(String(255), unique=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

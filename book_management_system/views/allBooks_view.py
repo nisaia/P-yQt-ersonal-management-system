@@ -49,7 +49,7 @@ class AllBooksView(QWidget):
         self.yearSlider.setValue((FIRST_YEAR_BOOK + (ACTUAL_YEAR - FIRST_YEAR_BOOK) / 5, ACTUAL_YEAR - (ACTUAL_YEAR - FIRST_YEAR_BOOK) / 5))"""
         
     def loadData(self):
-        results = book_session.query(Book, Author, Genre, Status).select_from(Book).join(Author).join(Genre).join(Status).all()
+        results = book_session.query(Book, Author, Genre, BookStatus).select_from(Book).join(Author).join(Genre).join(BookStatus).all()
         self.model = QStandardItemModel(len(results), len(self.labels))
         self.model.setHorizontalHeaderLabels(self.labels)
 
@@ -70,7 +70,7 @@ class AllBooksView(QWidget):
             genreI.setTextAlignment(Qt.AlignCenter)
             status = QStandardItem(status.name)
             status.setTextAlignment(Qt.AlignCenter)
-            status.setForeground(QBrush(getColorStatus(book.status_id)))
+            status.setForeground(QBrush(getColorStatus(book.status_id, book)))
             
             self.model.setItem(row, 0, book_id)
             self.model.setItem(row, 1, book_title)
@@ -87,7 +87,7 @@ class AllBooksView(QWidget):
     def book_details(self):
         row = self.ui.allBooks_tableView.selectionModel().selectedRows()[0].row()
         id = self.filter_proxy_model.index(row, 0).data()
-        result = book_session.query(Book, Author, Genre, Status).select_from(Book).filter_by(id=id).join(Author).join(Genre).join(Status).first()
+        result = book_session.query(Book, Author, Genre, BookStatus).select_from(Book).filter_by(id=id).join(Author).join(Genre).join(BookStatus).first()
 
         print(result)
         book, author, genre, status = result
