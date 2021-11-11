@@ -24,7 +24,7 @@ class AddMovieView(QWidget):
         self.ui.uploadCover_button.clicked.connect(lambda: get_image_file(parent=self, label=self.ui.movieCoverPath_label, button=self.ui.moviePreview_button))
         self.ui.moviePreview_button.clicked.connect(lambda: displayCover(label=self.ui.movieCoverPath_label))
 
-        self.ui.addMovie_button.clicked.connect(self.addMovie)
+        self.ui.addMovie_button_1.clicked.connect(self.addMovie)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
         for button in self.findChildren(QtWidgets.QPushButton):
@@ -120,3 +120,4 @@ class AddMovieView(QWidget):
         self.ui.movieCoverPath_label.setVisible(False)
         self.ui.moviePreview_button.setVisible(False)
         self.ui.movieDescription_plainTextEdit.clear()
+        self.ui.filmStatus_comboBox.setCurrentIndex(0)

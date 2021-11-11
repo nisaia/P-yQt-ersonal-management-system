@@ -102,6 +102,7 @@ QTableView {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border: 2px solid rgb(0, 0, 0);
+    gridline-color: rgb(12, 114, 224);
 }
 
 QTabWidget::pane {

@@ -89,8 +89,10 @@ QHeaderView {
 
 QTableView {
     font-size: 12pt;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background-color: rgb(26, 26, 29);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    gridline-color: rgb(255, 255, 255);
 }
 
 QTabWidget::pane {

@@ -31,9 +31,9 @@ class Ui_addGenre_window(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.genreName_lineEdit)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.formLayout.setItem(3, QtWidgets.QFormLayout.SpanningRole, spacerItem1)
-        self.addGenre_button = QtWidgets.QPushButton(addGenre_window)
-        self.addGenre_button.setObjectName("addGenre_button")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.addGenre_button)
+        self.addGenre_button_1 = QtWidgets.QPushButton(addGenre_window)
+        self.addGenre_button_1.setObjectName("addGenre_button_1")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.addGenre_button_1)
 
         self.retranslateUi(addGenre_window)
         QtCore.QMetaObject.connectSlotsByName(addGenre_window)
@@ -43,4 +43,4 @@ class Ui_addGenre_window(object):
         addGenre_window.setWindowTitle(_translate("addGenre_window", "Form"))
         self.addGenre_label.setText(_translate("addGenre_window", "Add genre"))
         self.genreName_label.setText(_translate("addGenre_window", "Name:"))
-        self.addGenre_button.setText(_translate("addGenre_window", "Add genre"))
+        self.addGenre_button_1.setText(_translate("addGenre_window", "Add genre"))

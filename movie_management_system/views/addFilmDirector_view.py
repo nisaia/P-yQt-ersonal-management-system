@@ -13,7 +13,7 @@ class AddFilmDirectorView(QWidget):
         self.ui = Ui_addFilmDirector_window()
         self.ui.setupUi(self)
 
-        self.ui.addFilmDirector_button.clicked.connect(self.addFilmDirector)
+        self.ui.addFilmDirector_button_1.clicked.connect(self.addFilmDirector)
         self.ui.clearAll_button.clicked.connect(self.clearAll)
 
         for button in self.findChildren(QtWidgets.QPushButton):

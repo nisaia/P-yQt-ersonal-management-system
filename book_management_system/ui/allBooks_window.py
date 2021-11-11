@@ -24,6 +24,7 @@ class Ui_allBooks_window(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
         self.searchBook_lineEdit = QtWidgets.QLineEdit(allBooks_window)
+        self.searchBook_lineEdit.setPlaceholderText('Search book by [Title - ISBN - Author - Genre]')
         self.searchBook_lineEdit.setObjectName("searchBook_lineEdit")
         self.verticalLayout.addWidget(self.searchBook_lineEdit)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)

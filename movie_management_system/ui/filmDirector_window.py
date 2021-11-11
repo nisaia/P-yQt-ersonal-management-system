@@ -70,7 +70,7 @@ class Ui_filmDirector_window(object):
         self.verticalLayout.addWidget(self.tabWidget)
 
         self.retranslateUi(filmDirector_window)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(filmDirector_window)
 
     def retranslateUi(self, filmDirector_window):

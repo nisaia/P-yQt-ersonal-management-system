@@ -79,7 +79,7 @@ class StatisticsView(QWidget):
                 slice.setLabelVisible(True)
 
             self.status_series.clear()
-            all_status = book_session.query(Status).all()
+            all_status = book_session.query(BookStatus).all()
             counter_status = {}
             for status in all_status:
                 book_status = book_session.query(Book).filter_by(status_id=status.id).count()

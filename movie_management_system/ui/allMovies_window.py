@@ -30,6 +30,8 @@ class Ui_allMovies_window(object):
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem1)
         self.allMovies_tableView = QtWidgets.QTableView(allMovies_window)
+        self.allMovies_tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.allMovies_tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.allMovies_tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.allMovies_tableView.verticalHeader().setVisible(False)
         self.allMovies_tableView.setCursor(QtCore.Qt.PointingHandCursor)

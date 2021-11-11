@@ -22,11 +22,13 @@ QPushButton#musicManagementSystem_button::hover, QPushButton#settings_button::ho
 }
 
 QPushButton#addBook_button_1::hover, QPushButton#addGenre_button_1::hover, QPushButton#addAuthor_button_1::hover,
-QPushButton#editBook_button::hover, QPushButton#editGenre_button::hover, QPushButton#editAuthor_button::hover {
+QPushButton#editBook_button::hover, QPushButton#editGenre_button::hover, QPushButton#editAuthor_button::hover,
+QPushButton#addMovie_button_1::hover, QPushButton#addFilmDirector_button_1::hover, QPushButton#editFilmDirector_button::hover {
     background-color: rgb(46, 139, 86);
 }
 
-QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover, QPushButton#deleteAuthor_button::hover, QPushButton#deleteGenre_button::hover {
+QPushButton#clearAll_button::hover, QPushButton#deleteBook_button::hover, QPushButton#deleteAuthor_button::hover,
+QPushButton#deleteGenre_button::hover, QPushButton#deleteFilmDirector_button::hover {
     background-color: rgb(227, 70, 63);
 }
 
@@ -93,6 +95,7 @@ QTableView {
     font-size: 12pt;
     background-color: rgb(33, 56, 98);
     color: rgb(253, 149, 100);
+    gridline-color: rgb(180, 99, 130);
     border: 2px solid rgb(180, 99, 130);
 }
 

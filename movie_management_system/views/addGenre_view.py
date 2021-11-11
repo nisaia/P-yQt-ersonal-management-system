@@ -14,7 +14,7 @@ class AddGenreView(QWidget):
         self.ui = Ui_addGenre_window()
         self.ui.setupUi(self)
 
-        self.ui.addGenre_button.clicked.connect(self.addGenre)
+        self.ui.addGenre_button_1.clicked.connect(self.addGenre)
 
         for button in self.findChildren(QtWidgets.QPushButton):
             button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
