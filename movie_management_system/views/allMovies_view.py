@@ -54,4 +54,11 @@ class AllMoviesView(QWidget):
         self.ui.searchMovie_lineEdit.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
 
     def movie_details(self):
-        print("GOD")
+        row = self.ui.allMovies_tableView.selectionModel().selectedRows()[0].row()
+        id = self.filter_proxy_model.index(row, 0).data()
+        result = movie_session.query(Movie, Film_director, Genre, MovieStatus).select_from(Movie).filter_by(id=id).join(Film_director).join(Genre).join(MovieStatus).first()
+
+        movie, film_director, genre, status = result
+        movie_view = self.parent().findChild(QWidget, 'movie_window')
+        #movie_view.updateValues(movie, film_director, genre, status)
+        self.parent().setCurrentWidget(movie_view)

@@ -1,0 +1,24 @@
+{
+    "authors": [
+        {
+            "id": 1,
+            "name": "George",
+            "surname": "Orwell"
+        },
+        {
+            "id": 2,
+            "name": "Alessandro",
+            "surname": "D'Avenia"
+        },
+        {
+            "id": 3,
+            "name": "Will",
+            "surname": "Elliot"
+        },
+        {
+            "id": 4,
+            "name": "Milan",
+            "surname": "Kundera"
+        }
+    ]
+}

@@ -5,9 +5,10 @@ import datetime
 STYLES_PATH = 'assets/styles'
 COVER_PATH = 'book_management_system/database/cover_folder'
 IMAGES_PATH = 'assets/images'
-ICONS_PATH = 'assets/images/icons'
+BOOK_ICONS_PATH = 'assets/images/icons/book'
+MOVIE_ICONS_PATH = 'assets/images/icons/movie'
 TRANSLATIONS_PATH = 'translations'
-FLAGS_PATH = 'assets/images/icons/flags'
+FLAGS_PATH = 'assets/images/flags'
 NO_COVER_AVAILABLE_PATH = 'database/cover_folder/no_cover_available.jpg'
 
 #BASIC QT CLASSES

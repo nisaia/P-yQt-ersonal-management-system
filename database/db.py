@@ -22,7 +22,7 @@ def create_database():
 
     #SISTEMARE QUESTA COSA# VIOLA IL VINCOLO DI UNICITÀ
     
-    for value in ['Not completed', 'In progress', 'Completed']:
+    for value in ['Not readed', 'In progress', 'Readed']:
         book_status = BookStatus(name=value)
         book_session.add(book_status)
     book_session.commit()

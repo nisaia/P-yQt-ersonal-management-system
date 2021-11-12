@@ -154,4 +154,7 @@ Thumbs.db
 # Database
 database.db
 
+# Python script files
+fill_db.py
+
 # End of https://www.toptal.com/developers/gitignore/api/python

@@ -15,7 +15,7 @@ class Book(Base):
     pages = Column(Integer, nullable=False)
     year = Column(Integer, nullable=False)
     description = Column(String(255))
-    cover_path = Column(String(255), nullable=False)
+    cover_path = Column(String(255))
     genre_id = Column(Integer(), ForeignKey('genres.id'))
     author_id = Column(Integer(), ForeignKey('authors.id'))
     status_id = Column(Integer(), ForeignKey('book_status.id'))

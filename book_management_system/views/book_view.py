@@ -11,7 +11,7 @@ from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
 import os
 from os.path import join
-from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH, ICONS_PATH, FIRST_YEAR_BOOK, ACTUAL_YEAR
+from utils.constants import COVER_PATH, NO_COVER_AVAILABLE_PATH, BOOK_ICONS_PATH, FIRST_YEAR_BOOK, ACTUAL_YEAR
 import shutil
 
 
@@ -28,16 +28,16 @@ class BookView(QWidget):
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
 
-        isbnIcon = QPixmap(join(ICONS_PATH, 'isbn.png'))
+        isbnIcon = QPixmap(join(BOOK_ICONS_PATH, 'isbn.png'))
         self.ui.bookIsbnIcon_label.setPixmap(isbnIcon)
 
-        pagesIcon = QPixmap(join(ICONS_PATH, 'pages.png'))
+        pagesIcon = QPixmap(join(BOOK_ICONS_PATH, 'pages.png'))
         self.ui.bookPagesIcon_label.setPixmap(pagesIcon)
 
-        yearIcon = QPixmap(join(ICONS_PATH, 'release.png'))
+        yearIcon = QPixmap(join(BOOK_ICONS_PATH, 'release.png'))
         self.ui.bookYearIcon_label.setPixmap(yearIcon)
 
-        genreIcon = QPixmap(join(ICONS_PATH, 'genre.png'))
+        genreIcon = QPixmap(join(BOOK_ICONS_PATH, 'genre.png'))
         self.ui.bookGenreIcon_label.setPixmap(genreIcon)
 
         for button in self.findChildren(QtWidgets.QPushButton):

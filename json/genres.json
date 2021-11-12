@@ -1,0 +1,20 @@
+{
+    "genres": [
+        {
+            "id": 1,
+            "name": "Science fiction"
+        },
+        {
+            "id": 2,
+            "name": "Storytelling"
+        },
+        {
+            "id": 3,
+            "name": "Mistery"
+        },
+        {
+            "id": 4,
+            "name": "Romance"
+        }
+    ]
+}

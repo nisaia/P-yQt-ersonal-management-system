@@ -11,6 +11,8 @@ from movie_management_system.views.allFilmDirectors_view import AllFilmDirectors
 from movie_management_system.views.allGenres_view import AllGenresView
 from movie_management_system.views.filmDirector_view import FilmDirectorView
 from movie_management_system.views.genre_view import GenreView
+from movie_management_system.views.movie_view import MovieView
+from movie_management_system.views.statistics_view import StatisticsView
 
 class MovieMainView(QWidget):
 
@@ -29,6 +31,8 @@ class MovieMainView(QWidget):
         self.allGenres_view = AllGenresView(parent=self)
         self.filmDirector_view = FilmDirectorView(parent=self)
         self.genre_view = GenreView(parent=self)
+        self.movie_view = MovieView(parent=self)
+        self.statistics_view = StatisticsView(parent=self)
 
         self.ui.stackedWidget.addWidget(self.addMovie_view)
         self.ui.stackedWidget.addWidget(self.home_view)
@@ -39,6 +43,8 @@ class MovieMainView(QWidget):
         self.ui.stackedWidget.addWidget(self.allGenres_view)
         self.ui.stackedWidget.addWidget(self.filmDirector_view)
         self.ui.stackedWidget.addWidget(self.genre_view)
+        self.ui.stackedWidget.addWidget(self.movie_view)
+        self.ui.stackedWidget.addWidget(self.statistics_view)
 
         self.ui.addMovie_button.clicked.connect(self.addMovie)
         self.ui.home_button.clicked.connect(self.home)
@@ -47,6 +53,7 @@ class MovieMainView(QWidget):
         self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.allFilmDirectors_button.clicked.connect(self.allFilmDirectors)
         self.ui.allGenres_button.clicked.connect(self.allGenres)
+        self.ui.statistics_button.clicked.connect(self.statistics)
 
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
 
@@ -76,3 +83,6 @@ class MovieMainView(QWidget):
     def allGenres(self):
         self.allGenres_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allGenres_view)
+
+    def statistics(self):
+        self.ui.stackedWidget.setCurrentWidget(self.statistics_view)
