@@ -155,6 +155,6 @@ Thumbs.db
 database.db
 
 # Json files
-json/*
+json/
 
 # End of https://www.toptal.com/developers/gitignore/api/python
