@@ -19,13 +19,12 @@ def getColorStatus(status_id, model):
     #MOLTO PIÙ STRUTTURATO RISPETTO A DEI SEMPLICI CONTROLLI CON I NUMERI
 
     status_dict = {
-        'Not completed': QColor(255, 0, 0),
+        'Not readed': QColor(255, 0, 0),
         'In progress' : QColor(0, 0, 255),
-        'Completed': QColor(0, 100, 0),
+        'Readed': QColor(0, 100, 0),
         'Not watched': QColor(255, 0, 0),
         'Watched': QColor(0, 100, 0)
     }
-    print(model)
     if isinstance(model, Book): all_status = book_session.query(BookStatus).all()
     else: all_status = movie_session.query(MovieStatus).all()
 

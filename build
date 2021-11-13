@@ -4,7 +4,8 @@ GREEN="\e[32m"
 RED="\e[31m"
 END_COLOR="\e[0m"
 venv='virtual_enviroment'
-database_file='database/database.db'
+books_database_file='database/books_database.db'
+movies_database_file='database/movies_database.db'
 
 function usage {
     echo "Usage: $0 [option]"
@@ -12,11 +13,12 @@ function usage {
     echo 'List of options:
     
          -h: Display the help message
+         -v: Create a vritual enviroment with all dependencies installed
          -c: Create database engine
          -a: Create the virtual enviroment and create database engine'
 }
 
-function all {
+function create_virtual_enviroment {
     #CREATE VIRTUAL ENVIROMENT
 
     echo -e "${GREEN}Creating virtual enviroment...${END_COLOR}"
@@ -41,9 +43,7 @@ function all {
         echo -e "${GREEN}All dependencies installed.${END_COLOR}"
     fi
 
-    echo
-
-    create_database_engine
+    deactivate
 }
 
 function create_database_engine {
@@ -51,12 +51,18 @@ function create_database_engine {
 
     echo -e "${GREEN}Creating database engine...${END_COLOR}"
     sleep 3
-    if [ -f "$database_file" ]; then
-        echo -e "${GREEN}Database engine already created.${END_COLOR}"
-    else
-        python3 -c "from database.db import create_database; create_database()"
-        echo -e "${GREEN}Database engine created.${END_COLOR}"
+    if [ -f "$books_database_file" ] && [ -f "$movies_database_file" ]; then
+        echo -e "${GREEN}Removing old database files..${END_COLOR}"
+        rm $books_database_file $movies_database_file
     fi
+    
+    python3 -c "from database.db import create_database; create_database()"
+    echo -e "${GREEN}Database engine created.${END_COLOR}"
+    
+    echo -e "${GREEN}Database filling...${END_COLOR}"
+    sleep 3
+    python3 fill_db.py
+
 }
 
 function header {
@@ -68,10 +74,16 @@ function header {
 '
 }
 
+function all {
+    create_virtual_enviroment
+    . $venv/bin/activate
+    create_database_engine
+}
+
 clear
 header
 
-while getopts "ach" opt; do
+while getopts "achv" opt; do
     case ${opt} in
         a )
             all
@@ -85,6 +97,9 @@ while getopts "ach" opt; do
                 exit 1
             fi
             create_database_engine
+            ;;
+        v )
+            create_virtual_enviroment
             ;;
         * )
             usage
