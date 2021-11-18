@@ -53,7 +53,7 @@ class MovieMainView(QWidget):
         self.ui.addGenre_button.clicked.connect(self.addGenre)
         self.ui.allFilmDirectors_button.clicked.connect(self.allFilmDirectors)
         self.ui.allGenres_button.clicked.connect(self.allGenres)
-        self.ui.statistics_button.clicked.connect(self.statistics)
+        self.ui.statistics_button.clicked.connect(self.getStatistics)
 
         self.ui.stackedWidget.setCurrentWidget(self.home_view)
 
@@ -84,5 +84,7 @@ class MovieMainView(QWidget):
         self.allGenres_view.loadData()
         self.ui.stackedWidget.setCurrentWidget(self.allGenres_view)
 
-    def statistics(self):
+    def getStatistics(self):
+        self.statistics_view.getValues()
+        self.statistics_view.updateValues()
         self.ui.stackedWidget.setCurrentWidget(self.statistics_view)

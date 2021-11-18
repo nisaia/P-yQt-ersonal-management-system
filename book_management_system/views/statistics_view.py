@@ -89,12 +89,14 @@ class StatisticsView(QWidget):
                 slice = QPieSlice()
                 slice = self.status_series.slices()[i]
                 slice.setLabelVisible(True)
-                if slice.label() == 'Not completed':
+                if slice.label() == 'Not readed':
                     slice.setColor(QColor(255, 0, 0))
                 elif slice.label() == 'In progress':
                     slice.setColor(QColor(0, 0, 255))
-                elif slice.label() == 'Completed':
+                elif slice.label() == 'Readed':
                     slice.setColor(QColor(0, 100, 0))
 
         except ZeroDivisionError:
+            home_window = self.parent().findChild(QWidget, 'home_window')
+            self.parent().setCurrentWidget(home_window)
             openDialog(QMessageBox.Critical, 'Insufficient data for chart', 'Error')
