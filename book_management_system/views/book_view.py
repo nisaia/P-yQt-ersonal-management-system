@@ -5,7 +5,7 @@ from PyQt5.QtGui import QPixmap
 from database.book_models import *
 from database.db import book_session
 from utils.custom_exceptions import *
-from utils.functions import openDialog
+from utils.functions import openDialog, displayCover, get_image_file
 from sqlalchemy.exc import IntegrityError
 from book_management_system.views.coverIllustration_view import *
 from PyQt5.QtCore import QUrl
@@ -22,8 +22,8 @@ class BookView(QWidget):
         self.ui = Ui_book_window()
         self.ui.setupUi(self)
 
-        self.ui.uploadCover_button.clicked.connect(self.get_image_file)
-        self.ui.bookPreview_button.clicked.connect(self.displayCover)
+        self.ui.uploadCover_button.clicked.connect(lambda: get_image_file(parent=self, label=self.ui.bookCoverPath_label, button=self.ui.bookPreview_button))
+        self.ui.bookPreview_button.clicked.connect(lambda: displayCover(label=self.ui.bookCoverPath_label))
 
         self.ui.editBook_button.clicked.connect(self.editBook)
         self.ui.deleteBook_button.clicked.connect(self.deleteBook)
@@ -49,22 +49,6 @@ class BookView(QWidget):
         self.findChild(QtWidgets.QTabWidget).tabBar().setCursor(QtCore.Qt.PointingHandCursor)
 
         self.show()
-
-    def get_image_file(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"/", "Image files (*.jpg *.png)")
-        if len(file_name) != 0:
-            self.ui.bookCoverPath_label.setText(file_name)
-
-    def displayCover(self):
-        coverIllustration_window = CoverIllustrationView()
-        coverIllustration_window.setModal(True)
-        
-        image = QPixmap(self.ui.bookCoverPath_label.text())
-        image = image.scaled(coverIllustration_window.ui.coverIllustration_label.width(), coverIllustration_window.ui.coverIllustration_label.height(), QtCore.Qt.KeepAspectRatio)
-        coverIllustration_window.ui.coverIllustration_label.setPixmap(image)
-        coverIllustration_window.ui.coverIllustration_label.setScaledContents(True)
-
-        coverIllustration_window.exec_()
 
     def updateValues(self, book, author, genre, status):
         self.book = book

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from movie_management_system.views.addMovie_view import AddMovieView
 from movie_management_system.views.home_view import HomeView
 from movie_management_system.views.allMovies_view import AllMoviesView
+from movie_management_system.views.movie_view import MovieView
 from movie_management_system.views.addFilmDirector_view import AddFilmDirectorView
 from movie_management_system.views.addGenre_view import AddGenreView
 from movie_management_system.views.allFilmDirectors_view import AllFilmDirectorsView
@@ -25,6 +26,7 @@ class MovieMainView(QWidget):
         self.addMovie_view = AddMovieView(parent=self)
         self.home_view = HomeView(parent=self)
         self.allMovies_view = AllMoviesView(parent=self)
+
         self.addFilmDirector_view = AddFilmDirectorView(parent=self)
         self.addGenre_view = AddGenreView(parent=self)
         self.allFilmDirectors_view = AllFilmDirectorsView(parent=self)
@@ -37,6 +39,7 @@ class MovieMainView(QWidget):
         self.ui.stackedWidget.addWidget(self.addMovie_view)
         self.ui.stackedWidget.addWidget(self.home_view)
         self.ui.stackedWidget.addWidget(self.allMovies_view)
+        self.ui.stackedWidget.addWidget(self.movie_view)
         self.ui.stackedWidget.addWidget(self.addFilmDirector_view)
         self.ui.stackedWidget.addWidget(self.addGenre_view)
         self.ui.stackedWidget.addWidget(self.allFilmDirectors_view)

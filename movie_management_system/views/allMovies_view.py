@@ -60,5 +60,5 @@ class AllMoviesView(QWidget):
 
         movie, film_director, genre, status = result
         movie_view = self.parent().findChild(QWidget, 'movie_window')
-        #movie_view.updateValues(movie, film_director, genre, status)
+        movie_view.updateValues(movie, film_director, genre, status)
         self.parent().setCurrentWidget(movie_view)
