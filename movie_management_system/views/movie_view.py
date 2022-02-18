@@ -5,6 +5,7 @@ from utils.constants import FIRST_YEAR_MOVIE, ACTUAL_YEAR
 from PyQt5.QtWidgets import QWidget
 from database.db import movie_session
 from database.movie_models import *
+from PyQt5.QtGui import QPixmap
 
 class MovieView(QWidget):
 
@@ -65,8 +66,33 @@ class MovieView(QWidget):
         for status in all_status:
             self.ui.movieStatus_comboBox.addItem(status.name)
 
+        hour = self.movie.film_length // 60
+        minutes = self.movie.film_length % 60
+
         # FIRST TAB
         self.ui.movieTitle_label.setText(self.movie.title + ', ' + self.film_director.name + ' ' + self.film_director.surname)
+        self.ui.movieLength_label.setText(str(hour) + ' hour, ' + str(minutes) + ' minutes')
+        self.ui.movieYear_label.setText(str(self.movie.year))
+        image = QPixmap(self.movie.cover_path)
+        image = image.scaled(self.ui.movieCover_label.width(), self.ui.movieCover_label.height(), QtCore.Qt.KeepAspectRatio)
+        self.ui.movieCover_label.setPixmap(image)
+        self.ui.movieCover_label.setScaledContents(True)
+        self.ui.movieGenre_label.setText(self.genre.name)
+        self.ui.movieDescription_label.setText(self.movie.description)
+
+        # SECOND TAB
+        self.ui.movieTitle_lineEdit.setText(self.movie.title)
+        self.ui.movieCoverPath_label.setText(self.movie.cover_path)
+
+        self.ui.hour_spinBox.setValue(self.movie.film_length // 60)
+        self.ui.minutes_spinBox.setValue(self.movie.film_length % 60) 
+
+        self.ui.movieYear_comboBox.setCurrentText(str(self.movie.year))
+        self.ui.filmDirector_comboBox.setCurrentIndex(self.film_director.id - 1)
+        self.ui.movieGenre_comboBox.setCurrentIndex(self.genre.id - 1)
+        self.ui.movieStatus_comboBox.setCurrentIndex(self.status.id - 1)
+
+        self.ui.movieDescription_plainTextEdit.setPlainText(self.movie.description)
 
     def editMovie(self): pass
     def deleteMovie(self): pass
